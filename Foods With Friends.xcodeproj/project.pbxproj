@@ -14,6 +14,7 @@
 		0F2F317329AF9662008B0CC3 /* Foods_With_FriendsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2F317229AF9662008B0CC3 /* Foods_With_FriendsTests.swift */; };
 		0F2F317D29AF9662008B0CC3 /* Foods_With_FriendsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2F317C29AF9662008B0CC3 /* Foods_With_FriendsUITests.swift */; };
 		0F2F317F29AF9662008B0CC3 /* Foods_With_FriendsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2F317E29AF9662008B0CC3 /* Foods_With_FriendsUITestsLaunchTests.swift */; };
+		0FC6C8BC29B0F9CF0040048C /* FWFData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6C8BB29B0F9CF0040048C /* FWFData.swift */; };
 		834981D229B0F89C00CF2D98 /* PersonalProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834981D129B0F89C00CF2D98 /* PersonalProfileView.swift */; };
 		8801352729B0F45400304A06 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8801352629B0F45400304A06 /* Constants.swift */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,7 @@
 		0F2F317829AF9662008B0CC3 /* Foods With FriendsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Foods With FriendsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F2F317C29AF9662008B0CC3 /* Foods_With_FriendsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Foods_With_FriendsUITests.swift; sourceTree = "<group>"; };
 		0F2F317E29AF9662008B0CC3 /* Foods_With_FriendsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Foods_With_FriendsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0FC6C8BB29B0F9CF0040048C /* FWFData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FWFData.swift; sourceTree = "<group>"; };
 		834981D129B0F89C00CF2D98 /* PersonalProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalProfileView.swift; sourceTree = "<group>"; };
 		8801352629B0F45400304A06 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				834981D129B0F89C00CF2D98 /* PersonalProfileView.swift */,
+				0FC6C8BB29B0F9CF0040048C /* FWFData.swift */,
 				0F2F316329AF965D008B0CC3 /* ContentView.swift */,
 			);
 			path = Views;
@@ -283,6 +286,7 @@
 				0F2F316429AF965D008B0CC3 /* ContentView.swift in Sources */,
 				0F2F316229AF965D008B0CC3 /* Foods_With_FriendsApp.swift in Sources */,
 				8801352729B0F45400304A06 /* Constants.swift in Sources */,
+				0FC6C8BC29B0F9CF0040048C /* FWFData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

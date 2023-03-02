@@ -1,0 +1,5 @@
+#import <Foundation/Foundation.h>
+@interface PodsDummy_Pods_Foods_With_Friends_Foods_With_FriendsUITests : NSObject
+@end
+@implementation PodsDummy_Pods_Foods_With_Friends_Foods_With_FriendsUITests
+@end
