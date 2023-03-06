@@ -17,9 +17,9 @@ struct PersonalProfileView: View {
                     Image("profileDefault")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                    //    .frame(width: (UIScreen.width)/4)
+                        .frame(width: 100, height: 100)
                         .clipShape(Circle())
-
+                    
                     
                     //location
                     Text("Wynnewood, PA")
@@ -28,6 +28,7 @@ struct PersonalProfileView: View {
                     //bio
                     Text("Hi! I am Julia and, just like you, I love food! I post reviews at least once a week. Be my friend to see my opinions and be a better informed foodie :)")
                         .font(Constants.textFont)
+                        .padding()
                     
                 }
                 
@@ -38,6 +39,8 @@ struct PersonalProfileView: View {
                         //Name
                         Text("Julia Zorc")
                             .font(Constants.titleFont)
+                            .padding()
+                        
                         
                         Spacer()
                         
@@ -45,27 +48,34 @@ struct PersonalProfileView: View {
                         Text("@juliazorc123")
                             .font(Constants.textFont)
                             .foregroundColor(Color.highlight)
+                            .padding()
+                        
                         
                     }
-                    
-                    //# of reviews
-                    VStack{
-                        Text("123")
-                            .font(Constants.titleFont)
+                    HStack{
                         
-                        Text("Reviews")
-                            .font(Constants.textFont)
+                        //# of reviews
+                        VStack{
+                            Text("123")
+                                .font(Constants.titleFont)
+                            
+                            
+                            Text("Reviews")
+                                .font(Constants.textFont)
+                            
+                            
+                        }
                         
-                    }
-                    
-                    //# of friends
-                    VStack{
-                        Text("78")
-                            .font(Constants.titleFont)
-                        
-                        Text("Friends")
-                            .font(Constants.textFont)
-                        
+                        //# of friends
+                        VStack{
+                            Text("78")
+                                .font(Constants.titleFont)
+                            
+                            
+                            Text("Friends")
+                                .font(Constants.textFont)
+                            
+                        }
                     }
                     
                 }
