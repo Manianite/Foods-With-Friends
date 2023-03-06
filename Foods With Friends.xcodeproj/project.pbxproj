@@ -19,6 +19,7 @@
 		5C06D9C55326A1B0364472FE /* Pods_Foods_With_Friends.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEBF9A9813A7EF895010EB59 /* Pods_Foods_With_Friends.framework */; };
 		834981D229B0F89C00CF2D98 /* PersonalProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834981D129B0F89C00CF2D98 /* PersonalProfileView.swift */; };
 		8801352729B0F45400304A06 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8801352629B0F45400304A06 /* Constants.swift */; };
+		8801352F29B3A06600304A06 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8801352E29B3A06600304A06 /* HomeView.swift */; };
 		E52952969C9DC7BC91092A52 /* Pods_Foods_With_FriendsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AA202260AEF374CFB9658D /* Pods_Foods_With_FriendsTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		834981D129B0F89C00CF2D98 /* PersonalProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalProfileView.swift; sourceTree = "<group>"; };
 		870305D1CDDE70F076450C36 /* Pods_Foods_With_Friends_Foods_With_FriendsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Foods_With_Friends_Foods_With_FriendsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8801352629B0F45400304A06 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8801352E29B3A06600304A06 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C6EA3D0E636B8C828B4492FA /* Pods-Foods With Friends-Foods With FriendsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foods With Friends-Foods With FriendsUITests.release.xcconfig"; path = "Target Support Files/Pods-Foods With Friends-Foods With FriendsUITests/Pods-Foods With Friends-Foods With FriendsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		DDAB0FCC35BA08F5393E4837 /* Pods-Foods With Friends.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foods With Friends.debug.xcconfig"; path = "Target Support Files/Pods-Foods With Friends/Pods-Foods With Friends.debug.xcconfig"; sourceTree = "<group>"; };
 		FEBF9A9813A7EF895010EB59 /* Pods_Foods_With_Friends.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Foods_With_Friends.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,6 +158,7 @@
 			children = (
 				834981D129B0F89C00CF2D98 /* PersonalProfileView.swift */,
 				0F2F316329AF965D008B0CC3 /* ContentView.swift */,
+				8801352E29B3A06600304A06 /* HomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -189,7 +192,6 @@
 				1312B84986727524ADBE45D0 /* Pods-Foods With FriendsTests.debug.xcconfig */,
 				774E59FDDE60AB104A321A88 /* Pods-Foods With FriendsTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -434,6 +436,7 @@
 				834981D229B0F89C00CF2D98 /* PersonalProfileView.swift in Sources */,
 				0F2F316429AF965D008B0CC3 /* ContentView.swift in Sources */,
 				0F2F316229AF965D008B0CC3 /* Foods_With_FriendsApp.swift in Sources */,
+				8801352F29B3A06600304A06 /* HomeView.swift in Sources */,
 				8801352729B0F45400304A06 /* Constants.swift in Sources */,
 				0FC6C8BC29B0F9CF0040048C /* FWFData.swift in Sources */,
 			);
