@@ -6,35 +6,49 @@
 //
 
 
-import Foundation
+import SwiftUI
 import FirebaseStorage
 import FirebaseDatabase
 import FirebaseAuth
 
 class DatabaseData {
-//    func uploadProfilePicture(_ image: UIImage, _ completion: @escaping((_ url:URL?) -> ())){
-//        // get the current user's userid
-//        guard let uid = Auth.auth().currentUser?.uid else {return}
-//        // get a reference to the storage object
-//        let storage = Storage.storage().reference().child("user/\(uid)")
-//        // image's must be saved as data obejct's so convert and compress the image.
-//        guard let image = imageView?.image, let imageData = UIImageJPEGRepresentation(image, 0.75) else {return}
-//        // store the image
-//        storage.putData(imageData, metadata: StorageMetadata()) { (metaData, error) in
-//        }
-//    }
-    func uploadPrivateData(_ data: Data, _ completion: @escaping((_ url:URL?) -> ())){
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-        let storage = Storage.storage().reference().child("user/\(uid)")
-        storage.putData(Data(base64Encoded: "12345! Wowee!?") ?? Data()) { metadata, error in
-            
+    @EnvironmentObject static var me: AppUser
+    
+    static func writeTxtData(_ dataString: String, _ location: String, _ completion: @escaping((_ url:URL?) -> ())){
+        let storage = Storage.storage().reference().child("\(location)")
+        let metadata = StorageMetadata()
+        metadata.contentType = "text/txt"
+        storage.putData(Data(dataString.utf8), metadata: metadata) { meta, error in }
+    }
+    static func listFilesIn(_ dir: String) {
+        let storage = Storage.storage().reference().child("\(dir)")
+        storage.listAll { (result, error) in
+            if let e = error {
+                print("Error while listing all files: ", e)
+            }
+            if let r = result {
+                for item in r.items {
+                    print("Item in folder: ", item)
+                }
+            }
         }
     }
-    func uploadPublicData(_ data: Data, _ completion: @escaping((_ url:URL?) -> ())){ //not done
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-        let storage = Storage.storage().reference().child("user/\(uid)")
-        storage.putData(Data(base64Encoded: "12345! Wowee!?") ?? Data()) { metadata, error in
-            
+    static func deleteItem(location: String) {
+        let item = Storage.storage().reference().child(location)
+        item.delete { error in
+            if let error = error {
+                print("Error deleting item", error)
+            }
+        }
+    }
+    static func readTxtData(location: String, _ completion: @escaping((_ dataString: String) -> ())) {
+        let item = Storage.storage().reference().child(location)
+        item.getData(maxSize: Int64.max) { data, error in
+            if let error = error {
+                print("Error reading item", error)
+            } else if let data = data {
+                completion(String(decoding: data, as: UTF8.self))
+            }
         }
     }
 }

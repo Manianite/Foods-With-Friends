@@ -11,7 +11,8 @@ import FirebaseAuth
 struct LoginView: View {
     @State var username = ""
     @State var password = ""
-    @Binding var viewState:ViewState
+    @Binding var viewState: ViewState
+    @EnvironmentObject var user: AppUser
     var body: some View {
         VStack {
             Text("Foods With Friends!")
@@ -28,7 +29,9 @@ struct LoginView: View {
             Button {
                 Auth.auth().signIn(withEmail: username, password: password) { user, error in
                     if let _=user {
-                        viewState = .home
+                        guard let uid = Auth.auth().currentUser?.uid else {return}
+                        self.user.uid = uid
+                        viewState = .homeFeed
                     } else {
                         print(error)
                     }

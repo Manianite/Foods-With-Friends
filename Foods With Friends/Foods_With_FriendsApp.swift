@@ -20,9 +20,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct Foods_With_FriendsApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject var user: AppUser = AppUser()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(user)
         }
     }
+}
+
+class AppUser: ObservableObject {
+    @Published var handle = ""
 }
