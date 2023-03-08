@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>223321269019-goedc78ebino3q5hlhifv8ne9j167rqt.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.223321269019-goedc78ebino3q5hlhifv8ne9j167rqt</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDCgJUKlRI3drJVKuHWB5lvCftoL-x10WE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>223321269019</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.HyperFrogProductions.Foods-With-Friends</string>
+	<key>PROJECT_ID</key>
+	<string>foods-with-friends</string>
+	<key>STORAGE_BUCKET</key>
+	<string>foods-with-friends.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:223321269019:ios:75b4b6db3163513b55a9be</string>
+</dict>
+</plist>

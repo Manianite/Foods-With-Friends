@@ -137,7 +137,7 @@ struct ContentView: View {
             .frame(height: 3.0)
             .background(Color.white.edgesIgnoringSafeArea(.all))
             .padding(.top, 20.0)
-            .padding(.bottom, 16)
+            .padding(.bottom, 16)   
         }
     }
     
