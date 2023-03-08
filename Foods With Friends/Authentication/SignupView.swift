@@ -14,10 +14,22 @@ struct SignupView: View {
     @State var username = ""
     @State var password = ""
     @State var password2 = ""
+    @State var errorString = ""
     var matchCheck: Bool {password==password2}
-    var handleCheck: Bool {true}//{!handles.contains(handle)}
+    var handleCheck: Bool {
+        var data: Data = Data()
+        DatabaseData.readData(location: "user/user_list.json") { _data, _ in
+            data = _data
+        }
+        do {
+            let userList = try JSONDecoder().decode(UserList.self, from: data)
+            return userList.list.contains(handle)
+        } catch {
+            errorString = "error!!! cannot decode user_list.json |28"
+        }
+        return false
+    }
     @Binding var viewState:ViewState
-    @EnvironmentObject var me: AppUser
     var body: some View {
         VStack {
             Text("Foods With Friends!")
@@ -48,18 +60,30 @@ struct SignupView: View {
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
             }
+            if errorString=="" {
+                Text(errorString)
+            }
             Button {
                 if matchCheck && handleCheck {
                     Auth.auth().createUser(withEmail: email, password: password) { user, error in
                         if let _=user {
-                            self.me.handle = handle
+                            guard let uid = Auth.auth().currentUser?.uid else {return}
+                            AppUser.uid = uid
+                            AppUser.username = username
+                            AppUser.handle = handle
                             
-                            var data: Data
-                            DatabaseData.readTxtData(location: "user/user_list.json") { dataString in
-                                data = Data(dataString.utf8)
+                            var data: Data = Data()
+                            DatabaseData.readData(location: "user/user_list.json") { _data, _ in
+                                data = _data
                             }
-                            JSONDecoder().decode(UserList.self, from: data)
-                            //DatabaseData.writeTxtData("", "user/user_list.json") { url in }
+                            do {
+                                var userList = try JSONDecoder().decode(UserList.self, from: data)
+                                userList.list.append(handle)
+                                data = try JSONEncoder().encode(userList)
+                                DatabaseData.writeData(data, "user/user_list.json") { url in }
+                            } catch {
+                                errorString = "error!!! cannot de/encode user_list.json |83"
+                            }
                             viewState = .homeFeed
                         } else {
                             print(error)
@@ -78,6 +102,10 @@ struct SignupView: View {
             }
         }
     }
+}
+
+struct UserList: Codable {
+    var list:[String] = []
 }
 
 struct SignupView_Previews: PreviewProvider {

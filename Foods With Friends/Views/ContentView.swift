@@ -11,27 +11,8 @@ struct ContentView: View {
     @State var viewState: ViewState = .login
     @State var dataString: String = "1234567890"
     @State var dir: String = "1234567890"
-    @EnvironmentObject var user: User
     var body: some View {
-        VStack {
-            TextField("data", text: $dataString)
-            TextField("location", text: $dir)
-            Button {
-                DatabaseData.uploadTxtData(dataString, "user/\(user.uid)/filename") { url in
-                    dir=""
-                    dataString=""
-                }
-            } label: {
-                Text("put")
-            }
-            Button {
-                DatabaseData.readTxtData(location: "user/\(user.uid)/filename") { dataString in
-                    print(dataString)
-                }
-            } label: {
-                Text("read")
-            }
-        }
+        LoginView(viewState: $viewState)
     }
 }
 
