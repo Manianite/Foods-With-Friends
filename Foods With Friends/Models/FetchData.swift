@@ -44,25 +44,36 @@ struct Address: Codable {
     var state:String = "PA"
 }
 
-class FetchUserData: ObservableObject{
-    @Published var response = User()
+class FetchUserData {
     
-    func getData(_ location: String) {
+    static func getData(_ location: String) -> User {
         do {
-            var data: String
-            DatabaseData.readTxtData(location: location) { dataString in
-                data = dataString
+            var data: Data = Data()
+            DatabaseData.readData(location: location) { _data, _  in
+                data = _data
             }
             //print(String(data: data, encoding: .utf8))
-            let response = try JSONDecoder().decode(User.self, from: Data(data.utf8))
-            self.response = response
+            let response = try JSONDecoder().decode(User.self, from: data)
+            return response
+            
         } catch {
             print(error)
         }
+        return User()
     }
 }
 struct User: Codable {
     var username = ""
     var handle = ""
+    var bio = ""
+    var pofilePic = ""
+    var city = "City"
+    var friendsNum = 0
+    var reviewsNum = 0
+    var friendList:[String] = []
+    var reviewList:[Review] = []
+}
+struct Review: Codable {
     
 }
+ 

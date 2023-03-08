@@ -20,13 +20,11 @@ import FirebaseDatabase
 import FirebaseAuth
 
 class DatabaseData {
-    @EnvironmentObject static var me: AppUser
-    
-    static func writeTxtData(_ dataString: String, _ location: String, _ completion: @escaping((_ url:URL?) -> ())){
+    static func writeData(_ data: Data, _ location: String, _ completion: @escaping((_ url:URL?) -> ())){
         let storage = Storage.storage().reference().child("\(location)")
         let metadata = StorageMetadata()
         metadata.contentType = "text/txt"
-        storage.putData(Data(dataString.utf8), metadata: metadata) { meta, error in }
+        storage.putData(data, metadata: metadata) { meta, error in }
     }
     static func listFilesIn(_ dir: String) {
         let storage = Storage.storage().reference().child("\(dir)")
@@ -48,14 +46,14 @@ class DatabaseData {
                 print("Error deleting item", error)
             }
         }
-    }
-    static func readTxtData(location: String, _ completion: @escaping((_ dataString: String) -> ())) {
+    } 
+    static func readData(location: String, _ completion: @escaping((_ data: Data, _ dataString: String) -> ())) {
         let item = Storage.storage().reference().child(location)
         item.getData(maxSize: Int64.max) { data, error in
             if let error = error {
                 print("Error reading item", error)
             } else if let data = data {
-                completion(String(decoding: data, as: UTF8.self))
+                completion(data, String(decoding: data, as: UTF8.self))
             }
         }
     }
