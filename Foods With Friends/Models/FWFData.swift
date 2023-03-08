@@ -38,7 +38,7 @@ class DatabaseData {
                 print("Error deleting item", error)
             }
         }
-    }
+    } 
     static func readData(location: String, _ completion: @escaping((_ data: Data, _ dataString: String) -> ())) {
         let item = Storage.storage().reference().child(location)
         item.getData(maxSize: Int64.max) { data, error in

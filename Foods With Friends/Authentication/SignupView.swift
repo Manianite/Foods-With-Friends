@@ -103,7 +103,7 @@ struct SignupView: View {
         }
     }
 }
-
+ 
 struct UserList: Codable {
     var list:[String] = []
 }

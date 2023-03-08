@@ -32,3 +32,4 @@ class AppUser {
     static var uid = ""
     static var username = ""
 }
+ 
