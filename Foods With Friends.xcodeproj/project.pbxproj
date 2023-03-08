@@ -23,6 +23,12 @@
 		5C06D9C55326A1B0364472FE /* Pods_Foods_With_Friends.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEBF9A9813A7EF895010EB59 /* Pods_Foods_With_Friends.framework */; };
 		834981D229B0F89C00CF2D98 /* PersonalProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834981D129B0F89C00CF2D98 /* PersonalProfileView.swift */; };
 		8801352729B0F45400304A06 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8801352629B0F45400304A06 /* Constants.swift */; };
+		8801352F29B3A06600304A06 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8801352E29B3A06600304A06 /* HomeView.swift */; };
+		88F7339929B77EFA001D8CC6 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F7339829B77EFA001D8CC6 /* SearchView.swift */; };
+		88F7339B29B77F12001D8CC6 /* FriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F7339A29B77F12001D8CC6 /* FriendView.swift */; };
+		88F7339D29B77F21001D8CC6 /* NewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F7339C29B77F21001D8CC6 /* NewPostView.swift */; };
+		88F7339F29B77F3D001D8CC6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F7339E29B77F3D001D8CC6 /* SettingsView.swift */; };
+		88F733A129B77FD1001D8CC6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F733A029B77FD1001D8CC6 /* ProfileView.swift */; };
 		E52952969C9DC7BC91092A52 /* Pods_Foods_With_FriendsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AA202260AEF374CFB9658D /* Pods_Foods_With_FriendsTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +73,12 @@
 		834981D129B0F89C00CF2D98 /* PersonalProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalProfileView.swift; sourceTree = "<group>"; };
 		870305D1CDDE70F076450C36 /* Pods_Foods_With_Friends_Foods_With_FriendsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Foods_With_Friends_Foods_With_FriendsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8801352629B0F45400304A06 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8801352E29B3A06600304A06 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		88F7339829B77EFA001D8CC6 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		88F7339A29B77F12001D8CC6 /* FriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendView.swift; sourceTree = "<group>"; };
+		88F7339C29B77F21001D8CC6 /* NewPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostView.swift; sourceTree = "<group>"; };
+		88F7339E29B77F3D001D8CC6 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		88F733A029B77FD1001D8CC6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		C6EA3D0E636B8C828B4492FA /* Pods-Foods With Friends-Foods With FriendsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foods With Friends-Foods With FriendsUITests.release.xcconfig"; path = "Target Support Files/Pods-Foods With Friends-Foods With FriendsUITests/Pods-Foods With Friends-Foods With FriendsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		DDAB0FCC35BA08F5393E4837 /* Pods-Foods With Friends.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foods With Friends.debug.xcconfig"; path = "Target Support Files/Pods-Foods With Friends/Pods-Foods With Friends.debug.xcconfig"; sourceTree = "<group>"; };
 		FEBF9A9813A7EF895010EB59 /* Pods_Foods_With_Friends.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Foods_With_Friends.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +139,7 @@
 			children = (
 				0FDDA06629B2816B00A866C4 /* Authentication */,
 				834981D429B0F8B200CF2D98 /* Models */,
+				88F733A229B8C5D0001D8CC6 /* Tabs */,
 				834981D329B0F8A300CF2D98 /* Views */,
 				0F2F316129AF965D008B0CC3 /* Foods_With_FriendsApp.swift */,
 				0F2F316529AF9661008B0CC3 /* Assets.xcassets */,
@@ -187,6 +200,19 @@
 				0FDDA06D29B7AAB900A866C4 /* FetchData.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		88F733A229B8C5D0001D8CC6 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				88F7339E29B77F3D001D8CC6 /* SettingsView.swift */,
+				88F733A029B77FD1001D8CC6 /* ProfileView.swift */,
+				8801352E29B3A06600304A06 /* HomeView.swift */,
+				88F7339829B77EFA001D8CC6 /* SearchView.swift */,
+				88F7339A29B77F12001D8CC6 /* FriendView.swift */,
+				88F7339C29B77F21001D8CC6 /* NewPostView.swift */,
+			);
+			path = Tabs;
 			sourceTree = "<group>";
 		};
 		D1C796B4585ECE3969602525 /* Frameworks */ = {
@@ -454,11 +480,17 @@
 				0FDDA06A29B2816B00A866C4 /* SignupView.swift in Sources */,
 				0FDDA06929B2816B00A866C4 /* LoginView.swift in Sources */,
 				834981D229B0F89C00CF2D98 /* PersonalProfileView.swift in Sources */,
+				88F7339B29B77F12001D8CC6 /* FriendView.swift in Sources */,
 				0F2F316429AF965D008B0CC3 /* ContentView.swift in Sources */,
 				0F2F316229AF965D008B0CC3 /* Foods_With_FriendsApp.swift in Sources */,
+				88F733A129B77FD1001D8CC6 /* ProfileView.swift in Sources */,
+				8801352F29B3A06600304A06 /* HomeView.swift in Sources */,
+				88F7339929B77EFA001D8CC6 /* SearchView.swift in Sources */,
 				8801352729B0F45400304A06 /* Constants.swift in Sources */,
 				0FDDA06E29B7AABA00A866C4 /* FetchData.swift in Sources */,
 				0FC6C8BC29B0F9CF0040048C /* FWFData.swift in Sources */,
+				88F7339D29B77F21001D8CC6 /* NewPostView.swift in Sources */,
+				88F7339F29B77F3D001D8CC6 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

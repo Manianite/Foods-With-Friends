@@ -1,9 +1,17 @@
+////
+////  FWFData.swift
+////  Foods With Friends
+////
+////  Created by Speer-Zisook, Ella on 3/2/23.
+////
 //
-//  FWFData.swift
-//  Foods With Friends
 //
-//  Created by Speer-Zisook, Ella on 3/2/23.
+//import Foundation
+//import FirebaseStorage
+//import FirebaseDatabase
+//import FirebaseAuth
 //
+
 
 
 import SwiftUI
