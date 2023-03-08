@@ -20,7 +20,6 @@
 		834981D229B0F89C00CF2D98 /* PersonalProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834981D129B0F89C00CF2D98 /* PersonalProfileView.swift */; };
 		8801352729B0F45400304A06 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8801352629B0F45400304A06 /* Constants.swift */; };
 		8801352F29B3A06600304A06 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8801352E29B3A06600304A06 /* HomeView.swift */; };
-		883651B829B61F61000A9F41 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883651B729B61F61000A9F41 /* TabBar.swift */; };
 		88F7339929B77EFA001D8CC6 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F7339829B77EFA001D8CC6 /* SearchView.swift */; };
 		88F7339B29B77F12001D8CC6 /* FriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F7339A29B77F12001D8CC6 /* FriendView.swift */; };
 		88F7339D29B77F21001D8CC6 /* NewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F7339C29B77F21001D8CC6 /* NewPostView.swift */; };
@@ -67,7 +66,6 @@
 		870305D1CDDE70F076450C36 /* Pods_Foods_With_Friends_Foods_With_FriendsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Foods_With_Friends_Foods_With_FriendsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8801352629B0F45400304A06 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8801352E29B3A06600304A06 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		883651B729B61F61000A9F41 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		88F7339829B77EFA001D8CC6 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		88F7339A29B77F12001D8CC6 /* FriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendView.swift; sourceTree = "<group>"; };
 		88F7339C29B77F21001D8CC6 /* NewPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostView.swift; sourceTree = "<group>"; };
@@ -132,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				834981D429B0F8B200CF2D98 /* Models */,
+				88F733A229B8C5D0001D8CC6 /* Tabs */,
 				834981D329B0F8A300CF2D98 /* Views */,
 				0F2F316129AF965D008B0CC3 /* Foods_With_FriendsApp.swift */,
 				0F2F316529AF9661008B0CC3 /* Assets.xcassets */,
@@ -170,13 +169,6 @@
 			children = (
 				834981D129B0F89C00CF2D98 /* PersonalProfileView.swift */,
 				0F2F316329AF965D008B0CC3 /* ContentView.swift */,
-				883651B729B61F61000A9F41 /* TabBar.swift */,
-				88F7339E29B77F3D001D8CC6 /* SettingsView.swift */,
-				88F733A029B77FD1001D8CC6 /* ProfileView.swift */,
-				8801352E29B3A06600304A06 /* HomeView.swift */,
-				88F7339829B77EFA001D8CC6 /* SearchView.swift */,
-				88F7339A29B77F12001D8CC6 /* FriendView.swift */,
-				88F7339C29B77F21001D8CC6 /* NewPostView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -188,6 +180,19 @@
 				0FC6C8BB29B0F9CF0040048C /* FWFData.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		88F733A229B8C5D0001D8CC6 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				88F7339E29B77F3D001D8CC6 /* SettingsView.swift */,
+				88F733A029B77FD1001D8CC6 /* ProfileView.swift */,
+				8801352E29B3A06600304A06 /* HomeView.swift */,
+				88F7339829B77EFA001D8CC6 /* SearchView.swift */,
+				88F7339A29B77F12001D8CC6 /* FriendView.swift */,
+				88F7339C29B77F21001D8CC6 /* NewPostView.swift */,
+			);
+			path = Tabs;
 			sourceTree = "<group>";
 		};
 		D1C796B4585ECE3969602525 /* Frameworks */ = {
@@ -460,7 +465,6 @@
 				88F7339929B77EFA001D8CC6 /* SearchView.swift in Sources */,
 				8801352729B0F45400304A06 /* Constants.swift in Sources */,
 				0FC6C8BC29B0F9CF0040048C /* FWFData.swift in Sources */,
-				883651B829B61F61000A9F41 /* TabBar.swift in Sources */,
 				88F7339D29B77F21001D8CC6 /* NewPostView.swift in Sources */,
 				88F7339F29B77F3D001D8CC6 /* SettingsView.swift in Sources */,
 			);

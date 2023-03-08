@@ -15,13 +15,13 @@ struct ContentView: View {
             HStack{
                 VStack {
                     Image(systemName: "gear")
-                        .foregroundColor(selectedTab == .SettingsView ? Color.highlight.opacity(0.7) : Color.black.opacity(0.7))
+                        .foregroundColor(selectedTab == .SettingsView ? Color.highlight : Color.black.opacity(0.7))
                         .font(.system(size: 25))
                     Text("Settings")
                         .foregroundColor(selectedTab == .SettingsView ? Color.highlight.opacity(0.7) : Color.black.opacity(0.7))
                         .font(Constants.tabFont)
                 }
-                .padding(.leading, 20.0)
+                .padding(.leading, 30.0)
                 .onTapGesture {
                     selectedTab = .SettingsView
                 }
@@ -33,14 +33,14 @@ struct ContentView: View {
                 Spacer()
                 VStack {
                     Image(systemName: "person")
-                        .foregroundColor(selectedTab == .ProfileView ? Color.highlight.opacity(0.7) : Color.black.opacity(0.7))
+                        .foregroundColor(selectedTab == .ProfileView ? Color.highlight : Color.black.opacity(0.7))
                         .font(.system(size: 25))
 
                     Text("Profile")
                         .foregroundColor(selectedTab == .ProfileView ? Color.highlight.opacity(0.7) : Color.black.opacity(0.7))
                         .font(Constants.tabFont)
                 }
-                .padding(.trailing, 20.0)
+                .padding(.trailing, 30.0)
                 .onTapGesture {
                     selectedTab = .ProfileView
                 }
@@ -48,6 +48,7 @@ struct ContentView: View {
             }
             .background(Color.white.edgesIgnoringSafeArea(.all))
             Divider()
+                .padding(.vertical, 7)
             
             Spacer()
             
@@ -68,11 +69,12 @@ struct ContentView: View {
             Spacer()
             
             Divider()
+                .padding(.vertical, 7)
+
             HStack {
-                Spacer()
                 VStack {
                     Image(systemName: "house")
-                        .foregroundColor(selectedTab == .HomeView ? Color.highlight.opacity(0.7) : Color.black.opacity(0.7))
+                        .foregroundColor(selectedTab == .HomeView ? Color.highlight : Color.black.opacity(0.7))
                         .font(.system(size: 20))
                         .font(.system(size: 25))
 
@@ -81,6 +83,7 @@ struct ContentView: View {
                         .font(Constants.tabFont)
 
                 }
+                .padding(.leading, 35)
                 .onTapGesture {
                     selectedTab = .HomeView
                 }
@@ -88,7 +91,7 @@ struct ContentView: View {
                 Spacer()
                 VStack {
                     Image(systemName: "magnifyingglass")
-                        .foregroundColor(selectedTab == .SearchView ? Color.highlight.opacity(0.7) : Color.black.opacity(0.7))
+                        .foregroundColor(selectedTab == .SearchView ? Color.highlight : Color.black.opacity(0.7))
                         .font(.system(size: 25))
 
                     Text("Search")
@@ -102,7 +105,7 @@ struct ContentView: View {
                 Spacer()
                 VStack {
                     Image(systemName: "person.2")
-                        .foregroundColor(selectedTab == .FriendView ? Color.highlight.opacity(0.7) : Color.black.opacity(0.7))
+                        .foregroundColor(selectedTab == .FriendView ? Color.highlight : Color.black.opacity(0.7))
                         .font(.system(size: 25))
 
                     Text("Friends")
@@ -116,7 +119,7 @@ struct ContentView: View {
                 Spacer()
                 VStack {
                     Image(systemName: "plus.app")
-                        .foregroundColor(selectedTab == .NewPostView ? Color.highlight.opacity(0.7) : Color.black.opacity(0.7))
+                        .foregroundColor(selectedTab == .NewPostView ? Color.highlight : Color.black.opacity(0.7))
                         .font(.system(size: 25))
 
                     Text("Post")
@@ -124,15 +127,17 @@ struct ContentView: View {
                         .font(Constants.tabFont)
 
                 }
+                .padding(.trailing, 35)
+
                 .onTapGesture {
                     selectedTab = .NewPostView
                 }
-                Spacer()
                 
             }
             .frame(height: 3.0)
             .background(Color.white.edgesIgnoringSafeArea(.all))
             .padding(.top, 20.0)
+            .padding(.bottom, 16)
         }
     }
     
