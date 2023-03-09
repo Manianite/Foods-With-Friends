@@ -15,37 +15,43 @@ struct LoginView: View {
     var body: some View {
         VStack {
             Group{
+                VStack{
                 Image("logo")
+                    .resizable()
+                    .frame(width: UIScreen.screenWidth/3, height: UIScreen.screenWidth/3)
                     .padding(.top)
+                
+                    //.aspectRatio(contentMode: .fit)
                 Text("Foods With Friends")
                     .font(.system(size: 45))
-                
                     .font(.largeTitle)
                     .font(Constants.titleFont)
                     .foregroundColor(Color.highlight)
-                
+                    .frame(width: UIScreen.screenWidth-20, height: UIScreen.screenHeight/15)
+                    .scaledToFill()
+                    .minimumScaleFactor(0.5)
+                    .lineLimit(1)
+                }
             }
-            Spacer()
             Group{
                 VStack{
-                    Spacer()
                     TextField("Enter Username", text: $username)
-                        .multilineTextAlignment(.center)
                         .disableAutocorrection(true)
                         .autocapitalization(.none)
+                        .multilineTextAlignment(.center)
                         .foregroundColor(Color.gray)
                         .padding()
-                        .frame(width: UIScreen.screenWidth-40)
-                        .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.highlight))
+                        .frame(width: UIScreen.screenWidth-40, height: UIScreen.screenHeight/15)
+                        .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
                     
                     SecureField("Enter Password", text: $password)
-                        .multilineTextAlignment(.center)
                         .disableAutocorrection(true)
                         .autocapitalization(.none)
+                        .multilineTextAlignment(.center)
                         .foregroundColor(Color.gray)
                         .padding()
-                        .frame(width: UIScreen.screenWidth-40)
-                        .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.highlight))
+                        .frame(width: UIScreen.screenWidth-40, height: UIScreen.screenHeight/15)
+                        .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
                 }
                 .padding(.top, 70)
                 .padding(.bottom, 40)
@@ -66,15 +72,13 @@ struct LoginView: View {
             } label: {
                 Text("Log In")
                     .padding()
-                    .frame(width: UIScreen.screenWidth-70)
+                    .frame(width: UIScreen.screenWidth-70, height: UIScreen.screenHeight/15)
                     .background(Color.highlight.opacity(0.1))
                     .cornerRadius(100)
                     .background(RoundedRectangle(cornerRadius: 100).stroke().foregroundColor(Color.highlight))
                     .tint(Color.black)
                     .font(Constants.textFont)
-                //.controlSize(.small) // .large, .medium or .small
                     .buttonStyle(.borderedProminent)
-                // .padding(.top, 70)
             }
             Button {
                 Auth.auth().sendPasswordReset(withEmail: username) { error in
@@ -85,15 +89,13 @@ struct LoginView: View {
             } label: {
                 Text("Forgot Password")
                     .padding()
-                    .frame(width: UIScreen.screenWidth-70)
+                    .frame(width: UIScreen.screenWidth-70, height: UIScreen.screenHeight/15)
                     .background(Color.highlight.opacity(0.1))
                     .cornerRadius(100)
                     .background(RoundedRectangle(cornerRadius: 100).stroke().foregroundColor(Color.highlight))
                     .tint(Color.black)
                     .font(Constants.textFont)
-                //.controlSize(.small) // .large, .medium or .small
                     .buttonStyle(.borderedProminent)
-                    .padding(.bottom, 100)
             }
             Spacer()
             Text("Don't have an account?")
@@ -103,16 +105,14 @@ struct LoginView: View {
             } label: {
                 Text("Sign up!")
                     .padding()
-                    .frame(width: UIScreen.screenWidth-70)
+                    .frame(width: UIScreen.screenWidth-70, height: UIScreen.screenHeight/15)
                     .background(Color.highlight.opacity(0.1))
                     .cornerRadius(100)
                     .background(RoundedRectangle(cornerRadius: 100).stroke().foregroundColor(Color.highlight))
                     .tint(Color.black)
                     .font(Constants.textFont)
-                //.controlSize(.small) // .large, .medium or .small
                     .buttonStyle(.borderedProminent)
             }
-            Spacer()
         }
     }
 }
