@@ -32,34 +32,75 @@ struct SignupView: View {
     @Binding var viewState:ViewState
     var body: some View {
         VStack {
-            Text("Foods With Friends!")
-                .font(.largeTitle)
-            Spacer()
-            Text("Sign up")
-                .font(.headline)
+            Group{
+                Image("logo")
+                    .padding(.top)
+                Text("Foods With Friends")
+                    .font(.system(size: 45))
+                    .font(.largeTitle)
+                    .font(Constants.titleFont)
+                    .foregroundColor(Color.highlight)
+            }
+
             VStack {
                 TextField("Email address", text: $email)
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
+                    .multilineTextAlignment(.center)
+                    .disableAutocorrection(true)
+                    .autocapitalization(.none)
+                    .foregroundColor(Color.gray)
+                    .padding()
+                    .frame(width: UIScreen.screenWidth-40)
+                    .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.highlight))
                 if !matchCheck {
                     Text("@handle not unique!")
                 }
                 TextField("@handle", text: $handle)
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
+                    .multilineTextAlignment(.center)
+                    .disableAutocorrection(true)
+                    .autocapitalization(.none)
+                    .foregroundColor(Color.gray)
+                    .padding()
+                    .frame(width: UIScreen.screenWidth-40)
+                    .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.highlight))
                 TextField("Username", text: $username)
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
+                    .multilineTextAlignment(.center)
+                    .disableAutocorrection(true)
+                    .autocapitalization(.none)
+                    .foregroundColor(Color.gray)
+                    .padding()
+                    .frame(width: UIScreen.screenWidth-40)
+                    .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.highlight))
                 if !matchCheck {
                     Text("Passwords do not match!")
                 }
                 SecureField("Password", text: $password)
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
+                    .multilineTextAlignment(.center)
+                    .disableAutocorrection(true)
+                    .autocapitalization(.none)
+                    .foregroundColor(Color.gray)
+                    .padding()
+                    .frame(width: UIScreen.screenWidth-40)
+                    .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.highlight))
                 SecureField("Confirm password", text: $password2)
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
+                    .multilineTextAlignment(.center)
+                    .disableAutocorrection(true)
+                    .autocapitalization(.none)
+                    .foregroundColor(Color.gray)
+                    .padding()
+                    .frame(width: UIScreen.screenWidth-40)
+                    .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.highlight))
             }
+            .padding(.top, 30)
             if errorString=="" {
                 Text(errorString)
             }
@@ -92,13 +133,34 @@ struct SignupView: View {
                 }
             } label: {
                 Text("Sign up")
+                    .padding()
+                    .frame(width: UIScreen.screenWidth-70)
+                    .background(Color.highlight.opacity(0.1))
+                    .cornerRadius(100)
+                    .background(RoundedRectangle(cornerRadius: 100).stroke().foregroundColor(Color.highlight))
+                    .tint(Color.black)
+                    .font(Constants.textFont)
+                //.controlSize(.small) // .large, .medium or .small
+                    .buttonStyle(.borderedProminent)
+                // .padding(.top, 70)
             }
             Spacer()
             Text("Already have an account?")
+                .font(Constants.textFont)
             Button {
                 viewState = .login
             } label: {
                 Text("Log in!")
+                    .padding()
+                    .frame(width: UIScreen.screenWidth-70)
+                    .background(Color.highlight.opacity(0.1))
+                    .cornerRadius(100)
+                    .background(RoundedRectangle(cornerRadius: 100).stroke().foregroundColor(Color.highlight))
+                    .tint(Color.black)
+                    .font(Constants.textFont)
+                //.controlSize(.small) // .large, .medium or .small
+                    .buttonStyle(.borderedProminent)
+                // .padding(.top, 70)
             }
         }
     }
