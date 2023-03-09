@@ -15,6 +15,8 @@
 		0F2F317D29AF9662008B0CC3 /* Foods_With_FriendsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2F317C29AF9662008B0CC3 /* Foods_With_FriendsUITests.swift */; };
 		0F2F317F29AF9662008B0CC3 /* Foods_With_FriendsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2F317E29AF9662008B0CC3 /* Foods_With_FriendsUITestsLaunchTests.swift */; };
 		0FC6C8BC29B0F9CF0040048C /* FWFData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6C8BB29B0F9CF0040048C /* FWFData.swift */; };
+		0FC9C35F29B8E558006B9ECD /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC9C35E29B8E558006B9ECD /* AppView.swift */; };
+		0FC9C36129BA65AA006B9ECD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC9C36029BA65AA006B9ECD /* User.swift */; };
 		0FDDA06929B2816B00A866C4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDDA06729B2816B00A866C4 /* LoginView.swift */; };
 		0FDDA06A29B2816B00A866C4 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDDA06829B2816B00A866C4 /* SignupView.swift */; };
 		0FDDA06C29B28EDB00A866C4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0FDDA06B29B28EDB00A866C4 /* GoogleService-Info.plist */; };
@@ -62,6 +64,8 @@
 		0F2F317C29AF9662008B0CC3 /* Foods_With_FriendsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Foods_With_FriendsUITests.swift; sourceTree = "<group>"; };
 		0F2F317E29AF9662008B0CC3 /* Foods_With_FriendsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Foods_With_FriendsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0FC6C8BB29B0F9CF0040048C /* FWFData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FWFData.swift; sourceTree = "<group>"; };
+		0FC9C35E29B8E558006B9ECD /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		0FC9C36029BA65AA006B9ECD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0FDDA06729B2816B00A866C4 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		0FDDA06829B2816B00A866C4 /* SignupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		0FDDA06B29B28EDB00A866C4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 				8801352629B0F45400304A06 /* Constants.swift */,
 				0FC6C8BB29B0F9CF0040048C /* FWFData.swift */,
 				0FDDA06D29B7AAB900A866C4 /* FetchData.swift */,
+				0FC9C36029BA65AA006B9ECD /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -211,6 +216,7 @@
 				88F7339829B77EFA001D8CC6 /* SearchView.swift */,
 				88F7339A29B77F12001D8CC6 /* FriendView.swift */,
 				88F7339C29B77F21001D8CC6 /* NewPostView.swift */,
+				0FC9C35E29B8E558006B9ECD /* AppView.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -481,10 +487,12 @@
 				0FDDA06929B2816B00A866C4 /* LoginView.swift in Sources */,
 				834981D229B0F89C00CF2D98 /* PersonalProfileView.swift in Sources */,
 				88F7339B29B77F12001D8CC6 /* FriendView.swift in Sources */,
+				0FC9C36129BA65AA006B9ECD /* User.swift in Sources */,
 				0F2F316429AF965D008B0CC3 /* ContentView.swift in Sources */,
 				0F2F316229AF965D008B0CC3 /* Foods_With_FriendsApp.swift in Sources */,
 				88F733A129B77FD1001D8CC6 /* ProfileView.swift in Sources */,
 				8801352F29B3A06600304A06 /* HomeView.swift in Sources */,
+				0FC9C35F29B8E558006B9ECD /* AppView.swift in Sources */,
 				88F7339929B77EFA001D8CC6 /* SearchView.swift in Sources */,
 				8801352729B0F45400304A06 /* Constants.swift in Sources */,
 				0FDDA06E29B7AABA00A866C4 /* FetchData.swift in Sources */,

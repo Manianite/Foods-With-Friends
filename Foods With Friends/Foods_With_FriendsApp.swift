@@ -20,16 +20,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct Foods_With_FriendsApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @ObservedObject var appUser: User = User()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(appUser)
         }
     }
 }
-
-class AppUser {
-    static var handle = ""
-    static var uid = ""
-    static var username = ""
-}
- 

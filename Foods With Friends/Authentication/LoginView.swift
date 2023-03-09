@@ -12,6 +12,7 @@ struct LoginView: View {
     @State var username = ""
     @State var password = ""
     @Binding var viewState: ViewState
+    @EnvironmentObject var appUser: User
     var body: some View {
         VStack {
             Text("Foods With Friends!")
@@ -29,11 +30,10 @@ struct LoginView: View {
                 Auth.auth().signIn(withEmail: username, password: password) { user, error in
                     if let _=user {
                         guard let uid = Auth.auth().currentUser?.uid else {return}
-                        let me: User = FetchUserData.getData("users/\(uid)/User Profile.json")
-                        AppUser.uid = uid
-                        AppUser.handle = me.handle
-                        AppUser.username = me.username
-                        viewState = .homeFeed
+                        FetchUserData.getData("users/\(uid)/User Profile.json") { user in
+                            appUser.reinit(user)
+                            viewState = .home
+                        }
                     } else {
                         print(error)
                     }
@@ -60,6 +60,8 @@ struct LoginView: View {
         }
     }
 }
+
+
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {

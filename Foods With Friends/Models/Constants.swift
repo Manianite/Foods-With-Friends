@@ -17,13 +17,7 @@ extension Color{
     static let highlight = Color("Highlight")
 }
 enum ViewState{
-    case homeFeed
-    case personalProfile
-    case search
-    case comments
-    case friendsList
-    case friendProfile
-    case authentication
+    case home
     case login
     case signup
     case forgotPassword

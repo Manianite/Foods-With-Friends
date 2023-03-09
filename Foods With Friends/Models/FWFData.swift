@@ -20,7 +20,13 @@ import FirebaseDatabase
 import FirebaseAuth
 
 class DatabaseData {
-    static func writeData(_ data: Data, _ location: String, _ completion: @escaping((_ url:URL?) -> ())){
+    @MainActor static func writeData(_ data: Data, _ location: String) async {
+        let storage = Storage.storage().reference().child("\(location)")
+        let metadata = StorageMetadata()
+        metadata.contentType = "text/txt"
+        await storage.putData(data, metadata: metadata) { meta, error in }
+    }
+    static func writeDataPatently(_ data: Data, _ location: String) {
         let storage = Storage.storage().reference().child("\(location)")
         let metadata = StorageMetadata()
         metadata.contentType = "text/txt"
@@ -46,14 +52,26 @@ class DatabaseData {
                 print("Error deleting item", error)
             }
         }
-    } 
-    static func readData(location: String, _ completion: @escaping((_ data: Data, _ dataString: String) -> ())) {
+    }
+    @MainActor static func readData(location: String) async -> Data {
+        let item = Storage.storage().reference().child(location)
+        var outputData = Data()
+        await item.getData(maxSize: Int64.max) { data, error in
+            if let error = error {
+                print("Error reading item", error)
+            } else if let data = data {
+                outputData = data
+            }
+        }
+        return outputData
+    }
+    static func readDataPatiently(location: String, _ completion: @escaping ((_ data: Data) -> ())) {
         let item = Storage.storage().reference().child(location)
         item.getData(maxSize: Int64.max) { data, error in
             if let error = error {
                 print("Error reading item", error)
             } else if let data = data {
-                completion(data, String(decoding: data, as: UTF8.self))
+                 completion(data)
             }
         }
     }

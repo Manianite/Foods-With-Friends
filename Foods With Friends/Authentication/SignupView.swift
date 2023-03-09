@@ -9,6 +9,7 @@ import SwiftUI
 import FirebaseAuth
 
 struct SignupView: View {
+    @EnvironmentObject var appUser: User
     @State var email = ""
     @State var handle = ""
     @State var username = ""
@@ -16,19 +17,8 @@ struct SignupView: View {
     @State var password2 = ""
     @State var errorString = ""
     var matchCheck: Bool {password==password2}
-    var handleCheck: Bool {
-        var data: Data = Data()
-        DatabaseData.readData(location: "user/user_list.json") { _data, _ in
-            data = _data
-        }
-        do {
-            let userList = try JSONDecoder().decode(UserList.self, from: data)
-            return userList.list.contains(handle)
-        } catch {
-            errorString = "error!!! cannot decode user_list.json |28"
-        }
-        return false
-    }
+    @State var handleCheck: Bool = true
+    @State var userList: [String] = []
     @Binding var viewState:ViewState
     var body: some View {
         VStack {
@@ -41,12 +31,22 @@ struct SignupView: View {
                 TextField("Email address", text: $email)
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
-                if !matchCheck {
+                if !handleCheck {
                     Text("@handle not unique!")
                 }
                 TextField("@handle", text: $handle)
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
+                    .task {
+                        var data = await DatabaseData.readData(location: "users/user_list.json")
+                        print(String(data: data, encoding: .utf8) ?? "")
+                        do {
+                            userList = try JSONDecoder().decode(UserList.self, from: data).list
+                        } catch {
+                            handleCheck = false
+                            //errorString = "error!!! cannot decode user_list.json |28"
+                        }
+                    }
                 TextField("Username", text: $username)
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
@@ -64,27 +64,22 @@ struct SignupView: View {
                 Text(errorString)
             }
             Button {
+                handleCheck = !userList.contains(handle)
                 if matchCheck && handleCheck {
                     Auth.auth().createUser(withEmail: email, password: password) { user, error in
                         if let _=user {
                             guard let uid = Auth.auth().currentUser?.uid else {return}
-                            AppUser.uid = uid
-                            AppUser.username = username
-                            AppUser.handle = handle
-                            
-                            var data: Data = Data()
-                            DatabaseData.readData(location: "user/user_list.json") { _data, _ in
-                                data = _data
-                            }
+                            appUser.reinit(username: username, handle: handle, uid: uid)
+                            userList.append(handle)
                             do {
-                                var userList = try JSONDecoder().decode(UserList.self, from: data)
-                                userList.list.append(handle)
-                                data = try JSONEncoder().encode(userList)
-                                DatabaseData.writeData(data, "user/user_list.json") { url in }
+                                let JSONUserList = try JSONEncoder().encode(userList)
+                                DatabaseData.writeDataPatently(JSONUserList, "users/user_list.json")
+                                let JSONUserProfile = try JSONEncoder().encode(appUser)
+                                DatabaseData.writeDataPatently(JSONUserProfile, "users/\(uid)/User Profile.json")
                             } catch {
-                                errorString = "error!!! cannot de/encode user_list.json |83"
+                                errorString = "error!!! cannot encode user_list.json |83"
                             }
-                            viewState = .homeFeed
+                            viewState = .home
                         } else {
                             print(error)
                         }
