@@ -30,12 +30,12 @@ struct LoginView: View {
                 Auth.auth().signIn(withEmail: username, password: password) { user, error in
                     if let _=user {
                         guard let uid = Auth.auth().currentUser?.uid else {return}
-                        FetchUserData.getData("users/\(uid)/User Profile.json") { user in
+                        UserData.getUser(uid) { user in
                             appUser.reinit(user)
                             viewState = .home
                         }
                     } else {
-                        print(error)
+                        print(error ?? "")
                     }
                 }
             } label: {
@@ -44,7 +44,7 @@ struct LoginView: View {
             Button {
                 Auth.auth().sendPasswordReset(withEmail: username) { error in
                     if let _=error {
-                        print(error)
+                        print(error ?? "")
                     }
                 }
             } label: {

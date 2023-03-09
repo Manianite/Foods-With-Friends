@@ -17,7 +17,6 @@ class FetchRestaurantData: ObservableObject{
         
         do {
             let (data,_) = try await URLSession.shared.data(from: url)
-            //print(String(data: data, encoding: .utf8))
             let response = try JSONDecoder().decode(RestaurantResponse.self, from: data)
             self.response = response
         } catch {
@@ -42,22 +41,5 @@ struct Address: Codable {
     var street_addr:String = "1004 E Montgomery Rd."
     var city:String = "Aardmør"
     var state:String = "PA"
-}
-
-class FetchUserData {
-    
-    static func getData(_ location: String, _ completion: @escaping ((_ user: User) -> ())) {
-        DatabaseData.readDataPatiently(location: location) { data in
-            do {
-                let response: User = try JSONDecoder().decode(User.self, from: data)
-                completion(response)
-            } catch {
-                print(error)
-            }
-        }
-    }
-}
-struct Review: Codable {
-    
 }
  

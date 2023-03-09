@@ -83,3 +83,9 @@ class User: ObservableObject, Codable {
         self.reviews = user.reviews
     }
 }
+struct UserDict: Codable {
+    var handles:[String] = []
+    var uids:[String] = []
+    var usernames:[String] = []
+    var profilePics:[String] = []
+}
