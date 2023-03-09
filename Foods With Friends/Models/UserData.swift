@@ -19,7 +19,7 @@ import FirebaseStorage
 import FirebaseDatabase
 import FirebaseAuth
 
-class DatabaseData {
+class UserData {
     @MainActor static func writeData(_ data: Data, _ location: String) async {
         let storage = Storage.storage().reference().child("\(location)")
         let metadata = StorageMetadata()
