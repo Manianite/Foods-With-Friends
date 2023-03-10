@@ -8,91 +8,42 @@
 
 
 import SwiftUI
-import FirebaseStorage
 import FirebaseDatabase
-import FirebaseAuth
 
 class UserData {
-//    @MainActor static func writeData(_ data: Data, _ location: String) async {
-//        let storage = Storage.storage().reference().child("\(location)")
-//        let metadata = StorageMetadata()
-//        metadata.contentType = "text/txt"
-//        await storage.putData(data, metadata: metadata) { meta, error in }
-//    }
-    static func writeData(_ data: Data, _ location: String) {
-        let storage = Storage.storage().reference().child("\(location)")
-        let metadata = StorageMetadata()
-        metadata.contentType = "text/txt"
-        storage.putData(data, metadata: metadata) { meta, error in }
-    }
-    static func listFilesIn(_ dir: String) {
-        let storage = Storage.storage().reference().child("\(dir)")
-        storage.listAll { (result, error) in
-            if let e = error {
-                print("Error while listing all files: ", e)
-            }
-            if let r = result {
-                for item in r.items {
-                    print("Item in folder: ", item)
-                }
-            }
-        }
-    }
-    static func deleteItem(_ location: String) {
-        let item = Storage.storage().reference().child(location)
-        item.delete { error in
-            if let error = error {
-                print("Error deleting item", error)
-            }
-        }
-    }
-//    @MainActor static func readData(_ location: String) async -> Data {
-//        let item = Storage.storage().reference().child(location)
-//        var outputData = Data()
-//        await item.getData(maxSize: Int64.max) { data, error in
-//            if let error = error {
-//                print("Error reading item", error)
-//            } else if let data = data {
-//                outputData = data
-//            }
-//        }
-//        return outputData
-//    }
-    static func readData(_ location: String, _ completion: @escaping ((_ data: Data) -> ())) {
-        let item = Storage.storage().reference().child(location)
-        item.getData(maxSize: Int64.max) { data, error in
-            if let error = error {
-                print("Error reading item", error)
-            } else if let data = data {
-                 completion(data)
-            }
-        }
+    private static var ref = Database.database().reference()
+    
+    static func pushUser(_ user: User) {
+        ref.child("users/\(user.uid)").updateChildValues(user.toDictionnary)
     }
     static func getUser(_ uid: String, _ completion: @escaping ((_ user: User) -> ())) {
-        readData("users/\(uid)/user_profile.json") { data in
+        //this was a bitch to write
+        ref.child("users/\(uid)").observeSingleEvent(of: .value) { snapshot in
+            let dict = snapshot.value as? [String: Any] ?? [:]
             do {
-                let user: User = try JSONDecoder().decode(User.self, from: data)
-                completion(user)
+                completion(try dict.asObject(User.self, from: dict))
             } catch {
-                print(error)
+                print("ERROR!!! cannot get user_dict")
             }
         }
     }
-    static func getUserDict(_ completion: @escaping ((_ userDict: UserDict) -> ())) {
-        readData("users/user_dict.json") { data in
+    static var userDict:[String: PublicUser] = [:]
+    static var userDictObserver: DatabaseReference = ref.child("users/user_dict")
+    static func observeUserDict() {
+        userDictObserver.observe(.value) { snapshot in
+            let dict = snapshot.value as? [String: Any] ?? [:]
             do {
-                let userDict = try JSONDecoder().decode(UserDict.self, from: data)
-                completion(userDict)
+                userDict = try dict.asObject([String: PublicUser].self, from: dict)
             } catch {
-                print("error!!! cannot decode user_list.json at UserData: 87")
+                print("ERROR!!! cannot get user_dict")
             }
         }
     }
-    static func clearUserList() {
-        do {
-            let JSONUserProfile = try JSONEncoder().encode(UserDict())
-            UserData.writeData(JSONUserProfile, "users/user_dict.json")
-        } catch {}
+    static func stopObservingUserDict() {
+        userDictObserver.removeAllObservers()
+    }
+    static func appendUserDict(_ uid: String, _ user:PublicUser) {
+        ref.child("users/user_dict/\(uid)").updateChildValues(user.toDictionnary)
     }
 }
 struct Review: Codable {

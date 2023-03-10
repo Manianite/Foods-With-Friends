@@ -83,9 +83,69 @@ class User: ObservableObject, Codable {
         self.reviews = user.reviews
     }
 }
-struct UserDict: Codable {
-    var handles:[String] = []
-    var uids:[String] = []
-    var usernames:[String] = []
-    var profilePics:[String] = []
+class PublicUser: ObservableObject, Codable {
+    @Published var username: String
+    @Published var handle: String
+    @Published var profilePic: String
+    
+    enum CodingKeys: CodingKey {
+        case username, handle, profilePic
+    }
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(username, forKey: .username)
+        try container.encode(handle, forKey: .handle)
+        try container.encode(profilePic, forKey: .profilePic)
+    }
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        username = try container.decode(String.self, forKey: .username)
+        handle = try container.decode(String.self, forKey: .handle)
+        profilePic = try container.decode(String.self, forKey: .profilePic)
+    }
+    internal init(username: String, handle: String) {
+        self.username = username
+        self.handle = handle
+        self.profilePic = ""
+    }
+    internal init() {
+        self.username = ""
+        self.handle = ""
+        self.profilePic = ""
+    }
+    func reinit(username: String, handle: String) {
+        self.username = username
+        self.handle = handle
+        self.profilePic = ""
+    }
+    func reinit(_ user: PublicUser) {
+        self.username = user.username
+        self.handle = user.handle
+        self.profilePic = user.profilePic
+    }
+    func reinit(_ user: User) {
+        self.username = user.username
+        self.handle = user.handle
+        self.profilePic = user.profilePic
+    }
+}
+
+extension Encodable {
+    var toDictionnary: [String : Any] {
+        guard let data =  try? JSONEncoder().encode(self) else {
+            return [:]
+        }
+        guard let dict = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else {
+            print("ERROR!!! could not convert object to dictionary")
+            return [:]
+        }
+        return dict
+    }
+}
+extension Dictionary {
+    func asObject<T>(_ type: T.Type, from dict: [String: Any]) throws -> T where T: Codable {
+        let data = try JSONSerialization.data(withJSONObject: dict)
+        let obj = try JSONDecoder().decode(T.self, from: data)
+        return obj
+    }
 }

@@ -16,7 +16,7 @@ struct SignupView: View {
     @State var password = ""
     @State var password2 = ""
     var matchCheck: Bool {password==password2}
-    @State var handleCheck: Bool = true
+    var handleCheck: Bool {!UserData.userDict.contains {$0.value.handle == handle}}
     @Binding var viewState:ViewState
     var body: some View {
         VStack {
@@ -50,35 +50,25 @@ struct SignupView: View {
             }
             Button {
                 //TODO: loading –––––––––––––––––––––––––––––––
-                UserData.getUserDict { userDict in
-                    var userDict = userDict
-                    handleCheck = !userDict.handles.contains(handle)
-                    if matchCheck && handleCheck {
-                        Auth.auth().createUser(withEmail: email, password: password) { user, error in
-                            if let _=user {
-                                guard let uid = Auth.auth().currentUser?.uid else {return}
-                                appUser.reinit(username: username, handle: handle, uid: uid)
-                                userDict.handles.append(handle)
-                                userDict.uids.append(uid)
-                                userDict.usernames.append(username)
-                                userDict.profilePics.append("")
-                                do {
-                                    let JSONUserDict = try JSONEncoder().encode(userDict)
-                                    UserData.writeData(JSONUserDict, "users/user_dict.json")
-                                    let JSONUserProfile = try JSONEncoder().encode(appUser)
-                                    UserData.writeData(JSONUserProfile, "users/\(uid)/user_profile.json")
-                                } catch {
-                                    print("error!!! cannot encode user_dict.json at SignupView: 71")
-                                }
-                                viewState = .home
-                            } else {
-                                print(error ?? "")
-                            }
+                if matchCheck && handleCheck {
+                    Auth.auth().createUser(withEmail: email, password: password) { user, error in
+                        if let _=user {
+                            guard let uid = Auth.auth().currentUser?.uid else {return}
+                            appUser.reinit(username: username, handle: handle, uid: uid)
+                            UserData.appendUserDict(uid, PublicUser(username: username, handle: handle))
+                            UserData.pushUser(appUser)
+                            UserData.stopObservingUserDict()
+                            viewState = .home
+                        } else {
+                            print(error ?? "")
                         }
                     }
                 }
             } label: {
                 Text("Sign up")
+            }
+            .onAppear {
+                UserData.observeUserDict()
             }
             Spacer()
             Text("Already have an account?")
