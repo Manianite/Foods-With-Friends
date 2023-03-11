@@ -19,7 +19,7 @@ struct LoginView: View {
                 Image("logo")
                     .resizable()
                     .frame(width: UIScreen.screenWidth/3, height: UIScreen.screenWidth/3)
-                    .padding(.top)
+                    //.padding(.top, 5)
                 
                     //.aspectRatio(contentMode: .fit)
                 Text("Foods With Friends")
