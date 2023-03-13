@@ -6,22 +6,26 @@
 //
 
 import SwiftUI
+import struct Kingfisher.KFImage
 
 struct ContentView: View {
+    @State var viewState = ViewState.login
     var body: some View {
-        VStack{
-            Text("Hello, world!")
-                .padding()
-                .font(Constants.textFont)
-                .foregroundColor(Color.highlight)
-            Text("Hello, world!")
-                .padding()
-                .font(Constants.titleFont)
-                .foregroundColor(Color.highlight)
+        VStack {
+            if viewState == .home {
+                AppView(viewState: $viewState)
+            } else if viewState == .login {
+                LoginView(viewState: $viewState)
+            } else if viewState == .signup {
+                SignupView(viewState: $viewState)
+            } else if viewState == .forgotPassword {
+                Text("Forgot password page")
+            } else {
+                Text("Problem at ~23")
+            }
         }
     }
 }
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()

@@ -6,12 +6,25 @@
 //
 
 import SwiftUI
+import FirebaseCore
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    FirebaseApp.configure()
+
+    return true
+  }
+}
 
 @main
 struct Foods_With_FriendsApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @ObservedObject var appUser: User = User()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(appUser)
         }
     }
 }
