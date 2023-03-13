@@ -9,26 +9,14 @@ import SwiftUI
 import FirebaseAuth
 
 struct SignupView: View {
+    @EnvironmentObject var appUser: User
     @State var email = ""
     @State var handle = ""
     @State var username = ""
     @State var password = ""
     @State var password2 = ""
-    @State var errorString = ""
     var matchCheck: Bool {password==password2}
-    var handleCheck: Bool {
-        var data: Data = Data()
-        DatabaseData.readData(location: "user/user_list.json") { _data, _ in
-            data = _data
-        }
-        do {
-            let userList = try JSONDecoder().decode(UserList.self, from: data)
-            return userList.list.contains(handle)
-        } catch {
-            errorString = "error!!! cannot decode user_list.json |28"
-        }
-        return false
-    }
+    var handleCheck: Bool {!UserData.userDict.contains {$0.value.handle == handle}}
     @Binding var viewState:ViewState
     var body: some View {
         VStack {
@@ -62,7 +50,8 @@ struct SignupView: View {
                     .frame(width: UIScreen.screenWidth-40, height: UIScreen.screenHeight/15)
                     .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
                 
-                if !matchCheck {
+                
+                if !handleCheck {
                     Text("@handle not unique!")
                 }
                 TextField("@handle", text: $handle)
@@ -104,35 +93,21 @@ struct SignupView: View {
                     .frame(width: UIScreen.screenWidth-40, height: UIScreen.screenHeight/15)
                     .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
             }
-            //.padding(.top, 10)
             Spacer()
-            if errorString=="" {
-                Text(errorString)
-            }
+
             Button {
+                //TODO: loading –––––––––––––––––––––––––––––––
                 if matchCheck && handleCheck {
                     Auth.auth().createUser(withEmail: email, password: password) { user, error in
                         if let _=user {
                             guard let uid = Auth.auth().currentUser?.uid else {return}
-                            AppUser.uid = uid
-                            AppUser.username = username
-                            AppUser.handle = handle
-                            
-                            var data: Data = Data()
-                            DatabaseData.readData(location: "user/user_list.json") { _data, _ in
-                                data = _data
-                            }
-                            do {
-                                var userList = try JSONDecoder().decode(UserList.self, from: data)
-                                userList.list.append(handle)
-                                data = try JSONEncoder().encode(userList)
-                                DatabaseData.writeData(data, "user/user_list.json") { url in }
-                            } catch {
-                                errorString = "error!!! cannot de/encode user_list.json |83"
-                            }
-                            viewState = .homeFeed
+                            appUser.reinit(username: username, handle: handle, uid: uid)
+                            UserData.appendUserDict(uid, PublicUser(username: username, handle: handle))
+                            UserData.pushUser(appUser)
+                            UserData.stopObservingUserDict()
+                            viewState = .home
                         } else {
-                            print(error)
+                            print(error ?? "")
                         }
                     }
                 }
@@ -146,6 +121,9 @@ struct SignupView: View {
                     .tint(Color.black)
                     .font(Constants.textFont)
                     .buttonStyle(.borderedProminent)
+            }
+            .onAppear {
+                UserData.observeUserDict()
             }
             Spacer()
             Text("Already have an account?")
@@ -166,10 +144,6 @@ struct SignupView: View {
             Spacer()
         }
     }
-}
- 
-struct UserList: Codable {
-    var list:[String] = []
 }
 
 struct SignupView_Previews: PreviewProvider {
