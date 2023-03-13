@@ -49,28 +49,18 @@ class User: ObservableObject, Codable {
         self.bio = ""
         self.profilePic = ""
         self.city = ""
-        self.friends = []
-        self.reviews = []
+        self.friends = [""]
+        self.reviews = [Review()]
     }
     internal init() {
-        self.username = ""
-        self.handle = ""
-        self.uid = ""
-        self.bio = ""
+        self.username = "Julia Zorc"
+        self.handle = "juliazorc123"
+        self.uid = "Julia'sAccountlessUserID"
+        self.bio = "Hi! I am Julia and, just like you, I love food! I post reviews at least once a week. Be my friend to see my opinions and be a better informed foodie :)"
         self.profilePic = ""
-        self.city = ""
-        self.friends = []
-        self.reviews = []
-    }
-    func reinit(username: String, handle: String, uid: String) {
-        self.username = username
-        self.handle = handle
-        self.uid = uid
-        self.bio = ""
-        self.profilePic = ""
-        self.city = ""
-        self.friends = []
-        self.reviews = []
+        self.city = "Wynnewood, PA"
+        self.friends = [""]
+        self.reviews = [Review()]
     }
     func reinit(_ user: User) {
         self.username = user.username
@@ -81,6 +71,16 @@ class User: ObservableObject, Codable {
         self.city = user.city
         self.friends = user.friends
         self.reviews = user.reviews
+    }
+    func reinit(username: String, handle: String, uid: String) {
+        self.username = username
+        self.handle = handle
+        self.uid = uid
+        self.bio = ""
+        self.profilePic = ""
+        self.city = ""
+        self.friends = [""]
+        self.reviews = [Review()]
     }
 }
 class PublicUser: ObservableObject, Codable {
@@ -108,6 +108,11 @@ class PublicUser: ObservableObject, Codable {
         self.handle = handle
         self.profilePic = ""
     }
+    internal init(_ user: User) {
+        self.username = user.username
+        self.handle = user.handle
+        self.profilePic = user.profilePic
+    }
     internal init() {
         self.username = ""
         self.handle = ""
@@ -119,11 +124,6 @@ class PublicUser: ObservableObject, Codable {
         self.profilePic = ""
     }
     func reinit(_ user: PublicUser) {
-        self.username = user.username
-        self.handle = user.handle
-        self.profilePic = user.profilePic
-    }
-    func reinit(_ user: User) {
         self.username = user.username
         self.handle = user.handle
         self.profilePic = user.profilePic
