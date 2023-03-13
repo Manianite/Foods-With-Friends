@@ -1,5 +1,5 @@
 //
-//  FWFData.swift
+//  UserData.swift
 //  Foods With Friends
 //
 //  Created by Speer-Zisook, Ella on 3/2/23.
@@ -15,15 +15,18 @@ class UserData {
     
     static func pushUser(_ user: User) {
         ref.child("users/\(user.uid)").updateChildValues(user.toDictionnary)
+        ref.child("users/user_dict/\(user.uid)").updateChildValues(PublicUser(user).toDictionnary)
     }
     static func getUser(_ uid: String, _ completion: @escaping ((_ user: User) -> ())) {
-        //this was a bitch to write
         ref.child("users/\(uid)").observeSingleEvent(of: .value) { snapshot in
-            let dict = snapshot.value as? [String: Any] ?? [:]
+            guard let dict = snapshot.value as? [String: Any] else {
+                print("ERROR!!! cannot get user")
+                return
+            }
             do {
                 completion(try dict.asObject(User.self, from: dict))
             } catch {
-                print("ERROR!!! cannot get user_dict")
+                print("ERROR!!! cannot convert user")
             }
         }
     }
@@ -42,10 +45,14 @@ class UserData {
     static func stopObservingUserDict() {
         userDictObserver.removeAllObservers()
     }
-    static func appendUserDict(_ uid: String, _ user:PublicUser) {
+    static func appendUserDict(_ uid: String, _ user: PublicUser) {
         ref.child("users/user_dict/\(uid)").updateChildValues(user.toDictionnary)
     }
 }
 struct Review: Codable {
-    
+    var title = ""
+    var stars = 0
+    var images = [""]
+    var restaurant = ""
+    var body = ""
 }

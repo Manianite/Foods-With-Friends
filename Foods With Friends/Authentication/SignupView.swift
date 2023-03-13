@@ -25,9 +25,6 @@ struct SignupView: View {
                 Image("logo")
                     .resizable()
                     .frame(width: UIScreen.screenWidth/3, height: UIScreen.screenWidth/3)
-                    //.padding(.top, 5)
-                
-                    //.aspectRatio(contentMode: .fit)
                 Text("Foods With Friends")
                     .font(.system(size: 45))
                     .font(.largeTitle)
@@ -49,11 +46,7 @@ struct SignupView: View {
                     .padding()
                     .frame(width: UIScreen.screenWidth-40, height: UIScreen.screenHeight/15)
                     .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
-                
-                
-                if !handleCheck {
-                    Text("@handle not unique!")
-                }
+
                 TextField("@handle", text: $handle)
                     .multilineTextAlignment(.center)
                     .disableAutocorrection(true)
@@ -61,6 +54,7 @@ struct SignupView: View {
                     .foregroundColor(Color.gray)
                     .padding()
                     .frame(width: UIScreen.screenWidth-40, height: UIScreen.screenHeight/15)
+                    .background(handleCheck ? .white : .red.opacity(0.2))
                     .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
                 TextField("Username", text: $username)
                     .autocapitalization(.none)
@@ -71,9 +65,6 @@ struct SignupView: View {
                     .padding()
                     .frame(width: UIScreen.screenWidth-40, height: UIScreen.screenHeight/15)
                     .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
-                if !matchCheck {
-                    Text("Passwords do not match!")
-                }
                 SecureField("Password", text: $password)
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
@@ -91,6 +82,7 @@ struct SignupView: View {
                     .foregroundColor(Color.gray)
                     .padding()
                     .frame(width: UIScreen.screenWidth-40, height: UIScreen.screenHeight/15)
+                    .background(matchCheck ? .white : .red.opacity(0.2))
                     .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
             }
             Spacer()
@@ -122,6 +114,7 @@ struct SignupView: View {
                     .font(Constants.textFont)
                     .buttonStyle(.borderedProminent)
             }
+            .disabled(!(matchCheck && handleCheck))
             .onAppear {
                 UserData.observeUserDict()
             }
@@ -148,6 +141,6 @@ struct SignupView: View {
 
 struct SignupView_Previews: PreviewProvider {
     static var previews: some View {
-        SignupView(viewState: Binding.constant(.login))
+        SignupView(viewState: Binding.constant(.signup))
     }
 }

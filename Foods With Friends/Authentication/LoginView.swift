@@ -9,7 +9,7 @@ import SwiftUI
 import FirebaseAuth
 
 struct LoginView: View {
-    @State var username = ""
+    @State var email = ""
     @State var password = ""
     @Binding var viewState: ViewState
     @EnvironmentObject var appUser: User
@@ -20,7 +20,6 @@ struct LoginView: View {
                 Image("logo")
                     .resizable()
                     .frame(width: UIScreen.screenWidth/3, height: UIScreen.screenWidth/3)
-                    //.padding(.top, 5)
                 
                     //.aspectRatio(contentMode: .fit)
                 Text("Foods With Friends")
@@ -36,7 +35,7 @@ struct LoginView: View {
             }
             Group{
                 VStack{
-                    TextField("Enter Username", text: $username)
+                    TextField("Enter Username", text: $email)
                         .disableAutocorrection(true)
                         .autocapitalization(.none)
                         .multilineTextAlignment(.center)
@@ -58,7 +57,7 @@ struct LoginView: View {
                 .padding(.bottom, 40)
             }
             Button {
-                Auth.auth().signIn(withEmail: username, password: password) { user, error in
+                Auth.auth().signIn(withEmail: email, password: password) { user, error in
                     if let _=user {
                         guard let uid = Auth.auth().currentUser?.uid else {return}
                         UserData.getUser(uid) { user in
@@ -80,10 +79,11 @@ struct LoginView: View {
                     .font(Constants.textFont)
                     .buttonStyle(.borderedProminent)
             }
+            .disabled(password.count<1 || email.count<1)
             Button {
-                Auth.auth().sendPasswordReset(withEmail: username) { error in
+                Auth.auth().sendPasswordReset(withEmail: email) { error in
                     if let _=error {
-                        print(error ?? "")
+                        print(error)
                     }
                 }
             } label: {
@@ -116,8 +116,6 @@ struct LoginView: View {
         }
     }
 }
-
-
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
