@@ -49,10 +49,3 @@ class UserData {
         ref.child("users/user_dict/\(uid)").updateChildValues(user.toDictionnary)
     }
 }
-struct Review: Codable {
-    var title = ""
-    var stars = 0
-    var images = [""]
-    var restaurant = ""
-    var body = ""
-}
