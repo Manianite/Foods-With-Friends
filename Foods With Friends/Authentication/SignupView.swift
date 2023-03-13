@@ -25,9 +25,6 @@ struct SignupView: View {
                 Image("logo")
                     .resizable()
                     .frame(width: UIScreen.screenWidth/3, height: UIScreen.screenWidth/3)
-                    .padding(.top)
-                
-                    //.aspectRatio(contentMode: .fit)
                 Text("Foods With Friends")
                     .font(.system(size: 45))
                     .font(.largeTitle)
@@ -49,6 +46,7 @@ struct SignupView: View {
                     .padding()
                     .frame(width: UIScreen.screenWidth-40, height: UIScreen.screenHeight/15)
                     .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
+
                 TextField("@handle", text: $handle)
                     .multilineTextAlignment(.center)
                     .disableAutocorrection(true)
@@ -87,8 +85,8 @@ struct SignupView: View {
                     .background(matchCheck ? .white : .red.opacity(0.2))
                     .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
             }
-            //.padding(.top, 10)
             Spacer()
+
             Button {
                 //TODO: loading –––––––––––––––––––––––––––––––
                 if matchCheck && handleCheck {

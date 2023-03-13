@@ -5,11 +5,13 @@
 //  Created by Julia Zorc (student LM) on 3/2/23.
 //
 
+
 import SwiftUI
 
 struct PersonalProfileView: View {
     @EnvironmentObject var appUser: User
     @State var viewMode = true
+
     var body: some View {
         VStack{
             HStack(){
@@ -26,10 +28,9 @@ struct PersonalProfileView: View {
                         Image(systemName: "person.crop.circle.fill")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 100, height: 100)
+                            .frame(width: (UIScreen.main.bounds.width)/4, height: (UIScreen.main.bounds.width)/4)
                             .clipShape(Circle())
                             .padding(.leading)
-                        
                         
                         if viewMode {
                             Button(){
@@ -58,6 +59,7 @@ struct PersonalProfileView: View {
                             Text(String(appUser.reviews.count))
                                 .font(Constants.titleFont)
                             
+
                             Text("Reviews")
                                 .font(Constants.textFont)
                             
@@ -73,7 +75,7 @@ struct PersonalProfileView: View {
                             Text("Friends")
                                 .font(Constants.textFont)
                             
-                        }.padding(7)
+                        }.padding()
                     }
                     
                     

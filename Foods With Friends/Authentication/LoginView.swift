@@ -7,7 +7,6 @@
 
 import SwiftUI
 import FirebaseAuth
- 
 
 struct LoginView: View {
     @State var email = ""
@@ -21,7 +20,6 @@ struct LoginView: View {
                 Image("logo")
                     .resizable()
                     .frame(width: UIScreen.screenWidth/3, height: UIScreen.screenWidth/3)
-                    .padding(.top)
                 
                     //.aspectRatio(contentMode: .fit)
                 Text("Foods With Friends")
@@ -56,7 +54,7 @@ struct LoginView: View {
                         .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
                 }
                 .padding(.top, 70)
-                .padding(.bottom, 5)
+                .padding(.bottom, 40)
             }
             Button {
                 Auth.auth().signIn(withEmail: email, password: password) { user, error in
@@ -80,7 +78,6 @@ struct LoginView: View {
                     .tint(Color.black)
                     .font(Constants.textFont)
                     .buttonStyle(.borderedProminent)
-                    .padding(.bottom, 35)
             }
             .disabled(password.count<1 || email.count<1)
             Button {
@@ -115,7 +112,6 @@ struct LoginView: View {
                     .tint(Color.black)
                     .font(Constants.textFont)
                     .buttonStyle(.borderedProminent)
-                    .padding(.bottom, 15)
             }
         }
     }
