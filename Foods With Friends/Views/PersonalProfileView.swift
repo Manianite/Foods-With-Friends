@@ -32,21 +32,6 @@ struct PersonalProfileView: View {
                             .clipShape(Circle())
                             .padding(.leading)
                         
-
-                        
-                        
-                        Button(){
-                            //edit profile
-                        } label: {
-                            Image(systemName: "pencil.circle.fill")
-                                .foregroundColor(Color.highlight)
-                                .font(.system(size: 30))
-                            
-                        }
-                            .padding(.leading, -15.0)
-                        
-                        Spacer()
-=======
                         if viewMode {
                             Button(){
                                 viewMode = false
@@ -54,7 +39,7 @@ struct PersonalProfileView: View {
                                 Image(systemName: "pencil.circle.fill")
                                     .foregroundColor(Color.highlight)
                                     .font(.system(size: 30))
-                            }.padding([.trailing, .top, .bottom], 0.25)
+                            }
                                 .padding(.leading, -15.0)
                         } else {
                             Button(){
@@ -64,11 +49,10 @@ struct PersonalProfileView: View {
                                 Image(systemName: "checkmark.circle.fill")
                                     .foregroundColor(Color.highlight)
                                     .font(.system(size: 30))
-                            }.padding([.trailing, .top, .bottom], 0.25)
+                            }
                                 .padding(.leading, -15.0)
                         }
                         //Spacer()
-
                         
                         //# of reviews
                         VStack{
@@ -80,7 +64,7 @@ struct PersonalProfileView: View {
                                 .font(Constants.textFont)
                             
                             
-                        }.padding(7)
+                        }.padding()
                         
                         //# of friends
                         VStack{
@@ -97,21 +81,11 @@ struct PersonalProfileView: View {
                     
                     HStack{
 
-                        //Name
-                        Text("Julia Zorc")
-                            .font(Constants.titleFont)
-                            .padding(.leading)
-                        //username
-                        Text("@juliazorc123")
-                            .font(Constants.textFont)
-                            .foregroundColor(Color.gray)
-=======
                         if viewMode {
                             //Name
                             Text(appUser.username)
                                 .font(Constants.titleFont)
                                 .padding(.leading)
-                                .padding([.top, .bottom, .trailing], 0.25)
                             //username
                             Text("@\(appUser.handle)")
                                 .font(Constants.textFont)
@@ -132,7 +106,6 @@ struct PersonalProfileView: View {
                             Spacer()
                                 .frame(width: 20)
                         }
-
                     }
                     
                     HStack{
@@ -142,21 +115,9 @@ struct PersonalProfileView: View {
                             .padding(.leading)
                         //Location
 
-                        Text("Wynnewood, PA")
-                            .font(Constants.textFont)
-                    }.padding(.leading, 1.0)
-                    
-                    //bio
-                    Text("Hi! I am Julia and, just like you, I love food! I post reviews at least once a week. Be my friend to see my opinions and be a better informed foodie :)")
-                        .font(Constants.textFontSmall)
-                        .frame(width: UIScreen.main.bounds.width/2)
-                        .padding(.leading)
-                    
-=======
                         if viewMode {
                             Text(appUser.city)
                                 .font(Constants.textFont)
-                                .padding([.top, .bottom, .trailing], 0.25)
                         } else {
                             TextField("City", text: $appUser.city)
                                 .font(Constants.textFont)
@@ -180,7 +141,7 @@ struct PersonalProfileView: View {
                                 .font(Constants.textFontSmall)
                                 .frame(width: UIScreen.screenWidth-40)
                                 .multilineTextAlignment(.leading)
-                                .padding([.top, .bottom, .trailing], 0.25)
+                                .padding([.top, .bottom], 5)
                             Spacer()
                                 .frame(width: 20)
                         } else {
@@ -200,7 +161,6 @@ struct PersonalProfileView: View {
                                 .frame(width: 20)
                         }
                     }
-
                 }
                 
                 
