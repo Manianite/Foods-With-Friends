@@ -24,7 +24,7 @@ struct PersonalProfileView: View {
                         Image("profileDefault")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 100, height: 100)
+                            .frame(width: (UIScreen.main.bounds.width)/4, height: (UIScreen.main.bounds.width)/4)
                             .clipShape(Circle())
                             .padding(.leading)
                         
@@ -89,7 +89,7 @@ struct PersonalProfileView: View {
                             .padding(.leading)
                         
                         //Location
-                        Text("Wynnewood")
+                        Text("Wynnewood, PA")
                             .font(Constants.textFont)
                             .padding([.top, .bottom, .trailing], 0.25)
                     }.padding(.leading, 1.0)
