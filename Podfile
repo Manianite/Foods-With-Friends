@@ -11,6 +11,7 @@ target 'Foods With Friends' do
   pod 'Firebase/Core'
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
+  pod 'ReadMoreTextView'
 
   target 'Foods With FriendsTests' do
     inherit! :search_paths

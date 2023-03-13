@@ -33,6 +33,10 @@
 		88F7339F29B77F3D001D8CC6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F7339E29B77F3D001D8CC6 /* SettingsView.swift */; };
 		88F733A129B77FD1001D8CC6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F733A029B77FD1001D8CC6 /* ProfileView.swift */; };
 		E52952969C9DC7BC91092A52 /* Pods_Foods_With_FriendsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AA202260AEF374CFB9658D /* Pods_Foods_With_FriendsTests.framework */; };
+		F0D8A18729BF4F1D004A916F /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D8A18629BF4F1D004A916F /* Review.swift */; };
+		F0D8A18929BF4F3F004A916F /* StarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D8A18829BF4F3F004A916F /* StarsView.swift */; };
+		F0D8A18B29BF4F80004A916F /* ExpandableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D8A18A29BF4F80004A916F /* ExpandableText.swift */; };
+		F0D8A18D29BF5044004A916F /* ReviewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D8A18C29BF5044004A916F /* ReviewRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +91,10 @@
 		88F733A029B77FD1001D8CC6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		C6EA3D0E636B8C828B4492FA /* Pods-Foods With Friends-Foods With FriendsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foods With Friends-Foods With FriendsUITests.release.xcconfig"; path = "Target Support Files/Pods-Foods With Friends-Foods With FriendsUITests/Pods-Foods With Friends-Foods With FriendsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		DDAB0FCC35BA08F5393E4837 /* Pods-Foods With Friends.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foods With Friends.debug.xcconfig"; path = "Target Support Files/Pods-Foods With Friends/Pods-Foods With Friends.debug.xcconfig"; sourceTree = "<group>"; };
+		F0D8A18629BF4F1D004A916F /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		F0D8A18829BF4F3F004A916F /* StarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsView.swift; sourceTree = "<group>"; };
+		F0D8A18A29BF4F80004A916F /* ExpandableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableText.swift; sourceTree = "<group>"; };
+		F0D8A18C29BF5044004A916F /* ReviewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRow.swift; sourceTree = "<group>"; };
 		FEBF9A9813A7EF895010EB59 /* Pods_Foods_With_Friends.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Foods_With_Friends.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -194,6 +202,9 @@
 			children = (
 				834981D129B0F89C00CF2D98 /* PersonalProfileView.swift */,
 				0F2F316329AF965D008B0CC3 /* ContentView.swift */,
+				F0D8A18829BF4F3F004A916F /* StarsView.swift */,
+				F0D8A18A29BF4F80004A916F /* ExpandableText.swift */,
+				F0D8A18C29BF5044004A916F /* ReviewRow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -206,6 +217,7 @@
 				0FC9C36229BBBBB3006B9ECD /* UserStorage.swift */,
 				0FDDA06D29B7AAB900A866C4 /* APIData.swift */,
 				0FC9C36029BA65AA006B9ECD /* User.swift */,
+				F0D8A18629BF4F1D004A916F /* Review.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -487,6 +499,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FDDA06A29B2816B00A866C4 /* SignupView.swift in Sources */,
+				F0D8A18929BF4F3F004A916F /* StarsView.swift in Sources */,
 				0FDDA06929B2816B00A866C4 /* LoginView.swift in Sources */,
 				834981D229B0F89C00CF2D98 /* PersonalProfileView.swift in Sources */,
 				88F7339B29B77F12001D8CC6 /* FriendView.swift in Sources */,
@@ -497,9 +510,12 @@
 				8801352F29B3A06600304A06 /* HomeView.swift in Sources */,
 				0FC9C35F29B8E558006B9ECD /* AppView.swift in Sources */,
 				0FC9C36329BBBBB3006B9ECD /* UserStorage.swift in Sources */,
+				F0D8A18D29BF5044004A916F /* ReviewRow.swift in Sources */,
+				F0D8A18729BF4F1D004A916F /* Review.swift in Sources */,
 				88F7339929B77EFA001D8CC6 /* SearchView.swift in Sources */,
 				8801352729B0F45400304A06 /* Constants.swift in Sources */,
 				0FDDA06E29B7AABA00A866C4 /* APIData.swift in Sources */,
+				F0D8A18B29BF4F80004A916F /* ExpandableText.swift in Sources */,
 				0FC6C8BC29B0F9CF0040048C /* UserData.swift in Sources */,
 				88F7339D29B77F21001D8CC6 /* NewPostView.swift in Sources */,
 				88F7339F29B77F3D001D8CC6 /* SettingsView.swift in Sources */,

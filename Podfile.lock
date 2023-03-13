@@ -110,6 +110,7 @@ PODS:
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
   - PromisesObjC (2.2.0)
+  - ReadMoreTextView (3.0.1)
 
 DEPENDENCIES:
   - Firebase/Auth
@@ -117,6 +118,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - Kingfisher/SwiftUI
+  - ReadMoreTextView
 
 SPEC REPOS:
   trunk:
@@ -138,6 +140,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - PromisesObjC
+    - ReadMoreTextView
 
 SPEC CHECKSUMS:
   Firebase: f13680471b021937f2230ea8503c7809d8c29806
@@ -158,7 +161,8 @@ SPEC CHECKSUMS:
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
+  ReadMoreTextView: 19147adf93abce6d7271e14031a00303fe28720d
 
-PODFILE CHECKSUM: 28dea54c6c73b1807bca5b50ab7a66219e17d78d
+PODFILE CHECKSUM: 26d4d0daca6339f95afaef7665a8f3b67fd1d74b
 
 COCOAPODS: 1.11.3
