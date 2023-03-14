@@ -16,6 +16,7 @@ struct PublicUserView: View {
                     .resizable()
                     .frame(width: (UIScreen.main.bounds.width)/6, height: (UIScreen.main.bounds.width)/6)
                     .aspectRatio(contentMode: .fit)
+                    .padding(5)
                 VStack {
                     Text(user.username)
                         .font(Constants.titleFont)
@@ -23,7 +24,8 @@ struct PublicUserView: View {
                         .font(Constants.textFont)
                         .foregroundColor(.gray)
                 }
-                Spacer()
+                Color.white
+                    .padding(10)
             }
         }
     }

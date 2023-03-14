@@ -36,7 +36,6 @@ class UserData {
                 print("ERROR!!! cannot get user")
                 return
             }
-            print(snapshot)
             do {
                 completion(try dict.asObject(User.self, from: dict))
             } catch {
@@ -48,7 +47,6 @@ class UserData {
         ref.child("users/user_dict/\(uid)").observeSingleEvent(of: .value) { snapshot in
             guard let dict = snapshot.value as? [String: Any] else {
                 print("ERROR!!! cannot get public user")
-                print(snapshot)
                 return
             }
             do {

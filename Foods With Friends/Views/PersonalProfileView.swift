@@ -118,33 +118,36 @@ struct PersonalProfileView: View {
                                 .padding(.leading, 5)
                                 .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
                         }
+                        Spacer()
+                            .frame(width: 20)
                     }.padding(.leading, 1.0)
-                    Spacer()
-                        .frame(width: 20)
                     HStack {
                         //bio
                         if viewMode {
                             Spacer()
                                 .frame(width: 20)
-                            Text(appUser.bio)
-                                .font(Constants.textFontSmall)
-                                .frame(width: (UIScreen.main.bounds.width)/2, height: (UIScreen.main.bounds.width)/2)
-                                .multilineTextAlignment(.leading)
+                            ScrollView {
+                                Text(appUser.bio)
+                                    .font(Constants.textFontSmall)
+                                    .frame(width: (UIScreen.main.bounds.width)/2, height: (UIScreen.main.bounds.width)/2)
+                                    .multilineTextAlignment(.leading)
+                            }
                             Spacer()
                                 .frame(width: 20)
                         } else {
                             Spacer()
                                 .frame(width: 20)
-                            TextEditor(text: $appUser.bio)
-                                .font(Constants.textFontSmall)
-                                .frame(width: (UIScreen.main.bounds.width)/2, height: (UIScreen.main.bounds.width)/2)
-                                //.disableAutocorrection(true)
-                                //.autocapitalization(.none)
-                                .multilineTextAlignment(.leading)
-                                .foregroundColor(Color.gray)
-                                .padding([.leading, .top, .bottom, .trailing], 3)
-                                .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
-                            
+                            ScrollView {
+                                TextEditor(text: $appUser.bio)
+                                    .font(Constants.textFontSmall)
+                                    .frame(width: (UIScreen.main.bounds.width)/2, height: (UIScreen.main.bounds.width)/2)
+                                    //.disableAutocorrection(true)
+                                    //.autocapitalization(.none)
+                                    .multilineTextAlignment(.leading)
+                                    .foregroundColor(Color.gray)
+                                    .padding([.leading, .top, .bottom, .trailing], 3)
+                                    .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
+                            }
                             Spacer()
                                 .frame(width: 20)
                         }

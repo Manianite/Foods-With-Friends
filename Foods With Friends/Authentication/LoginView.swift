@@ -62,6 +62,7 @@ struct LoginView: View {
                         guard let uid = Auth.auth().currentUser?.uid else {return}
                         UserData.getUser(uid) { user in
                             appUser.reinit(user)
+                            UserDefaults.standard.set(uid, forKey: "userID")
                             viewState = .home
                         }
                     } else {
@@ -80,6 +81,16 @@ struct LoginView: View {
                     .buttonStyle(.borderedProminent)
             }
             .disabled(password.count<1 || email.count<1)
+            .onAppear {
+                if let uid: String = UserDefaults.standard.object(forKey: "userID") as? String {
+                    UserData.getUser(uid) { user in
+                        appUser.reinit(user)
+                        viewState = .home
+                    }
+                } else {
+                    print("no saved user found")
+                }
+            }
             Button {
                 Auth.auth().sendPasswordReset(withEmail: email) { error in
                     if let _=error {

@@ -7,7 +7,7 @@
 import SwiftUI
 struct HomeView: View {
     let reviews: [Review] = [
-        Review(title: "TITLE", stars: 5, images: [""], restaurant: "It's Me", uid: "", body: "aAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+        Review(title: "LOVED IT", stars: 5, images: [""], restaurant: "The Krusty Krab", uid: "Julia'sAccountlessID", body: "I was sort of hesitant in visiting a restaurant underwater, but the food was beyond compare! I have never before in my whole life had a burger as delectable as the Krabby Paddy. Thanks, @Patrick!")
     ]
     
     @State private var expanded: Bool = false

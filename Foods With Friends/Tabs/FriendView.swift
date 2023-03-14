@@ -11,25 +11,37 @@ struct FriendView: View {
     @EnvironmentObject var appUser: User
     @State var query = ""
     @State var friendsList: [PublicUser] = []
+    @State var getUid: [String: String] = [:]
     var body: some View {
         VStack {
-            TextField("Search", text: $query)
-                .padding(.leading, 5)
-                .background(.gray.opacity(0.5))
-                .foregroundColor(.black)
-                .font(Constants.textFontSmall)
-                .cornerRadius(10)
-            ForEach($friendsList, id: \.self.handle) { friend in
-                PublicUserView(user: friend)
+            NavigationView {
+                ScrollView {
+                    ForEach($friendsList, id: \.self.handle) { friend in
+                        NavigationLink {
+                            FriendProfileView(uid: getUid[friend.handle.wrappedValue] ?? "")
+                        } label: {
+                            PublicUserView(user: friend)
+                                .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
+                                .padding([.trailing, .leading], 5)
+                        }
+                        .buttonStyle(.plain)
+                        
+                    }
+                    //.navigationBarHidden(true)
+                    .navigationTitle("My Friends")
+                    .navigationBarTitleDisplayMode(.inline)
+                }
             }
+            .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always))
         }
         .onAppear {
             for friend in appUser.friends {
                 if friend=="" {
                     continue
                 }
-                UserData.getPublicUser(appUser.uid) { user in
+                UserData.getPublicUser(friend) { user in
                     friendsList.append(user)
+                    getUid[user.handle] = friend
                 }
             }
         }
