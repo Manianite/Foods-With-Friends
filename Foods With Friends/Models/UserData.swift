@@ -17,16 +17,44 @@ class UserData {
         ref.child("users/\(user.uid)").updateChildValues(user.toDictionnary)
         ref.child("users/user_dict/\(user.uid)").updateChildValues(PublicUser(user).toDictionnary)
     }
+    static func getBranch<T>(from url: String, as type: T.Type, _ completion: @escaping ((_ obj: T) -> ())) where T: Codable {
+        ref.child(url).observeSingleEvent(of: .value) { snapshot in
+            guard let dict = snapshot.value as? [String: Any] else {
+                print("ERROR!!! cannot get branch")
+                return
+            }
+            do {
+                completion(try dict.asObject(T.self, from: dict))
+            } catch {
+                print("ERROR!!! cannot convert branch")
+            }
+        }
+    }
     static func getUser(_ uid: String, _ completion: @escaping ((_ user: User) -> ())) {
         ref.child("users/\(uid)").observeSingleEvent(of: .value) { snapshot in
             guard let dict = snapshot.value as? [String: Any] else {
                 print("ERROR!!! cannot get user")
                 return
             }
+            print(snapshot)
             do {
                 completion(try dict.asObject(User.self, from: dict))
             } catch {
                 print("ERROR!!! cannot convert user")
+            }
+        }
+    }
+    static func getPublicUser(_ uid: String, _ completion: @escaping ((_ user: PublicUser) -> ())) {
+        ref.child("users/user_dict/\(uid)").observeSingleEvent(of: .value) { snapshot in
+            guard let dict = snapshot.value as? [String: Any] else {
+                print("ERROR!!! cannot get public user")
+                print(snapshot)
+                return
+            }
+            do {
+                completion(try dict.asObject(PublicUser.self, from: dict))
+            } catch {
+                print("ERROR!!! cannot convert public user")
             }
         }
     }
