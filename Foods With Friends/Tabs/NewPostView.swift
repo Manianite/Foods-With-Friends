@@ -6,17 +6,11 @@
 //
 
 import SwiftUI
-//
-//  NewPostView.swift
-//  fhZEaugi;.rS<aw
-//
-//  Created by Arianna Ridgeway (student LM) on 3/9/23.
-//
 
 struct NewPostView: View {
-    @State var reviewtext: String
-    var image: String
-    @State var title: String
+    @State var reviewtext: String = ""
+    var image: String = ""
+    @State var title: String = ""
     @State var ratinga: Float = 5.0
     
    

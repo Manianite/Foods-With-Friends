@@ -20,37 +20,42 @@ import SwiftUI
 //
 struct ReviewRow: View {
     let review: Review
+    var poster: PublicUser = PublicUser()
     var body: some View {
         VStack{
-        HStack{
-            VStack{
-
-                Image(review.profilepic)
-                    .resizable()
-                    .frame(width: 50, height: 50)
-
-                Text(review.user)
-                    .font(.system(size: 15))
-                    
-            }
-        VStack{
-            Text(review.title)
-                .padding(25)
             HStack{
-                Image(systemName: "star.fill")
-                Image(systemName: "star.fill")
-                Image(systemName: "star.fill")
-                Image(systemName: "star.fill")
-                Image(systemName: "star.fill")
-
+                VStack{
+                    
+                    Image(poster.profilePic)
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                    
+                    Text(poster.username)
+                        .font(.system(size: 15))
+                    
+                }
+                .onAppear {
+                    UserData.getPublicUser(review.uid) { user in
+                        poster.reinit(user)
+                    }
+                }
+                VStack{
+                    Text(review.title)
+                        .padding(25)
+                    HStack{
+                        Image(systemName: "star.fill")
+                        Image(systemName: "star.fill")
+                        Image(systemName: "star.fill")
+                        Image(systemName: "star.fill")
+                        Image(systemName: "star.fill")
+                        
+                    }
+                }
+                Image(review.images[0])
+                
+                
             }
-            }
-            Image(review.image)
-
-
-            
+            ExpandableText(review.body, lineLimit: 2)
+        }
     }
-            ExpandableText(review.reviewtext , lineLimit: 2)
-}
-}
 }

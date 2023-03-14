@@ -8,8 +8,31 @@
 import SwiftUI
 
 struct FriendView: View {
+    @EnvironmentObject var appUser: User
+    @State var query = ""
+    @State var friendsList: [PublicUser] = []
     var body: some View {
-        Text("Friend View")
+        VStack {
+            TextField("Search", text: $query)
+                .padding(.leading, 5)
+                .background(.gray.opacity(0.5))
+                .foregroundColor(.black)
+                .font(Constants.textFontSmall)
+                .cornerRadius(10)
+            ForEach($friendsList, id: \.self.handle) { friend in
+                PublicUserView(user: friend)
+            }
+        }
+        .onAppear {
+            for friend in appUser.friends {
+                if friend=="" {
+                    continue
+                }
+                UserData.getPublicUser(appUser.uid) { user in
+                    friendsList.append(user)
+                }
+            }
+        }
     }
 }
 

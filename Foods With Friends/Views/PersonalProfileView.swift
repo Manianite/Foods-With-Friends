@@ -1,24 +1,17 @@
+
 //
 //  PersonalProfileView.swift
 //  Foods With Friends
 //
 //  Created by Julia Zorc (student LM) on 3/2/23.
 //
-
-
 import SwiftUI
 
 struct PersonalProfileView: View {
     @EnvironmentObject var appUser: User
     @State var viewMode = true
-
     var body: some View {
         VStack{
-            HStack(){
-                Spacer()
-                
-            }
-            
             HStack{
                 
                 VStack(alignment: .leading){
@@ -32,21 +25,7 @@ struct PersonalProfileView: View {
                             .clipShape(Circle())
                             .padding(.leading)
                         
-
                         
-                        
-                        Button(){
-                            //edit profile
-                        } label: {
-                            Image(systemName: "pencil.circle.fill")
-                                .foregroundColor(Color.highlight)
-                                .font(.system(size: 30))
-                            
-                        }
-                            .padding(.leading, -15.0)
-                        
-                        Spacer()
-=======
                         if viewMode {
                             Button(){
                                 viewMode = false
@@ -54,7 +33,7 @@ struct PersonalProfileView: View {
                                 Image(systemName: "pencil.circle.fill")
                                     .foregroundColor(Color.highlight)
                                     .font(.system(size: 30))
-                            }.padding([.trailing, .top, .bottom], 0.25)
+                            }
                                 .padding(.leading, -15.0)
                         } else {
                             Button(){
@@ -64,18 +43,16 @@ struct PersonalProfileView: View {
                                 Image(systemName: "checkmark.circle.fill")
                                     .foregroundColor(Color.highlight)
                                     .font(.system(size: 30))
-                            }.padding([.trailing, .top, .bottom], 0.25)
+                            }
                                 .padding(.leading, -15.0)
                         }
                         //Spacer()
-
                         
                         //# of reviews
                         VStack{
                             Text(String(appUser.reviews.count))
                                 .font(Constants.titleFont)
                             
-
                             Text("Reviews")
                                 .font(Constants.textFont)
                             
@@ -91,32 +68,20 @@ struct PersonalProfileView: View {
                             Text("Friends")
                                 .font(Constants.textFont)
                             
-                        }.padding()
+                        }.padding(7)
                     }
                     
                     
                     HStack{
-
-                        //Name
-                        Text("Julia Zorc")
-                            .font(Constants.titleFont)
-                            .padding(.leading)
-                        //username
-                        Text("@juliazorc123")
-                            .font(Constants.textFont)
-                            .foregroundColor(Color.gray)
-=======
                         if viewMode {
                             //Name
                             Text(appUser.username)
                                 .font(Constants.titleFont)
                                 .padding(.leading)
-                                .padding([.top, .bottom, .trailing], 0.25)
                             //username
                             Text("@\(appUser.handle)")
                                 .font(Constants.textFont)
                                 .foregroundColor(Color.gray)
-                                .padding(0.25)
                         } else {
                             Spacer()
                                 .frame(width: 20)
@@ -132,7 +97,6 @@ struct PersonalProfileView: View {
                             Spacer()
                                 .frame(width: 20)
                         }
-
                     }
                     
                     HStack{
@@ -141,22 +105,9 @@ struct PersonalProfileView: View {
                             .font(.system(size: 30))
                             .padding(.leading)
                         //Location
-
-                        Text("Wynnewood, PA")
-                            .font(Constants.textFont)
-                    }.padding(.leading, 1.0)
-                    
-                    //bio
-                    Text("Hi! I am Julia and, just like you, I love food! I post reviews at least once a week. Be my friend to see my opinions and be a better informed foodie :)")
-                        .font(Constants.textFontSmall)
-                        .frame(width: UIScreen.main.bounds.width/2)
-                        .padding(.leading)
-                    
-=======
                         if viewMode {
                             Text(appUser.city)
                                 .font(Constants.textFont)
-                                .padding([.top, .bottom, .trailing], 0.25)
                         } else {
                             TextField("City", text: $appUser.city)
                                 .font(Constants.textFont)
@@ -166,11 +117,10 @@ struct PersonalProfileView: View {
                                 .foregroundColor(Color.gray)
                                 .padding(.leading, 5)
                                 .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
-                            Spacer()
-                                .frame(width: 20)
                         }
                     }.padding(.leading, 1.0)
-                    
+                    Spacer()
+                        .frame(width: 20)
                     HStack {
                         //bio
                         if viewMode {
@@ -178,9 +128,8 @@ struct PersonalProfileView: View {
                                 .frame(width: 20)
                             Text(appUser.bio)
                                 .font(Constants.textFontSmall)
-                                .frame(width: UIScreen.screenWidth-40)
+                                .frame(width: (UIScreen.main.bounds.width)/2, height: (UIScreen.main.bounds.width)/2)
                                 .multilineTextAlignment(.leading)
-                                .padding([.top, .bottom, .trailing], 0.25)
                             Spacer()
                                 .frame(width: 20)
                         } else {
@@ -188,9 +137,9 @@ struct PersonalProfileView: View {
                                 .frame(width: 20)
                             TextEditor(text: $appUser.bio)
                                 .font(Constants.textFontSmall)
-                                .frame(width: UIScreen.screenWidth-46)
-                                .disableAutocorrection(true)
-                                .autocapitalization(.none)
+                                .frame(width: (UIScreen.main.bounds.width)/2, height: (UIScreen.main.bounds.width)/2)
+                                //.disableAutocorrection(true)
+                                //.autocapitalization(.none)
                                 .multilineTextAlignment(.leading)
                                 .foregroundColor(Color.gray)
                                 .padding([.leading, .top, .bottom, .trailing], 3)
@@ -200,7 +149,6 @@ struct PersonalProfileView: View {
                                 .frame(width: 20)
                         }
                     }
-
                 }
                 
                 

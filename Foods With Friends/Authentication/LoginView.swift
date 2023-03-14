@@ -35,7 +35,7 @@ struct LoginView: View {
             }
             Group{
                 VStack{
-                    TextField("Enter Username", text: $email)
+                    TextField("Enter Email", text: $email)
                         .disableAutocorrection(true)
                         .autocapitalization(.none)
                         .multilineTextAlignment(.center)

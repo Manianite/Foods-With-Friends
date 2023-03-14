@@ -47,7 +47,7 @@ class User: ObservableObject, Codable {
         self.handle = handle
         self.uid = uid
         self.bio = ""
-        self.profilePic = ""
+        self.profilePic = "person.crop.circle.fill"
         self.city = ""
         self.friends = [""]
         self.reviews = [Review()]
@@ -57,7 +57,7 @@ class User: ObservableObject, Codable {
         self.handle = "juliazorc123"
         self.uid = "Julia'sAccountlessUserID"
         self.bio = "Hi! I am Julia and, just like you, I love food! I post reviews at least once a week. Be my friend to see my opinions and be a better informed foodie :)"
-        self.profilePic = ""
+        self.profilePic = "person.crop.circle.fill"
         self.city = "Wynnewood, PA"
         self.friends = [""]
         self.reviews = [Review()]
@@ -77,7 +77,7 @@ class User: ObservableObject, Codable {
         self.handle = handle
         self.uid = uid
         self.bio = ""
-        self.profilePic = ""
+        self.profilePic = "person.crop.circle.fill"
         self.city = ""
         self.friends = [""]
         self.reviews = [Review()]
@@ -87,7 +87,6 @@ class PublicUser: ObservableObject, Codable {
     @Published var username: String
     @Published var handle: String
     @Published var profilePic: String
-    
     enum CodingKeys: CodingKey {
         case username, handle, profilePic
     }
@@ -106,7 +105,7 @@ class PublicUser: ObservableObject, Codable {
     internal init(username: String, handle: String) {
         self.username = username
         self.handle = handle
-        self.profilePic = ""
+        self.profilePic = "person.crop.circle.fill"
     }
     internal init(_ user: User) {
         self.username = user.username
@@ -114,14 +113,14 @@ class PublicUser: ObservableObject, Codable {
         self.profilePic = user.profilePic
     }
     internal init() {
-        self.username = ""
-        self.handle = ""
-        self.profilePic = ""
+        self.username = "Julia Zorc"
+        self.handle = "juliazorc123"
+        self.profilePic = "person.crop.circle.fill"
     }
     func reinit(username: String, handle: String) {
         self.username = username
         self.handle = handle
-        self.profilePic = ""
+        self.profilePic = "person.crop.circle.fill"
     }
     func reinit(_ user: PublicUser) {
         self.username = user.username

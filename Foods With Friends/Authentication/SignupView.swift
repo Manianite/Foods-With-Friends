@@ -47,7 +47,7 @@ struct SignupView: View {
                     .frame(width: UIScreen.screenWidth-40, height: UIScreen.screenHeight/15)
                     .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
 
-                TextField("@handle", text: $handle)
+                TextField("Username", text: $handle)
                     .multilineTextAlignment(.center)
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
@@ -56,7 +56,7 @@ struct SignupView: View {
                     .frame(width: UIScreen.screenWidth-40, height: UIScreen.screenHeight/15)
                     .background(handleCheck ? .white : .red.opacity(0.2))
                     .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
-                TextField("Username", text: $username)
+                TextField("Name", text: $username)
                     .autocapitalization(.none)
                     .multilineTextAlignment(.center)
                     .disableAutocorrection(true)

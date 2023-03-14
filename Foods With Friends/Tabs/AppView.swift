@@ -57,7 +57,7 @@ struct AppView: View {
             } else if selectedTab == .ProfileView {
                 ProfileView()
             } else if selectedTab == .HomeView {
-                HomeView()
+                HomeView("", lineLimit: 1)
             } else if selectedTab == .SearchView {
                 SearchView()
             } else if selectedTab == .FriendView {
