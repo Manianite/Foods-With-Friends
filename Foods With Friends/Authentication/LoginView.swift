@@ -56,6 +56,7 @@ struct LoginView: View {
                 .padding(.top, 70)
                 .padding(.bottom, 40)
             }
+            Spacer()
             Button {
                 Auth.auth().signIn(withEmail: email, password: password) { user, error in
                     if let _=user {
@@ -98,13 +99,14 @@ struct LoginView: View {
                     .buttonStyle(.borderedProminent)
             }
             Spacer()
+            Spacer()
             Text("Don't have an account?")
                 .font(Constants.textFont)
             Button {
                 viewState = .signup
             } label: {
                 Text("Sign up!")
-                    .padding()
+                   // .padding()
                     .frame(width: UIScreen.screenWidth-70, height: UIScreen.screenHeight/15)
                     .background(Color.highlight.opacity(0.1))
                     .cornerRadius(100)
@@ -112,6 +114,7 @@ struct LoginView: View {
                     .tint(Color.black)
                     .font(Constants.textFont)
                     .buttonStyle(.borderedProminent)
+                    .padding(.bottom, 10)
             }
         }
     }
