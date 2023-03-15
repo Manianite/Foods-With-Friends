@@ -25,7 +25,6 @@ struct PersonalProfileView: View {
                             .clipShape(Circle())
                             .padding(.leading)
                         
-                        
                         if viewMode {
                             Button(){
                                 viewMode = false
@@ -57,7 +56,7 @@ struct PersonalProfileView: View {
                                 .font(Constants.textFont)
                             
                             
-                        }.padding(7)
+                        }.padding()
                         
                         //# of friends
                         VStack{
@@ -126,7 +125,8 @@ struct PersonalProfileView: View {
                         if viewMode {
                             Spacer()
                                 .frame(width: 20)
-                            ScrollView {
+                           
+                           ScrollView {
                                 Text(appUser.bio)
                                     .font(Constants.textFontSmall)
                                     .frame(width: (UIScreen.main.bounds.width)/2, height: (UIScreen.main.bounds.width)/2)
