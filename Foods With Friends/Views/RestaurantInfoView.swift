@@ -10,6 +10,7 @@ import struct Kingfisher.KFImage
 
 struct RestaurantInfoView: View {
     @Binding var restaurant:Restaurant
+    
     var body: some View {
         VStack {
             KFImage(URL(string: restaurant.logo_photos.first ?? "https://us.123rf.com/450wm/benidict83/benidict832008/benidict83200800014/benidict83200800014.jpg?ver=6"))
