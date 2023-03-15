@@ -25,6 +25,9 @@
 		43EB9BC0D6410B1441D5161A /* Pods_Foods_With_Friends_Foods_With_FriendsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 870305D1CDDE70F076450C36 /* Pods_Foods_With_Friends_Foods_With_FriendsUITests.framework */; };
 		5C06D9C55326A1B0364472FE /* Pods_Foods_With_Friends.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEBF9A9813A7EF895010EB59 /* Pods_Foods_With_Friends.framework */; };
 		834981D229B0F89C00CF2D98 /* PersonalProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834981D129B0F89C00CF2D98 /* PersonalProfileView.swift */; };
+		83C9AA1C29C0AAD7009AE879 /* FetchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C9AA1B29C0AAD7009AE879 /* FetchData.swift */; };
+		83C9AA1E29C0AB49009AE879 /* RestaurantListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C9AA1D29C0AB49009AE879 /* RestaurantListView.swift */; };
+		83C9AA2029C0AB71009AE879 /* RestaurantInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C9AA1F29C0AB71009AE879 /* RestaurantInfoView.swift */; };
 		8801352729B0F45400304A06 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8801352629B0F45400304A06 /* Constants.swift */; };
 		8801352F29B3A06600304A06 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8801352E29B3A06600304A06 /* HomeView.swift */; };
 		88F7339929B77EFA001D8CC6 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F7339829B77EFA001D8CC6 /* SearchView.swift */; };
@@ -81,6 +84,9 @@
 		64DAE250A059C1C12BFD3D40 /* Pods-Foods With Friends-Foods With FriendsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foods With Friends-Foods With FriendsUITests.debug.xcconfig"; path = "Target Support Files/Pods-Foods With Friends-Foods With FriendsUITests/Pods-Foods With Friends-Foods With FriendsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		774E59FDDE60AB104A321A88 /* Pods-Foods With FriendsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foods With FriendsTests.release.xcconfig"; path = "Target Support Files/Pods-Foods With FriendsTests/Pods-Foods With FriendsTests.release.xcconfig"; sourceTree = "<group>"; };
 		834981D129B0F89C00CF2D98 /* PersonalProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalProfileView.swift; sourceTree = "<group>"; };
+		83C9AA1B29C0AAD7009AE879 /* FetchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchData.swift; sourceTree = "<group>"; };
+		83C9AA1D29C0AB49009AE879 /* RestaurantListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListView.swift; sourceTree = "<group>"; };
+		83C9AA1F29C0AB71009AE879 /* RestaurantInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInfoView.swift; sourceTree = "<group>"; };
 		870305D1CDDE70F076450C36 /* Pods_Foods_With_Friends_Foods_With_FriendsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Foods_With_Friends_Foods_With_FriendsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8801352629B0F45400304A06 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8801352E29B3A06600304A06 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -205,6 +211,8 @@
 				F0D8A18829BF4F3F004A916F /* StarsView.swift */,
 				F0D8A18A29BF4F80004A916F /* ExpandableText.swift */,
 				F0D8A18C29BF5044004A916F /* ReviewRow.swift */,
+				83C9AA1D29C0AB49009AE879 /* RestaurantListView.swift */,
+				83C9AA1F29C0AB71009AE879 /* RestaurantInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -218,6 +226,7 @@
 				0FDDA06D29B7AAB900A866C4 /* APIData.swift */,
 				0FC9C36029BA65AA006B9ECD /* User.swift */,
 				F0D8A18629BF4F1D004A916F /* Review.swift */,
+				83C9AA1B29C0AAD7009AE879 /* FetchData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -500,7 +509,9 @@
 			files = (
 				0FDDA06A29B2816B00A866C4 /* SignupView.swift in Sources */,
 				F0D8A18929BF4F3F004A916F /* StarsView.swift in Sources */,
+				83C9AA1C29C0AAD7009AE879 /* FetchData.swift in Sources */,
 				0FDDA06929B2816B00A866C4 /* LoginView.swift in Sources */,
+				83C9AA1E29C0AB49009AE879 /* RestaurantListView.swift in Sources */,
 				834981D229B0F89C00CF2D98 /* PersonalProfileView.swift in Sources */,
 				88F7339B29B77F12001D8CC6 /* FriendView.swift in Sources */,
 				0FC9C36129BA65AA006B9ECD /* User.swift in Sources */,
@@ -515,6 +526,7 @@
 				88F7339929B77EFA001D8CC6 /* SearchView.swift in Sources */,
 				8801352729B0F45400304A06 /* Constants.swift in Sources */,
 				0FDDA06E29B7AABA00A866C4 /* APIData.swift in Sources */,
+				83C9AA2029C0AB71009AE879 /* RestaurantInfoView.swift in Sources */,
 				F0D8A18B29BF4F80004A916F /* ExpandableText.swift in Sources */,
 				0FC6C8BC29B0F9CF0040048C /* UserData.swift in Sources */,
 				88F7339D29B77F21001D8CC6 /* NewPostView.swift in Sources */,
