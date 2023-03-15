@@ -21,19 +21,33 @@ struct FriendView: View {
                             PublicUserView(uid: friendID)
                                 .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(.black))
                                 .padding([.trailing, .leading], 5)
-                            Button {
-                                UserData.setValue(true, to: "users/\(friendID.wrappedValue)/friends/\(appUser.uid)")
-                                UserData.remove("users/\(friendID.wrappedValue)/new_friends/\(appUser.uid)-O")
-                                appUser.friends[friendID.wrappedValue] = true
-                                appUser.newFriends.removeValue(forKey: friendID.wrappedValue+"-I")
-                                UserData.setValue(true, to: "users/\(appUser.uid)/friends/\(friendID.wrappedValue)")
-                                UserData.remove("users/\(appUser.uid)/new_friends/\(friendID.wrappedValue)-I")
-                            } label: {
-                                Image(systemName: "checkmark")
-                                    .resizable()
-                                    .frame(width: (UIScreen.main.bounds.width)/7, height: (UIScreen.main.bounds.width)/7)
-                                    .accentColor(.highlight)
-                                    .padding(.trailing, 15)
+                            HStack {
+                                Button {
+                                    UserData.remove("users/\(friendID.wrappedValue)/new_friends/\(appUser.uid)-O")
+                                    appUser.newFriends.removeValue(forKey: friendID.wrappedValue+"-I")
+                                    UserData.remove("users/\(appUser.uid)/new_friends/\(friendID.wrappedValue)-I")
+                                } label: {
+                                    Image(systemName: "xmark")
+                                        .resizable()
+                                        .frame(width: (UIScreen.main.bounds.width)/8, height: (UIScreen.main.bounds.width)/8)
+                                        .accentColor(.red)
+                                        .padding(.trailing, 5)
+                                }
+                                Divider()
+                                Button {
+                                    UserData.setValue(true, to: "users/\(friendID.wrappedValue)/friends/\(appUser.uid)")
+                                    UserData.remove("users/\(friendID.wrappedValue)/new_friends/\(appUser.uid)-O")
+                                    appUser.friends[friendID.wrappedValue] = true
+                                    appUser.newFriends.removeValue(forKey: friendID.wrappedValue+"-I")
+                                    UserData.setValue(true, to: "users/\(appUser.uid)/friends/\(friendID.wrappedValue)")
+                                    UserData.remove("users/\(appUser.uid)/new_friends/\(friendID.wrappedValue)-I")
+                                } label: {
+                                    Image(systemName: "checkmark")
+                                        .resizable()
+                                        .frame(width: (UIScreen.main.bounds.width)/8, height: (UIScreen.main.bounds.width)/8)
+                                        .accentColor(.green)
+                                        .padding(.trailing, 18)
+                                }
                             }
                         }
                     }
