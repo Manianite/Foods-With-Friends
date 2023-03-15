@@ -7,7 +7,9 @@
 
 import Foundation
 
-class User: ObservableObject, Codable {
+class User: ObservableObject, Codable, Equatable {
+    static func == (lhs: User, rhs: User) -> Bool {lhs.handle==rhs.handle}
+    
     @Published var username: String
     @Published var handle: String
     @Published var uid: String
@@ -90,7 +92,9 @@ class User: ObservableObject, Codable {
         self.reviews = [Review()]
     }
 }
-class PublicUser: ObservableObject, Codable {
+class PublicUser: ObservableObject, Codable, Equatable {
+    static func == (lhs: PublicUser, rhs: PublicUser) -> Bool {lhs.handle==rhs.handle}
+    
     @Published var username: String
     @Published var handle: String
     @Published var uid: String

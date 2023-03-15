@@ -69,6 +69,7 @@ struct FriendView: View {
                 friendReqsList = Array(user.newFriends.keys).filter { $0.hasSuffix("-I") }.map { String($0.dropLast(2)) }
                 friendsList = Array(user.friends.keys).filter { $0 != "_" }
             }
+            //reload view
         }
         .onDisappear {
             UserData.stopObservingUser()
