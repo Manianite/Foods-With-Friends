@@ -11,9 +11,8 @@ import FirebaseAuth
 
 struct SearchView: View {
     
-    @StateObject var data = FetchData()
+    @StateObject var data = FetchRestaurantData()
     @EnvironmentObject var user: User
-    @Binding var viewState: ViewState
     @State var query: String = ""
     @State var waiting: Bool = false
     
@@ -56,23 +55,13 @@ struct SearchView: View {
                        .navigationViewStyle(.stack)
                        .navigationBarHidden(true)
                    }
-                   Button{
-                       try! Auth.auth().signOut()
-                       user.loggedIn = false
-                       viewState = .authentication
-                   } label: {
-                       Text("Sign Out")
-                           //.font(Constants.buttonFont)
-                           .frame(width: 300, height: 50)
-                           .background(Color.white.opacity(0.7))
-                           .cornerRadius(20)
-                   }.padding()
            }
     }
 }
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView(viewState: Binding.constant(.login))
+        SearchView()
+            .environmentObject(User())
     }
 }
