@@ -94,7 +94,7 @@ struct SignupView: View {
                         if let _=user {
                             guard let uid = Auth.auth().currentUser?.uid else {return}
                             appUser.reinit(username: username, handle: handle, uid: uid)
-                            UserData.appendUserDict(uid, PublicUser(username: username, handle: handle))
+                            UserData.appendUserDict(uid, PublicUser(username: username, handle: handle, uid: uid))
                             UserData.pushUser(appUser)
                             UserData.stopObservingUserDict()
                             viewState = .home

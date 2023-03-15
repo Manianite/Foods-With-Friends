@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct PublicUserView: View {
-    @Binding var user: PublicUser
+    @ObservedObject var user: PublicUser = PublicUser()
+    @Binding var uid: String
     var body: some View {
         ZStack {
             HStack {
@@ -28,11 +29,16 @@ struct PublicUserView: View {
                     .padding(10)
             }
         }
+        .onAppear {
+            UserData.getPublicUser(uid) { gotUser in
+                user.reinit(gotUser)
+            }
+        }
     }
 }
 
 struct PublicUserView_Previews: PreviewProvider {
     static var previews: some View {
-        PublicUserView(user: Binding.constant(PublicUser()))
+        PublicUserView(uid: Binding.constant("Julia'sAccountlessUserID"))
     }
 }

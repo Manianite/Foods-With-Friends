@@ -17,6 +17,12 @@ class UserData {
         ref.child("users/\(user.uid)").updateChildValues(user.toDictionnary)
         ref.child("users/user_dict/\(user.uid)").updateChildValues(PublicUser(user).toDictionnary)
     }
+    static func remove(_ url: String) {
+        ref.child(url).removeValue()
+    }
+    static func setValue(_ value: Any, to url: String) {
+        ref.child(url).setValue(value)
+    }
     static func getBranch<T>(from url: String, as type: T.Type, _ completion: @escaping ((_ obj: T) -> ())) where T: Codable {
         ref.child(url).observeSingleEvent(of: .value) { snapshot in
             guard let dict = snapshot.value as? [String: Any] else {
@@ -71,6 +77,25 @@ class UserData {
     static func stopObservingUserDict() {
         userDictObserver.removeAllObservers()
     }
+    
+    static var observedUser: User = User()
+    static var userObserver: DatabaseReference = ref.child("users/uid/")
+    static func observeUser(for uid: String, _ completion: @escaping ((_ user: User) -> ())) {
+        userObserver = ref.child("users/\(uid)")
+        userObserver.observe(.value) { snapshot in
+            let dict = snapshot.value as? [String: Any] ?? [:]
+            do {
+                observedUser = try dict.asObject(User.self, from: dict)
+                completion(observedUser)
+            } catch {
+                print("ERROR!!! cannot get new_friends")
+            }
+        }
+    }
+    static func stopObservingUser() {
+        userObserver.removeAllObservers()
+    }
+    
     static func appendUserDict(_ uid: String, _ user: PublicUser) {
         ref.child("users/user_dict/\(uid)").updateChildValues(user.toDictionnary)
     }

@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct FriendProfileView: View {
-    var uid: String
-    @State var friend = User()
+    @Binding var uid: String
+    @ObservedObject var friend = User()
     var body: some View {
         VStack{
             HStack{
@@ -26,7 +26,7 @@ struct FriendProfileView: View {
                             .padding(.leading)
                             .onAppear {
                                 UserData.getUser(uid) { user in
-                                    friend = user
+                                    friend.reinit(user)
                                 }
                             }
                         
@@ -106,6 +106,6 @@ struct FriendProfileView: View {
 
 struct FriendProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        FriendProfileView(uid: "Julia'sAccountlessUserID")
+        FriendProfileView(uid: Binding.constant("Julia'sAccountlessUserID"))
     }
 }
