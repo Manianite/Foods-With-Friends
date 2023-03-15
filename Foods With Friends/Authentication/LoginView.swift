@@ -35,7 +35,7 @@ struct LoginView: View {
             }
             Group{
                 VStack{
-                    TextField("Enter Username", text: $email)
+                    TextField("Enter Email", text: $email)
                         .disableAutocorrection(true)
                         .autocapitalization(.none)
                         .multilineTextAlignment(.center)
@@ -56,12 +56,14 @@ struct LoginView: View {
                 .padding(.top, 70)
                 .padding(.bottom, 40)
             }
+            Spacer()
             Button {
                 Auth.auth().signIn(withEmail: email, password: password) { user, error in
                     if let _=user {
                         guard let uid = Auth.auth().currentUser?.uid else {return}
                         UserData.getUser(uid) { user in
                             appUser.reinit(user)
+                            UserDefaults.standard.set(uid, forKey: "userID")
                             viewState = .home
                         }
                     } else {
@@ -80,6 +82,16 @@ struct LoginView: View {
                     .buttonStyle(.borderedProminent)
             }
             .disabled(password.count<1 || email.count<1)
+            .onAppear {
+                if let uid: String = UserDefaults.standard.object(forKey: "userID") as? String {
+                    UserData.getUser(uid) { user in
+                        appUser.reinit(user)
+                        viewState = .home
+                    }
+                } else {
+                    print("no saved user found")
+                }
+            }
             Button {
                 Auth.auth().sendPasswordReset(withEmail: email) { error in
                     if let _=error {
@@ -98,13 +110,14 @@ struct LoginView: View {
                     .buttonStyle(.borderedProminent)
             }
             Spacer()
+            Spacer()
             Text("Don't have an account?")
                 .font(Constants.textFont)
             Button {
                 viewState = .signup
             } label: {
                 Text("Sign up!")
-                    .padding()
+                   // .padding()
                     .frame(width: UIScreen.screenWidth-70, height: UIScreen.screenHeight/15)
                     .background(Color.highlight.opacity(0.1))
                     .cornerRadius(100)
@@ -112,6 +125,7 @@ struct LoginView: View {
                     .tint(Color.black)
                     .font(Constants.textFont)
                     .buttonStyle(.borderedProminent)
+                    .padding(.bottom, 10)
             }
         }
     }

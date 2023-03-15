@@ -47,16 +47,17 @@ struct SignupView: View {
                     .frame(width: UIScreen.screenWidth-40, height: UIScreen.screenHeight/15)
                     .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
 
-                TextField("@handle", text: $handle)
+                TextField("Username", text: $handle)
                     .multilineTextAlignment(.center)
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
                     .foregroundColor(Color.gray)
                     .padding()
                     .frame(width: UIScreen.screenWidth-40, height: UIScreen.screenHeight/15)
-                    .background(handleCheck ? .white : .red.opacity(0.2))
+                   
                     .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
-                TextField("Username", text: $username)
+                    .background(handleCheck ? .white : .red.opacity(0.2))
+                TextField("Name", text: $username)
                     .autocapitalization(.none)
                     .multilineTextAlignment(.center)
                     .disableAutocorrection(true)
@@ -82,8 +83,9 @@ struct SignupView: View {
                     .foregroundColor(Color.gray)
                     .padding()
                     .frame(width: UIScreen.screenWidth-40, height: UIScreen.screenHeight/15)
-                    .background(matchCheck ? .white : .red.opacity(0.2))
                     .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
+                    .background(matchCheck ? .white : .red.opacity(0.2))
+
             }
             Spacer()
 
@@ -94,7 +96,7 @@ struct SignupView: View {
                         if let _=user {
                             guard let uid = Auth.auth().currentUser?.uid else {return}
                             appUser.reinit(username: username, handle: handle, uid: uid)
-                            UserData.appendUserDict(uid, PublicUser(username: username, handle: handle))
+                            UserData.appendUserDict(uid, PublicUser(username: username, handle: handle, uid: uid))
                             UserData.pushUser(appUser)
                             UserData.stopObservingUserDict()
                             viewState = .home

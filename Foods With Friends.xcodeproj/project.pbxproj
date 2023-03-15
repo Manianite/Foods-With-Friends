@@ -14,6 +14,9 @@
 		0F2F317329AF9662008B0CC3 /* Foods_With_FriendsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2F317229AF9662008B0CC3 /* Foods_With_FriendsTests.swift */; };
 		0F2F317D29AF9662008B0CC3 /* Foods_With_FriendsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2F317C29AF9662008B0CC3 /* Foods_With_FriendsUITests.swift */; };
 		0F2F317F29AF9662008B0CC3 /* Foods_With_FriendsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2F317E29AF9662008B0CC3 /* Foods_With_FriendsUITestsLaunchTests.swift */; };
+		0F43B64629C0B4C700E9A43A /* FriendProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F43B64529C0B4C700E9A43A /* FriendProfileView.swift */; };
+		0F43B64829C133F600E9A43A /* PublicUserSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F43B64729C133F600E9A43A /* PublicUserSearchView.swift */; };
+		0F98D40E29BFBF0B00AEE455 /* PublicUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F98D40D29BFBF0B00AEE455 /* PublicUserView.swift */; };
 		0FC6C8BC29B0F9CF0040048C /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6C8BB29B0F9CF0040048C /* UserData.swift */; };
 		0FC9C35F29B8E558006B9ECD /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC9C35E29B8E558006B9ECD /* AppView.swift */; };
 		0FC9C36129BA65AA006B9ECD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC9C36029BA65AA006B9ECD /* User.swift */; };
@@ -71,6 +74,9 @@
 		0F2F317829AF9662008B0CC3 /* Foods With FriendsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Foods With FriendsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F2F317C29AF9662008B0CC3 /* Foods_With_FriendsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Foods_With_FriendsUITests.swift; sourceTree = "<group>"; };
 		0F2F317E29AF9662008B0CC3 /* Foods_With_FriendsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Foods_With_FriendsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0F43B64529C0B4C700E9A43A /* FriendProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendProfileView.swift; sourceTree = "<group>"; };
+		0F43B64729C133F600E9A43A /* PublicUserSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicUserSearchView.swift; sourceTree = "<group>"; };
+		0F98D40D29BFBF0B00AEE455 /* PublicUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicUserView.swift; sourceTree = "<group>"; };
 		0FC6C8BB29B0F9CF0040048C /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		0FC9C35E29B8E558006B9ECD /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		0FC9C36029BA65AA006B9ECD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -194,6 +200,17 @@
 			path = "Foods With FriendsUITests";
 			sourceTree = "<group>";
 		};
+		0F43B64929C13AAD00E9A43A /* FriendTab */ = {
+			isa = PBXGroup;
+			children = (
+				0F98D40D29BFBF0B00AEE455 /* PublicUserView.swift */,
+				0F43B64729C133F600E9A43A /* PublicUserSearchView.swift */,
+				0F43B64529C0B4C700E9A43A /* FriendProfileView.swift */,
+				88F7339A29B77F12001D8CC6 /* FriendView.swift */,
+			);
+			path = FriendTab;
+			sourceTree = "<group>";
+		};
 		0FDDA06629B2816B00A866C4 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,7 +255,7 @@
 				88F733A029B77FD1001D8CC6 /* ProfileView.swift */,
 				8801352E29B3A06600304A06 /* HomeView.swift */,
 				88F7339829B77EFA001D8CC6 /* SearchView.swift */,
-				88F7339A29B77F12001D8CC6 /* FriendView.swift */,
+				0F43B64929C13AAD00E9A43A /* FriendTab */,
 				88F7339C29B77F21001D8CC6 /* NewPostView.swift */,
 				0FC9C35E29B8E558006B9ECD /* AppView.swift */,
 			);
@@ -525,11 +542,14 @@
 				F0D8A18729BF4F1D004A916F /* Review.swift in Sources */,
 				88F7339929B77EFA001D8CC6 /* SearchView.swift in Sources */,
 				8801352729B0F45400304A06 /* Constants.swift in Sources */,
+				0F98D40E29BFBF0B00AEE455 /* PublicUserView.swift in Sources */,
 				0FDDA06E29B7AABA00A866C4 /* APIData.swift in Sources */,
 				83C9AA2029C0AB71009AE879 /* RestaurantInfoView.swift in Sources */,
 				F0D8A18B29BF4F80004A916F /* ExpandableText.swift in Sources */,
 				0FC6C8BC29B0F9CF0040048C /* UserData.swift in Sources */,
+				0F43B64829C133F600E9A43A /* PublicUserSearchView.swift in Sources */,
 				88F7339D29B77F21001D8CC6 /* NewPostView.swift in Sources */,
+				0F43B64629C0B4C700E9A43A /* FriendProfileView.swift in Sources */,
 				88F7339F29B77F3D001D8CC6 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

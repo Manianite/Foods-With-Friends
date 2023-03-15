@@ -1,24 +1,17 @@
+
 //
 //  PersonalProfileView.swift
 //  Foods With Friends
 //
 //  Created by Julia Zorc (student LM) on 3/2/23.
 //
-
-
 import SwiftUI
 
 struct PersonalProfileView: View {
     @EnvironmentObject var appUser: User
     @State var viewMode = true
-
     var body: some View {
         VStack{
-            HStack(){
-                Spacer()
-                
-            }
-            
             HStack{
                 
                 VStack(alignment: .leading){
@@ -59,7 +52,6 @@ struct PersonalProfileView: View {
                             Text(String(appUser.reviews.count))
                                 .font(Constants.titleFont)
                             
-
                             Text("Reviews")
                                 .font(Constants.textFont)
                             
@@ -75,12 +67,11 @@ struct PersonalProfileView: View {
                             Text("Friends")
                                 .font(Constants.textFont)
                             
-                        }.padding()
+                        }.padding(7)
                     }
                     
                     
                     HStack{
-
                         if viewMode {
                             //Name
                             Text(appUser.username)
@@ -90,7 +81,6 @@ struct PersonalProfileView: View {
                             Text("@\(appUser.handle)")
                                 .font(Constants.textFont)
                                 .foregroundColor(Color.gray)
-                                .padding(0.25)
                         } else {
                             Spacer()
                                 .frame(width: 20)
@@ -114,7 +104,6 @@ struct PersonalProfileView: View {
                             .font(.system(size: 30))
                             .padding(.leading)
                         //Location
-
                         if viewMode {
                             Text(appUser.city)
                                 .font(Constants.textFont)
@@ -127,36 +116,38 @@ struct PersonalProfileView: View {
                                 .foregroundColor(Color.gray)
                                 .padding(.leading, 5)
                                 .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
-                            Spacer()
-                                .frame(width: 20)
                         }
+                        Spacer()
+                            .frame(width: 20)
                     }.padding(.leading, 1.0)
-                    
                     HStack {
                         //bio
                         if viewMode {
                             Spacer()
                                 .frame(width: 20)
-                            Text(appUser.bio)
-                                .font(Constants.textFontSmall)
-                                .frame(width: UIScreen.screenWidth-40)
-                                .multilineTextAlignment(.leading)
-                                .padding([.top, .bottom], 5)
+                           
+                           ScrollView {
+                                Text(appUser.bio)
+                                    .font(Constants.textFontSmall)
+                                    .frame(width: (UIScreen.main.bounds.width)/2, height: (UIScreen.main.bounds.width)/2)
+                                    .multilineTextAlignment(.leading)
+                            }
                             Spacer()
                                 .frame(width: 20)
                         } else {
                             Spacer()
                                 .frame(width: 20)
-                            TextEditor(text: $appUser.bio)
-                                .font(Constants.textFontSmall)
-                                .frame(width: UIScreen.screenWidth-46)
-                                .disableAutocorrection(true)
-                                .autocapitalization(.none)
-                                .multilineTextAlignment(.leading)
-                                .foregroundColor(Color.gray)
-                                .padding([.leading, .top, .bottom, .trailing], 3)
-                                .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
-                            
+                            ScrollView {
+                                TextEditor(text: $appUser.bio)
+                                    .font(Constants.textFontSmall)
+                                    .frame(width: (UIScreen.main.bounds.width)/2, height: (UIScreen.main.bounds.width)/2)
+                                    //.disableAutocorrection(true)
+                                    //.autocapitalization(.none)
+                                    .multilineTextAlignment(.leading)
+                                    .foregroundColor(Color.gray)
+                                    .padding([.leading, .top, .bottom, .trailing], 3)
+                                    .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
+                            }
                             Spacer()
                                 .frame(width: 20)
                         }

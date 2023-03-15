@@ -11,7 +11,7 @@ struct AppView: View {
     @State var selectedTab = Tabs.SettingsView
     @Binding var viewState: ViewState
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             HStack{
                 VStack {
                     Image(systemName: "gear")
@@ -48,16 +48,16 @@ struct AppView: View {
             }
             .background(Color.white.edgesIgnoringSafeArea(.all))
             Divider()
-                .padding(.vertical, 7)
+                .padding(.top, 7)
             
             Spacer()
             
             if selectedTab == .SettingsView {
-                SettingsView()
+                SettingsView(viewState: $viewState)
             } else if selectedTab == .ProfileView {
                 ProfileView()
             } else if selectedTab == .HomeView {
-                HomeView()
+                HomeView("", lineLimit: 1)
             } else if selectedTab == .SearchView {
                 SearchView()
             } else if selectedTab == .FriendView {
@@ -69,7 +69,7 @@ struct AppView: View {
             Spacer()
             
             Divider()
-                .padding(.vertical, 7)
+                .padding(.bottom, 7)
 
             HStack {
                 VStack {
@@ -111,7 +111,6 @@ struct AppView: View {
                     Text("Friends")
                         .foregroundColor(selectedTab == .FriendView ? Color.highlight.opacity(0.7) : Color.black.opacity(0.7))
                         .font(Constants.tabFont)
-
                 }
                 .onTapGesture {
                     selectedTab = .FriendView
