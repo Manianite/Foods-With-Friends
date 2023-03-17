@@ -11,7 +11,7 @@ import SwiftUI
 struct Constants{
     static let titleFont: Font = Font(UIFont(name: "AppleSDGothicNeo-Regular", size: 22) ?? UIFont.systemFont(ofSize: 19))
     static let textFont: Font = Font(UIFont(name: "AppleSDGothicNeo-Regular", size: 19) ?? UIFont.systemFont(ofSize: 19))
-    static let textFontSmall: Font = Font(UIFont(name: "AppleSDGothicNeo-Regular", size: 19) ?? UIFont.systemFont(ofSize: 13))
+    static let textFontSmall: Font = Font(UIFont(name: "AppleSDGothicNeo-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13))
     static let tabFont: Font = Font(UIFont(name: "AppleSDGothicNeo-Regular", size: 10) ?? UIFont.systemFont(ofSize: 10))
 }
 extension Color{
