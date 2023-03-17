@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import struct Kingfisher.KFImage
 
 struct FriendProfileView: View {
     @Binding var uid: String
@@ -18,7 +19,7 @@ struct FriendProfileView: View {
                     HStack(alignment: .bottom){
                         
                         //profile pic
-                        Image(systemName: "person.crop.circle.fill")
+                        KFImage(URL(string: friend.profilePic))
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: (UIScreen.main.bounds.width)/4, height: (UIScreen.main.bounds.width)/4)

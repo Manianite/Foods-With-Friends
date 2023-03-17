@@ -6,10 +6,13 @@
 //  Created by Julia Zorc (student LM) on 3/2/23.
 //
 import SwiftUI
+import struct Kingfisher.KFImage
 
 struct PersonalProfileView: View {
     @EnvironmentObject var appUser: User
     @State var viewMode = true
+    @State var showingImagePicker = false
+    @State var inputImage: UIImage?
     var body: some View {
         VStack{
             HStack{
@@ -17,16 +20,16 @@ struct PersonalProfileView: View {
                 VStack(alignment: .leading){
                     HStack(alignment: .bottom){
                         
-                        //profile pic
-                        Image(systemName: "person.crop.circle.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: (UIScreen.main.bounds.width)/4, height: (UIScreen.main.bounds.width)/4)
-                            .clipShape(Circle())
-                            .padding(.leading)
-                        
                         if viewMode {
-                            Button(){
+                            //profile pic
+                            KFImage(URL(string: appUser.profilePic))
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: (UIScreen.main.bounds.width)/4, height: (UIScreen.main.bounds.width)/4)
+                                .clipShape(Circle())
+                                .padding(.leading)
+                            
+                            Button {
                                 viewMode = false
                             } label: {
                                 Image(systemName: "pencil.circle.fill")
@@ -35,7 +38,19 @@ struct PersonalProfileView: View {
                             }
                                 .padding(.leading, -15.0)
                         } else {
-                            Button(){
+                            Button {
+                                showingImagePicker = true
+                            } label: {
+                                //profile pic
+                                KFImage(URL(string: appUser.profilePic))
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: (UIScreen.main.bounds.width)/4, height: (UIScreen.main.bounds.width)/4)
+                                    .clipShape(Circle())
+                                    .padding(.leading)
+                            }
+                            
+                            Button {
                                 viewMode = true
                                 UserData.pushUser(appUser)
                             } label: {
@@ -160,6 +175,20 @@ struct PersonalProfileView: View {
             Divider()
             Spacer()
             
+        }
+        .sheet(isPresented: $showingImagePicker) {
+            ImagePicker(image: $inputImage)
+        }
+        .onChange(of: inputImage) { image in
+            guard let image = image else { return }
+            UserStorage.putImage(image, url: "users/\(appUser.uid)/profile_pic") { url, error in
+                if let url = url {
+                    appUser.profilePic = url.absoluteString
+                    UserData.pushUser(appUser)
+                } else {
+                    print(error)
+                }
+            }
         }
     }
     

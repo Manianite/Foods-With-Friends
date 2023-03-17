@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import struct Kingfisher.KFImage
 
 struct PublicUserView: View {
     @ObservedObject var user: PublicUser = PublicUser(username: "", handle: "", uid: "")
@@ -13,10 +14,11 @@ struct PublicUserView: View {
     var body: some View {
         ZStack {
             HStack {
-                Image(systemName: user.profilePic)
+                KFImage(URL(string: user.profilePic))
                     .resizable()
                     .frame(width: (UIScreen.main.bounds.width)/6, height: (UIScreen.main.bounds.width)/6)
                     .aspectRatio(contentMode: .fit)
+                    .clipShape(Circle())
                     .padding(5)
                 VStack {
                     Text(user.username)
@@ -30,6 +32,7 @@ struct PublicUserView: View {
             }
         }
         .onAppear {
+            user.username = "Loading..."
             UserData.getPublicUser(uid) { gotUser in
                 user.reinit(gotUser)
             }
