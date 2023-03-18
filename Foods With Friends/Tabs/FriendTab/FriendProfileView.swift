@@ -8,6 +8,7 @@
 import SwiftUI
 import struct Kingfisher.KFImage
 
+
 struct FriendProfileView: View {
     @Binding var uid: String
     @ObservedObject var friend = User()
@@ -24,7 +25,7 @@ struct FriendProfileView: View {
                             .aspectRatio(contentMode: .fill)
                             .frame(width: (UIScreen.main.bounds.width)/4, height: (UIScreen.main.bounds.width)/4)
                             .clipShape(Circle())
-                            .padding(.leading)
+                            .padding(.leading, 25)
                             .onAppear {
                                 UserData.getUser(uid) { user in
                                     friend.reinit(user)
@@ -32,30 +33,31 @@ struct FriendProfileView: View {
                             }
                         
                         
-                        //Spacer()
+                        Spacer()
                         
                         //# of reviews
                         VStack{
                             Text(String(friend.reviews.count))
                                 .font(Constants.titleFont)
-                            
                             Text("Reviews")
                                 .font(Constants.textFont)
-                            
-                            
-                        }.padding(7)
+                                .frame(width: UIScreen.screenWidth/4)
+                        }.padding(.leading, 20)
                         
                         //# of friends
                         VStack{
                             Text(String(friend.friends.count))
                                 .font(Constants.titleFont)
                             
-                            
                             Text("Friends")
                                 .font(Constants.textFont)
+                                .frame(width: UIScreen.screenWidth/4)
                             
-                        }.padding(7)
+                        }
+                        .padding(.trailing, 20)
+   
                     }
+                    .frame(width: UIScreen.screenWidth-30)
                     
                     
                     HStack{
@@ -66,36 +68,33 @@ struct FriendProfileView: View {
                         //username
                         Text("@\(friend.handle)")
                             .font(Constants.textFont)
-                            .foregroundColor(Color.gray)
+                            .foregroundColor(Color.highlight.opacity(1))
                     }
-                    
+    
                     HStack{
                         Image(systemName: "mappin.and.ellipse")
                             .foregroundColor(Color.highlight)
-                            .font(.system(size: 30))
-                            .padding(.leading)
+                            .font(.system(size: 20))
+                            .padding(.leading, 15)
                         //Location
                         Text(friend.city)
                             .font(Constants.textFont)
                         Spacer()
-                            .frame(width: 20)
+                            .frame(width: 15)
                     }.padding(.leading, 1.0)
+                    
                     HStack {
                         //bio
-                        Spacer()
-                            .frame(width: 20)
                         ScrollView {
                             Text(friend.bio)
                                 .font(Constants.textFontSmall)
-                                .frame(width: (UIScreen.main.bounds.width)/2, height: (UIScreen.main.bounds.width)/2)
+                                .frame(width: (UIScreen.main.bounds.width)-20, height: (UIScreen.main.bounds.width)/6)
                                 .multilineTextAlignment(.leading)
+                                .lineLimit(nil)
+                            Spacer()
                         }
-                        Spacer()
-                            .frame(width: 20)
                     }
                 }
-                
-                
             }
             
             Divider()
