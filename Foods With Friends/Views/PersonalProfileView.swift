@@ -52,9 +52,9 @@ struct PersonalProfileView: View {
                                     .padding(.leading, 8)
                                 
                                 Text("Edit")
-
                                     .padding(.horizontal, 5)
-                                    .background(Color.highlight.opacity(1))
+                                    .padding(.top, 2)
+                                    .background(Color.highlight.opacity(0.5))
                                     .cornerRadius(40)
                                     .frame(width: (UIScreen.main.bounds.width)/5, height: (UIScreen.main.bounds.width)/4)
                                     .foregroundColor(Color.white)
@@ -78,7 +78,7 @@ struct PersonalProfileView: View {
                     
                     //# of reviews
                     VStack{
-                        Text(String(appUser.reviews.count))
+                        Text(String(appUser.reviews.count-1))
                             .font(Constants.titleFont)
                         
                         Text("Reviews")
@@ -93,7 +93,7 @@ struct PersonalProfileView: View {
                     
                     //# of friends
                     VStack{
-                        Text(String(appUser.friends.count))
+                        Text(String(appUser.friends.count-1))
                             .font(Constants.titleFont)
                         
                         

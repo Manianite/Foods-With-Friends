@@ -40,7 +40,7 @@ struct FriendProfileView: View {
                         
                         //# of reviews
                         VStack{
-                            Text(String(friend.reviews.count))
+                            Text(String(friend.reviews.count-1))
                                 .font(Constants.titleFont)
                             Text("Reviews")
                                 .font(Constants.textFont)
@@ -49,7 +49,7 @@ struct FriendProfileView: View {
                         
                         //# of friends
                         VStack{
-                            Text(String(friend.friends.count))
+                            Text(String(friend.friends.count-1))
                                 .font(Constants.titleFont)
                             
                             Text("Friends")
