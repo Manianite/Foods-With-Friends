@@ -21,6 +21,9 @@ struct FriendProfileView: View {
                         
                         //profile pic
                         KFImage(URL(string: friend.profilePic))
+                            .placeholder {
+                                Image(systemName: "person.crop.circle.fill")
+                            }
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: (UIScreen.main.bounds.width)/4, height: (UIScreen.main.bounds.width)/4)

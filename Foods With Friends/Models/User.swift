@@ -8,7 +8,7 @@
 import Foundation
 
 class User: ObservableObject, Codable, Equatable {
-    static func == (lhs: User, rhs: User) -> Bool {lhs.handle==rhs.handle}
+    static func == (lhs: User, rhs: User) -> Bool {lhs.uid==rhs.uid}
     
     @Published var username: String
     @Published var handle: String
@@ -92,8 +92,9 @@ class User: ObservableObject, Codable, Equatable {
         self.reviews = [Review()]
     }
 }
-class PublicUser: ObservableObject, Codable, Equatable {
-    static func == (lhs: PublicUser, rhs: PublicUser) -> Bool {lhs.handle==rhs.handle}
+class PublicUser: ObservableObject, Codable, Comparable {
+    static func < (lhs: PublicUser, rhs: PublicUser) -> Bool {lhs.uid<rhs.uid}
+    static func == (lhs: PublicUser, rhs: PublicUser) -> Bool {lhs.uid==rhs.uid}
     
     @Published var username: String
     @Published var handle: String
@@ -165,5 +166,10 @@ extension Dictionary {
         let data = try JSONSerialization.data(withJSONObject: dict)
         let obj = try JSONDecoder().decode(T.self, from: data)
         return obj
+    }
+}
+extension Array where Element: Comparable {
+    func containsSameElements(as other: [Element]) -> Bool {
+        return self.count == other.count && self.sorted() == other.sorted()
     }
 }

@@ -9,8 +9,7 @@ import SwiftUI
 import struct Kingfisher.KFImage
 
 struct PublicUserView: View {
-    @ObservedObject var user: PublicUser = PublicUser(username: "", handle: "", uid: "")
-    @Binding var uid: String
+    @Binding var user: PublicUser
     var body: some View {
         ZStack {
             HStack {
@@ -31,22 +30,22 @@ struct PublicUserView: View {
                     .padding(10)
             }
         }
-        .onAppear {
-            user.username = "Loading..."
-            UserData.getPublicUser(uid) { gotUser in
-                user.reinit(gotUser)
-            }
-        }
-        .onChange(of: user) { newUser in
-            UserData.getPublicUser(uid) { gotUser in
-                newUser.reinit(gotUser)
-            }
-        }
+//        .onAppear {
+//            user.username = "Loading..."
+//            UserData.getPublicUser(uid) { gotUser in
+//                user.reinit(gotUser)
+//            }
+//        }
+//        .onChange(of: user) { newUser in
+//            UserData.getPublicUser(uid) { gotUser in
+//                newUser.reinit(gotUser)
+//            }
+//        }
     }
 }
 
 struct PublicUserView_Previews: PreviewProvider {
     static var previews: some View {
-        PublicUserView(uid: Binding.constant("Julia'sAccountlessUserID"))
+        PublicUserView(user: Binding.constant(PublicUser()))
     }
 }

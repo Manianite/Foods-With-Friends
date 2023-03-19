@@ -10,22 +10,22 @@ import SwiftUI
 struct FriendView: View {
     @EnvironmentObject var appUser: User
     @State var query = ""
-    @State var friendsList: [String] = []
-    @State var friendReqsList: [String] = []
+    @State var friendsList: [PublicUser] = []
+    @State var friendReqsList: [PublicUser] = []
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
                 ScrollView {
-                    ForEach($friendReqsList, id: \.self) { friendID in
+                    ForEach($friendReqsList, id: \.self.uid) { friend in
                         ZStack(alignment: .trailing) {
-                            PublicUserView(uid: friendID)
+                            PublicUserView(user: friend)
                                 .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(.black))
                                 .padding([.trailing, .leading], 5)
                             HStack {
                                 Button {
-                                    UserData.remove("users/\(friendID.wrappedValue)/new_friends/\(appUser.uid)-O")
-                                    appUser.newFriends.removeValue(forKey: friendID.wrappedValue+"-I")
-                                    UserData.remove("users/\(appUser.uid)/new_friends/\(friendID.wrappedValue)-I")
+                                    UserData.remove("users/\(friend.uid.wrappedValue)/new_friends/\(appUser.uid)-O")
+                                    appUser.newFriends.removeValue(forKey: friend.uid.wrappedValue+"-I")
+                                    UserData.remove("users/\(appUser.uid)/new_friends/\(friend.uid.wrappedValue)-I")
                                 } label: {
                                     Image(systemName: "xmark")
                                         .resizable()
@@ -35,12 +35,14 @@ struct FriendView: View {
                                 }
                                 Divider()
                                 Button {
-                                    UserData.setValue(true, to: "users/\(friendID.wrappedValue)/friends/\(appUser.uid)")
-                                    UserData.remove("users/\(friendID.wrappedValue)/new_friends/\(appUser.uid)-O")
-                                    appUser.friends[friendID.wrappedValue] = true
-                                    appUser.newFriends.removeValue(forKey: friendID.wrappedValue+"-I")
-                                    UserData.setValue(true, to: "users/\(appUser.uid)/friends/\(friendID.wrappedValue)")
-                                    UserData.remove("users/\(appUser.uid)/new_friends/\(friendID.wrappedValue)-I")
+                                    UserData.setValue(true, to: "users/\(friend.uid.wrappedValue)/friends/\(appUser.uid)")
+                                    UserData.remove("users/\(friend.uid.wrappedValue)/new_friends/\(appUser.uid)-O")
+                                    appUser.friends[friend.uid.wrappedValue] = true
+                                    appUser.newFriends.removeValue(forKey: friend.uid.wrappedValue+"-I")
+                                    UserData.setValue(true, to: "users/\(appUser.uid)/friends/\(friend.uid.wrappedValue)")
+                                    UserData.remove("users/\(appUser.uid)/new_friends/\(friend.uid.wrappedValue)-I")
+                                    friendsList.insert(friendReqsList.first {$0==friend.wrappedValue} ?? PublicUser(), at: 0)
+                                    friendReqsList.removeAll {$0==friend.wrappedValue}
                                 } label: {
                                     Image(systemName: "checkmark")
                                         .resizable()
@@ -51,11 +53,11 @@ struct FriendView: View {
                             }
                         }
                     }
-                    ForEach($friendsList, id: \.self) { friend in
+                    ForEach($friendsList, id: \.self.uid) { friend in
                         NavigationLink {
-                            FriendProfileView(uid: friend)
+                            FriendProfileView(uid: friend.uid)
                         } label: {
-                            PublicUserView(uid: friend)
+                            PublicUserView(user: friend)
                                 .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(.black))
                                 .padding([.trailing, .leading], 5)
                         }
@@ -79,14 +81,22 @@ struct FriendView: View {
         }
         .searchable(text: $query)
         .onAppear {
-            UserData.observeUser(for: appUser.uid) { user in
-                friendReqsList = Array(user.newFriends.keys).filter { $0.hasSuffix("-I") }.map { String($0.dropLast(2)) }
-                friendsList = Array(user.friends.keys).filter { $0 != "_" }
+            UserData.getUser(appUser.uid) { user in
+                let friendReqUids = Array(user.newFriends.keys).filter { $0.hasSuffix("-I") }.map { String($0.dropLast(2)) }
+                let friendUids = Array(user.friends.keys).filter { $0 != "_" }
+                friendReqsList = []
+                friendsList = []
+                for uid in friendReqUids {
+                    UserData.getPublicUser(uid) { friendReq in
+                        friendReqsList.append(friendReq)
+                    }
+                }
+                for uid in friendUids {
+                    UserData.getPublicUser(uid) { friend in
+                        friendsList.append(friend)
+                    }
+                }
             }
-            //reload view
-        }
-        .onDisappear {
-            UserData.stopObservingUser()
         }
     }
 }
