@@ -23,6 +23,8 @@ struct FriendProfileView: View {
                         KFImage(URL(string: friend.profilePic))
                             .placeholder {
                                 Image(systemName: "person.crop.circle.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
                             }
                             .resizable()
                             .aspectRatio(contentMode: .fill)

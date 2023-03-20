@@ -52,7 +52,7 @@ class User: ObservableObject, Codable, Equatable {
         self.handle = handle
         self.uid = uid
         self.bio = ""
-        self.profilePic = "https://raw.githubusercontent.com/andrewtavis/sf-symbols-online/master/glyphs/person.circle.fill.png"
+        self.profilePic = ""
         self.city = ""
         self.friends = ["_": false]
         self.newFriends = ["_": false]
@@ -63,7 +63,7 @@ class User: ObservableObject, Codable, Equatable {
         self.handle = "juliazorc123"
         self.uid = "Julia'sAccountlessUserID"
         self.bio = "Hi! I am Julia and, just like you, I love food! I post reviews at least once a week. Be my friend to see my opinions and be a better informed foodie :)"
-        self.profilePic = "https://raw.githubusercontent.com/andrewtavis/sf-symbols-online/master/glyphs/person.circle.fill.png"
+        self.profilePic = ""
         self.city = "Wynnewood, PA"
         self.friends = ["_": false]
         self.newFriends = ["_": false]
@@ -85,7 +85,7 @@ class User: ObservableObject, Codable, Equatable {
         self.handle = handle
         self.uid = uid
         self.bio = ""
-        self.profilePic = "https://raw.githubusercontent.com/andrewtavis/sf-symbols-online/master/glyphs/person.circle.fill.png"
+        self.profilePic = ""
         self.city = ""
         self.friends = ["_": false]
         self.newFriends = ["_": false]
@@ -121,7 +121,7 @@ class PublicUser: ObservableObject, Codable, Comparable {
         self.username = username
         self.handle = handle
         self.uid = uid
-        self.profilePic = "https://raw.githubusercontent.com/andrewtavis/sf-symbols-online/master/glyphs/person.circle.fill.png"
+        self.profilePic = ""
     }
     internal init(_ user: User) {
         self.username = user.username
@@ -133,13 +133,13 @@ class PublicUser: ObservableObject, Codable, Comparable {
         self.username = "Julia Zorc"
         self.handle = "juliazorc123"
         self.uid = "Julia'sAccountlessUserID"
-        self.profilePic = "https://raw.githubusercontent.com/andrewtavis/sf-symbols-online/master/glyphs/person.circle.fill.png"
+        self.profilePic = ""
     }
     func reinit(username: String, handle: String, uid: String) {
         self.username = username
         self.handle = handle
         self.uid = uid
-        self.profilePic = "https://raw.githubusercontent.com/andrewtavis/sf-symbols-online/master/glyphs/person.circle.fill.png"
+        self.profilePic = ""
     }
     func reinit(_ user: PublicUser) {
         self.username = user.username

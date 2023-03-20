@@ -24,6 +24,11 @@ struct PersonalProfileView: View {
                     if viewMode {
                         //profile pic
                         KFImage(URL(string: appUser.profilePic))
+                            .placeholder {
+                                Image(systemName: "person.crop.circle.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                            }
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: (UIScreen.main.bounds.width)/4, height: (UIScreen.main.bounds.width)/4)
