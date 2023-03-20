@@ -16,7 +16,7 @@ struct PersonalProfileView: View {
     var body: some View {
         
         
-        VStack(alignment: .leading){
+        VStack(alignment: viewMode ? .leading : .center){
             HStack{
                 Spacer()
                 HStack(alignment: .bottom){
@@ -162,8 +162,6 @@ struct PersonalProfileView: View {
                 //bio
                 if viewMode {
                     Spacer()
-                        .frame(width: 20)
-                    
                     ScrollView {
                         Text(appUser.bio)
                             .font(Constants.textFontSmall)
@@ -172,10 +170,8 @@ struct PersonalProfileView: View {
                             .lineLimit(nil)
                     }
                     Spacer()
-                        .frame(width: 20)
                 } else {
                     Spacer()
-                        .frame(width: 20)
                     ScrollView {
                         TextEditor(text: $appUser.bio)
                             .font(Constants.textFontSmall)
@@ -187,7 +183,6 @@ struct PersonalProfileView: View {
                             .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
                     }
                     Spacer()
-                    //.frame(width: 20)
                 }
             }
             

@@ -7,12 +7,12 @@
 
 import Foundation
 
-class FetchRestaurantData: ObservableObject{
+@MainActor class FetchRestaurantData: ObservableObject{
     @Published var response = RestaurantResponse()
     
     func getData(_ query: String) async {
-        let URLString = "https://api.spoonacular.com/food/restaurants/search?query=\(query)&lat=39.9526&lng=-75.1652&distance=15&apiKey=edb7848c89934d62ba81c2fb8c7c8b0c"
-        
+        let URLString = "https://api.spoonacular.com/food/restaurants/search?query=\(query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")&lat=39.9526&lng=-75.1652&distance=15&apiKey=edb7848c89934d62ba81c2fb8c7c8b0c"
+        print(URLString)
         guard let url = URL(string: URLString) else {return}
         
         do {

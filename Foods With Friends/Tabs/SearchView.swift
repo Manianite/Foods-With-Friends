@@ -22,7 +22,15 @@ struct SearchView: View {
                        VStack {
                            HStack {
                                TextField("Search", text: $query)
+                                   .submitLabel(.go)
                                    .padding(.leading)
+                                   .onSubmit {
+                                       Task {
+                                           waiting = true
+                                           await data.getData(query)
+                                           waiting = false
+                                       }
+                                   }
                                Button {
                                    Task {
                                        waiting = true
@@ -31,9 +39,10 @@ struct SearchView: View {
                                    }
                                } label: {
                                    Text("Go")
-                                       .foregroundColor(.blue)
+                                       .accentColor(.highlight)
                                        .padding(.trailing)
                                }
+                               .disabled(waiting)
                            }
                            
                            if waiting {

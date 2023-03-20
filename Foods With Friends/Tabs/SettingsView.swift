@@ -18,6 +18,7 @@ struct SettingsView: View {
             } label: {
                 Text("Log Out")
                     .font(Constants.titleFont)
+                    .accentColor(.highlight)
             }
         }
     }

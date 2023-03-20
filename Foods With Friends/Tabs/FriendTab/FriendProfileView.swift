@@ -35,7 +35,6 @@ struct FriendProfileView: View {
                                 }
                             }
                         
-                        
                         Spacer()
                         
                         //# of reviews

@@ -21,6 +21,7 @@ struct FriendView: View {
                             PublicUserView(user: friend)
                                 .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(.black))
                                 .padding([.trailing, .leading], 5)
+                                .transition(.move(edge: .bottom))
                             HStack {
                                 Button {
                                     UserData.remove("users/\(friend.uid.wrappedValue)/new_friends/\(appUser.uid)-O")

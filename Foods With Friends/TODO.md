@@ -8,7 +8,7 @@
 #  Profile
 .   - list of reviews -> [IMPORTANT]
 .   - UI cleanup
-    
+
 #  Feed
 .   - database observation -> [IMPORTANT] <- Ella
 .   - reply and read replies [IMPORTANT]
@@ -16,10 +16,7 @@
 .   - UI cleanup -> [IMPORTANT]
 
 #  Search
-.   - Search Location
-.   - make go a submit button <- Ella
-.   - loading message
-.   - make it work -> [IMPORTANT]
+.   - Search Location -> [IMPORTANT]
 .   - list of reviews in restaurantview -> [IMPORTANT]
 .   - UI cleanup
 
@@ -38,3 +35,6 @@
 #  Misc.
 .   - change logo at top of screen to long one <- Julia
 .   - accessability?
+
+#  Login/Signup
+.   - password reset message

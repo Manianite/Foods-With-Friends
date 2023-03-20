@@ -64,6 +64,7 @@
 
 /* Begin PBXFileReference section */
 		044C27A9EE53F07C348E8091 /* Pods-Foods With Friends.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foods With Friends.release.xcconfig"; path = "Target Support Files/Pods-Foods With Friends/Pods-Foods With Friends.release.xcconfig"; sourceTree = "<group>"; };
+		0F17AED429C6D4BA008A881C /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		0F2F315E29AF965D008B0CC3 /* Foods With Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Foods With Friends.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F2F316129AF965D008B0CC3 /* Foods_With_FriendsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Foods_With_FriendsApp.swift; sourceTree = "<group>"; };
 		0F2F316329AF965D008B0CC3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -163,6 +164,7 @@
 		0F2F316029AF965D008B0CC3 /* Foods With Friends */ = {
 			isa = PBXGroup;
 			children = (
+				0F17AED429C6D4BA008A881C /* TODO.md */,
 				0FDDA06629B2816B00A866C4 /* Authentication */,
 				834981D429B0F8B200CF2D98 /* Models */,
 				88F733A229B8C5D0001D8CC6 /* Tabs */,

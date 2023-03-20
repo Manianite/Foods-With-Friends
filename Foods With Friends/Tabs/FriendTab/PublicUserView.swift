@@ -14,6 +14,9 @@ struct PublicUserView: View {
         ZStack {
             HStack {
                 KFImage(URL(string: user.profilePic))
+                    .placeholder {
+                        Image(systemName: "person.crop.circle.fill")
+                    }
                     .resizable()
                     .frame(width: (UIScreen.main.bounds.width)/6, height: (UIScreen.main.bounds.width)/6)
                     .aspectRatio(contentMode: .fit)
