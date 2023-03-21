@@ -14,6 +14,7 @@ struct LoginView: View {
     @Binding var viewState: ViewState
     @EnvironmentObject var appUser: User
     @State var sentReset: Bool? = false
+    @State var wrongPassword = false
     var body: some View {
         VStack {
             Group{
@@ -58,6 +59,7 @@ struct LoginView: View {
                         .padding()
                         .frame(width: UIScreen.screenWidth-40, height: UIScreen.screenHeight/15)
                         .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
+                        .background(wrongPassword ? .red.opacity(0.2) : .white)
                         .submitLabel(.go)
                         .onSubmit {
                             Auth.auth().signIn(withEmail: email, password: password) { user, error in
@@ -70,6 +72,7 @@ struct LoginView: View {
                                     }
                                 } else {
                                     print(error ?? "")
+                                    wrongPassword = true
                                 }
                             }
                         }
@@ -89,6 +92,7 @@ struct LoginView: View {
                         }
                     } else {
                         print(error ?? "")
+                        wrongPassword = true
                     }
                 }
             } label: {

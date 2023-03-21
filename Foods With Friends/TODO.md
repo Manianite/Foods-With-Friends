@@ -1,4 +1,4 @@
-#  Settings
+#  Settings <- Busra
 .   - change password
 .   - change handle
 .   - delete account
@@ -7,10 +7,11 @@
 
 #  Profile
 .   - list of reviews -> [IMPORTANT]
+.   - resize profile pic
 .   - UI cleanup
 
-#  Feed
-.   - database observation -> [IMPORTANT] <- Ella
+#  Feed <- Ella
+.   - database observation -> [IMPORTANT]
 .   - reply and read replies [IMPORTANT]
 .   - favorite?
 .   - UI cleanup -> [IMPORTANT]
@@ -27,8 +28,8 @@
 .   - always show search bar in friendsearchview
 .   - title in friendsearchview?
     
-#  Post
-.   - firebase functionality -> [IMPORTANT] <- Ella
+#  Post <- Ariana
+.   - firebase functionality -> [IMPORTANT]
 .   - restaurant select -> [IMPORTANT]
 .   - UI cleanup -> [IMPORTANT]
 
@@ -37,4 +38,4 @@
 .   - accessability?
 
 #  Login/Signup
-.   - password reset message
+.   - login error message

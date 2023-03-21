@@ -45,4 +45,12 @@ class Review: Codable, Identifiable, ObservableObject {
         self.uid = uid
         self.body = body
     }
+    internal init() {
+        title = "I LOVED IT"
+        stars = 5
+        images = ["https://upload.wikimedia.org/wikipedia/en/a/a9/Example.jpg","https://placekitten.com/640/360"]
+        restaurant = "The Krusty Krab"
+        uid = "Julia'sAccountlessUserID"
+        body = "I was sort of hesitant in visiting a restaurant underwater, but the food was beyond compare! I have never before in my whole life had a burger as delectable as the Krabby Paddy. Thanks, @Patrick!"
+    }
 }
