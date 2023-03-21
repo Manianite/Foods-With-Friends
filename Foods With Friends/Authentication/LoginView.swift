@@ -18,20 +18,24 @@ struct LoginView: View {
         VStack {
             Group{
                 VStack{
-                Image("logo")
+                
+                Image("loginlogo")
                     .resizable()
-                    .frame(width: UIScreen.screenWidth/3, height: UIScreen.screenWidth/3)
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: UIScreen.screenWidth/2.5, height: UIScreen.screenWidth/2.5)
+                    .padding()
+                    
                 
                     //.aspectRatio(contentMode: .fit)
-                Text("Foods With Friends")
-                    .font(.system(size: 45))
-                    .font(.largeTitle)
-                    .font(Constants.titleFont)
-                    .foregroundColor(Color.highlight)
-                    .frame(width: UIScreen.screenWidth-20, height: UIScreen.screenHeight/15)
-                    .scaledToFill()
-                    .minimumScaleFactor(0.5)
-                    .lineLimit(1)
+//                Text("Foods With Friends")
+//                    .font(.system(size: 45))
+//                    .font(.largeTitle)
+//                    .font(Constants.titleFont)
+//                    .foregroundColor(Color.highlight)
+//                    .frame(width: UIScreen.screenWidth-20, height: UIScreen.screenHeight/15)
+//                    .scaledToFill()
+//                    .minimumScaleFactor(0.5)
+//                    .lineLimit(1)
                 }
             }
             Group{
