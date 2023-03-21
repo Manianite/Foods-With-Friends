@@ -36,7 +36,7 @@ struct PersonalProfileView: View {
                                     .foregroundColor(Color.highlight)
                                     .font(.system(size: 30))
                             }
-                                .padding(.leading, -15.0)
+                            .padding(.leading, -15.0)
                         } else {
                             Button {
                                 showingImagePicker = true
@@ -58,7 +58,7 @@ struct PersonalProfileView: View {
                                     .foregroundColor(Color.highlight)
                                     .font(.system(size: 30))
                             }
-                                .padding(.leading, -15.0)
+                            .padding(.leading, -15.0)
                         }
                         //Spacer()
                         
@@ -140,8 +140,8 @@ struct PersonalProfileView: View {
                         if viewMode {
                             Spacer()
                                 .frame(width: 20)
-                           
-                           ScrollView {
+                            
+                            ScrollView {
                                 Text(appUser.bio)
                                     .font(Constants.textFontSmall)
                                     .frame(width: (UIScreen.main.bounds.width)/2, height: (UIScreen.main.bounds.width)/2)
@@ -156,8 +156,8 @@ struct PersonalProfileView: View {
                                 TextEditor(text: $appUser.bio)
                                     .font(Constants.textFontSmall)
                                     .frame(width: (UIScreen.main.bounds.width)/2, height: (UIScreen.main.bounds.width)/2)
-                                    //.disableAutocorrection(true)
-                                    //.autocapitalization(.none)
+                                //.disableAutocorrection(true)
+                                //.autocapitalization(.none)
                                     .multilineTextAlignment(.leading)
                                     .foregroundColor(Color.gray)
                                     .padding([.leading, .top, .bottom, .trailing], 3)
@@ -168,13 +168,9 @@ struct PersonalProfileView: View {
                         }
                     }
                 }
-                
-                
             }
-            
             Divider()
             Spacer()
-            
         }
         .sheet(isPresented: $showingImagePicker) {
             ImagePicker(image: $inputImage)
@@ -191,7 +187,6 @@ struct PersonalProfileView: View {
             }
         }
     }
-    
 }
 
 struct PersonalProfileView_Previews: PreviewProvider {

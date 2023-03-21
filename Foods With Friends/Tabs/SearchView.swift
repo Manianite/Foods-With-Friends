@@ -17,45 +17,44 @@ struct SearchView: View {
     @State var waiting: Bool = false
     
     var body: some View {
-               VStack{
-                   NavigationView {
-                       VStack {
-                           HStack {
-                               TextField("Search", text: $query)
-                                   .padding(.leading)
-                               Button {
-                                   Task {
-                                       waiting = true
-                                       await data.getData(query)
-                                       waiting = false
-                                   }
-                               } label: {
-                                   Text("Go")
-                                       .foregroundColor(.blue)
-                                       .padding(.trailing)
-                               }
-                           }
-                           
-                           if waiting {
-                               Divider()
-                               Text("Waiting...")
-                           }
-                           List {
-                               ForEach($data.response.restaurants) {restaurant in
-                                   NavigationLink {
-                                       RestaurantInfoView(restaurant: restaurant)
-                                   } label: {
-                                       RestaurantListView(restaurant: restaurant)
-                                   }
-                               }
-                               
-                           }
-                           .listStyle(.grouped)
-                       }
-                       .navigationViewStyle(.stack)
-                       .navigationBarHidden(true)
-                   }
-           }
+        VStack{
+            NavigationView {
+                VStack {
+                    HStack {
+                        TextField("Search", text: $query)
+                            .padding(.leading)
+                        Button {
+                            Task {
+                                waiting = true
+                                await data.getData(query)
+                                waiting = false
+                            }
+                        } label: {
+                            Text("Go")
+                                .foregroundColor(.blue)
+                                .padding(.trailing)
+                        }
+                    }
+                    
+                    if waiting {
+                        Divider()
+                        Text("Waiting...")
+                    }
+                    List {
+                        ForEach($data.response.restaurants) {restaurant in
+                            NavigationLink {
+                                RestaurantInfoView(restaurant: restaurant)
+                            } label: {
+                                RestaurantListView(restaurant: restaurant)
+                            }
+                        }
+                    }
+                    .listStyle(.grouped)
+                }
+                .navigationViewStyle(.stack)
+                .navigationBarHidden(true)
+            }
+        }
     }
 }
 
