@@ -18,7 +18,7 @@ class User: ObservableObject, Codable, Equatable {
     @Published var city: String
     @Published var friends:[String: Bool]
     @Published var newFriends:[String: Bool]
-    @Published var reviews:[Review]
+    @Published var reviews:[String: Review]
     
     enum CodingKeys: CodingKey {
         case username, handle, uid, bio, profilePic, city, friends, reviews, new_friends
@@ -45,7 +45,7 @@ class User: ObservableObject, Codable, Equatable {
         city = try container.decode(String.self, forKey: .city)
         friends = try container.decode([String: Bool].self, forKey: .friends)
         newFriends = try container.decode([String: Bool].self, forKey: .new_friends)
-        reviews = try container.decode([Review].self, forKey: .reviews)
+        reviews = try container.decode([String: Review].self, forKey: .reviews)
     }
     internal init(username: String, handle: String, uid: String) {
         self.username = username
@@ -56,7 +56,7 @@ class User: ObservableObject, Codable, Equatable {
         self.city = ""
         self.friends = ["_": false]
         self.newFriends = ["_": false]
-        self.reviews = [Review()]
+        self.reviews = ["_": Review(true)]
     }
     internal init() {
         self.username = "Julia Zorc"
@@ -67,7 +67,7 @@ class User: ObservableObject, Codable, Equatable {
         self.city = "Wynnewood, PA"
         self.friends = ["_": false]
         self.newFriends = ["_": false]
-        self.reviews = [Review()]
+        self.reviews = ["_": Review(true)]
     }
     func reinit(_ user: User) {
         self.username = user.username
@@ -89,7 +89,7 @@ class User: ObservableObject, Codable, Equatable {
         self.city = ""
         self.friends = ["_": false]
         self.newFriends = ["_": false]
-        self.reviews = [Review()]
+        self.reviews = ["_": Review(true)]
     }
 }
 class PublicUser: ObservableObject, Codable, Comparable {

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @EnvironmentObject var appUser: User
     @Binding var viewState: ViewState
     var body: some View {
         List {
@@ -19,6 +20,16 @@ struct SettingsView: View {
                 Text("Log Out")
                     .font(Constants.titleFont)
                     .accentColor(.highlight)
+            }
+            Button {
+                let time = Date().timeIntervalSince1970
+                UserData.pushReview(Review(time: time), toFriendsOf: appUser)
+                appUser.reviews[String(time)] = Review(time: time)
+            } label: {
+                Text("Push Test Review")
+                    .font(Constants.textFont)
+                    .accentColor(.highlight)
+                    .disabled(true)
             }
         }
     }

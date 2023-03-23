@@ -115,6 +115,7 @@ struct SignupView: View {
                         UserData.appendUserDict(uid, PublicUser(username: username, handle: handle, uid: uid))
                         UserData.pushUser(appUser)
                         UserData.stopObservingUserDict()
+                        UserDefaults.standard.set(uid, forKey: "userID")
                         viewState = .home
                     } else {
                         print(error ?? "")
