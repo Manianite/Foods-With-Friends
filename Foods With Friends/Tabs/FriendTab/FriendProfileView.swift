@@ -10,14 +10,18 @@ import struct Kingfisher.KFImage
 
 
 struct FriendProfileView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var appUser: User
     @Binding var uid: String
+    @Binding var friendsList: [PublicUser]
     @ObservedObject var friend = User()
+    @State var unfriendAssurance = false
     var body: some View {
         VStack{
             HStack{
                 
-                VStack(alignment: .leading){
-                    HStack(alignment: .bottom){
+                VStack(alignment: .leading) {
+                    HStack(alignment: .bottom) {
                         
                         //profile pic
                         KFImage(URL(string: friend.profilePic))
@@ -31,12 +35,20 @@ struct FriendProfileView: View {
                             .frame(width: (UIScreen.main.bounds.width)/4, height: (UIScreen.main.bounds.width)/4)
                             .clipShape(Circle())
                             .padding(.leading, 25)
+                            .padding(.bottom, 5)
                             .onAppear {
                                 UserData.getUser(uid) { user in
                                     friend.reinit(user)
                                 }
                             }
-                        
+                        Button {
+                            unfriendAssurance.toggle()
+                        } label: {
+                            Image(systemName: "person.badge.minus.fill")
+                                .foregroundColor(Color.highlight)
+                                .font(.system(size: 30))
+                        }
+                        .padding(.leading, -15.0)
                         Spacer()
                         
                         //# of reviews
@@ -105,11 +117,25 @@ struct FriendProfileView: View {
             Spacer()
             
         }
+        .alert(isPresented: $unfriendAssurance) {
+            Alert (
+                title: Text("Foods With Friends"),
+                message: Text("Are you sure you want to unfriend \(friend.username)?"),
+                primaryButton: .destructive(Text("Unfriend")) {
+                    UserData.remove("users/\(friend.uid)/friends/\(appUser.uid)")
+                    appUser.friends.removeValue(forKey: friend.uid)
+                    UserData.remove("users/\(appUser.uid)/friends/\(friend.uid)")
+                    friendsList.removeAll {$0.uid == friend.uid}
+                    self.presentationMode.wrappedValue.dismiss()
+                },
+                secondaryButton: .cancel()
+            )
+        }
     }
 }
 
 struct FriendProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        FriendProfileView(uid: Binding.constant("Julia'sAccountlessUserID"))
+        FriendProfileView(uid: Binding.constant("Julia'sAccountlessUserID"), friendsList: Binding.constant([]))
     }
 }

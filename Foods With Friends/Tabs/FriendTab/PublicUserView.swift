@@ -21,18 +21,18 @@ struct PublicUserView: View {
                     }
                     .resizable()
                     .frame(width: (UIScreen.main.bounds.width)/6, height: (UIScreen.main.bounds.width)/6)
-                    .aspectRatio(contentMode: .fit)
+                    .aspectRatio(contentMode: .fill)
                     .clipShape(Circle())
                     .padding(5)
-                VStack {
+                VStack(alignment: .leading) {
                     Text(user.username)
                         .font(Constants.titleFont)
+                        .lineLimit(1)
                     Text("@"+user.handle)
                         .font(Constants.textFont)
                         .foregroundColor(.gray)
                 }
-                Color.white
-                    .padding(10)
+                Spacer()
             }
         }
 //        .onAppear {

@@ -267,9 +267,21 @@ struct SettingsView: View {
                     )
                     .background(Color.highlight.opacity(0.5).cornerRadius(16))
                     .padding(.vertical, 20)
-
             }
             
+            //testing for posting reviews
+            Button {
+                let time = Date().timeIntervalSince1970
+                UserData.pushReview(Review(time: time), toFriendsOf: appUser)
+                appUser.reviews[String(time)] = Review(time: time)
+            } label: {
+                Text("Push Test Review")
+                    .font(Constants.textFont)
+                    .accentColor(.highlight)
+                    .disabled(true)
+            }
+
+
         }
     }
 }

@@ -50,14 +50,14 @@ struct AppView: View {
             Divider()
                 .padding(.top, 7)
             
-            Spacer()
+            //Spacer()
             
             if selectedTab == .SettingsView {
                 SettingsView(viewState: $viewState)
             } else if selectedTab == .ProfileView {
                 ProfileView()
             } else if selectedTab == .HomeView {
-                HomeView("", lineLimit: 1)
+                HomeView()
             } else if selectedTab == .SearchView {
                 SearchView()
             } else if selectedTab == .FriendView {
@@ -66,7 +66,7 @@ struct AppView: View {
                 NewPostView()
             }
             
-            Spacer()
+            //Spacer()
             
             Divider()
                 .padding(.bottom, 7)

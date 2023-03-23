@@ -16,6 +16,9 @@ struct Constants{
 }
 extension Color{
     static let highlight = Color("Highlight")
+    static let systemBackground = Color(uiColor: .systemBackground)
+    static let secondarySystemBackground = Color(uiColor: .secondarySystemBackground)
+    static let tertiarySystemBackground = Color(uiColor: .tertiarySystemBackground)
 }
 enum ViewState{
     case home

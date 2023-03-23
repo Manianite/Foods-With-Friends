@@ -10,12 +10,18 @@
 import SwiftUI
 import FirebaseDatabase
 
-class UserData {
+class UserData { // colloquially a static var is called a 'singleton'
     private static var ref = Database.database().reference()
     
     static func pushUser(_ user: User) {
         ref.child("users/\(user.uid)").updateChildValues(user.toDictionnary)
         ref.child("users/user_dict/\(user.uid)").updateChildValues(PublicUser(user).toDictionnary)
+    }
+    static func pushReview(_ review: Review, toFriendsOf appUser: User) {
+        for recipient in appUser.friends.keys.filter({$0 != "_"}) {
+            ref.child("feeds/\(recipient)/\(review.time.replacingOccurrences(of: ".", with: ","))").updateChildValues(review.toDictionnary)
+        }
+        ref.child("users/\(appUser.uid)/reviews/\(review.time.replacingOccurrences(of: ".", with: ","))").updateChildValues(review.toDictionnary)
     }
     static func remove(_ url: String) {
         ref.child(url).removeValue()
@@ -94,6 +100,24 @@ class UserData {
     }
     static func stopObservingUser() {
         userObserver.removeAllObservers()
+    }
+    
+    static var observedFeed: [String: Review] = [:]
+    static var feedObserver: DatabaseReference = ref.child("users/uid/")
+    static func observeFeed(for uid: String, _ completion: @escaping ((_ feed: [String: Review]) -> ())) {
+        userObserver = ref.child("feeds/\(uid)")
+        userObserver.queryOrderedByKey().queryLimited(toLast: 10).observe(.value) { snapshot in
+            let dict = snapshot.value as? [String: Any] ?? [:]
+            do {
+                observedFeed = try dict.asObject([String: Review].self, from: dict)
+                completion(observedFeed)
+            } catch {
+                print("ERROR!!! cannot get feed")
+            }
+        }
+    }
+    static func stopObservingFeed() {
+        feedObserver.removeAllObservers()
     }
     
     static func appendUserDict(_ uid: String, _ user: PublicUser) {

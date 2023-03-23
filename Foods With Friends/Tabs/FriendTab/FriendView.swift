@@ -56,7 +56,7 @@ struct FriendView: View {
                     }
                     ForEach($friendsList, id: \.self.uid) { friend in
                         NavigationLink {
-                            FriendProfileView(uid: friend.uid)
+                            FriendProfileView(uid: friend.uid, friendsList: $friendsList)
                         } label: {
                             PublicUserView(user: friend)
                                 .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(.black))

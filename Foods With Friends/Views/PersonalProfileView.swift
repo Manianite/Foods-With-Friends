@@ -14,8 +14,6 @@ struct PersonalProfileView: View {
     @State var showingImagePicker = false
     @State var inputImage: UIImage?
     var body: some View {
-        
-        
         VStack(alignment: viewMode ? .leading : .center){
             HStack{
                 Spacer()
@@ -50,6 +48,11 @@ struct PersonalProfileView: View {
                             //profile pic
                             ZStack(alignment: .bottom){
                                 KFImage(URL(string: appUser.profilePic))
+                                    .placeholder {
+                                        Image(systemName: "person.crop.circle.fill")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                    }
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: (UIScreen.main.bounds.width)/4, height: (UIScreen.main.bounds.width)/4)
@@ -68,6 +71,7 @@ struct PersonalProfileView: View {
                                     .padding(.leading, 8)
                             }
                         }
+                        .foregroundColor(.black)
                         
                         Button {
                             viewMode = true
@@ -92,15 +96,12 @@ struct PersonalProfileView: View {
                             .scaledToFill()
                             .minimumScaleFactor(0.5)
                             .lineLimit(1)
-                        
-                        
                     }
                     
                     //# of friends
                     VStack{
                         Text(String(appUser.friends.count-1))
                             .font(Constants.titleFont)
-                        
                         
                         Text("Friends")
                             .font(Constants.textFont)

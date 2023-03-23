@@ -22,18 +22,21 @@ struct SignupView: View {
         VStack {
             Group{
                 VStack{
-                Image("logo")
+                Image("loginlogo")
                     .resizable()
-                    .frame(width: UIScreen.screenWidth/3, height: UIScreen.screenWidth/3)
-                Text("Foods With Friends")
-                    .font(.system(size: 45))
-                    .font(.largeTitle)
-                    .font(Constants.titleFont)
-                    .foregroundColor(Color.highlight)
-                    .frame(width: UIScreen.screenWidth-20, height: UIScreen.screenHeight/15)
-                    .scaledToFill()
-                    .minimumScaleFactor(0.5)
-                    .lineLimit(1)
+                    .aspectRatio(contentMode: .fill)
+
+                    .frame(width: UIScreen.screenWidth/2.5, height: UIScreen.screenWidth/2.5)
+                    .padding()
+//                Text("Foods With Friends")
+//                    .font(.system(size: 45))
+//                    .font(.largeTitle)
+//                    .font(Constants.titleFont)
+//                    .foregroundColor(Color.highlight)
+//                    .frame(width: UIScreen.screenWidth-20, height: UIScreen.screenHeight/15)
+//                    .scaledToFill()
+//                    .minimumScaleFactor(0.5)
+//                    .lineLimit(1)
                 }
             }
 
@@ -112,6 +115,7 @@ struct SignupView: View {
                         UserData.appendUserDict(uid, PublicUser(username: username, handle: handle, uid: uid))
                         UserData.pushUser(appUser)
                         UserData.stopObservingUserDict()
+                        UserDefaults.standard.set(uid, forKey: "userID")
                         viewState = .home
                     } else {
                         print(error ?? "")
