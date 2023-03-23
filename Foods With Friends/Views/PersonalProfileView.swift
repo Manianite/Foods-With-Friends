@@ -71,6 +71,7 @@ struct PersonalProfileView: View {
                                     .padding(.leading, 8)
                             }
                         }
+                        .foregroundColor(.black)
                         
                         Button {
                             viewMode = true
