@@ -69,7 +69,6 @@ struct NewPostView: View {
     @State var title: String = ""
     @State private var rating: Int = 0
     @State private var isEditable = true
-    //@Binding var reviews: [Review]
     @State private var ratingCount: Int = 0
     @State var showingImagePicker = false
     @State var inputImage: UIImage?
@@ -126,35 +125,35 @@ struct NewPostView: View {
             }
             .navigationViewStyle(.stack)
             .navigationBarHidden(true)
-                TextEditor(text: $reviewtext)
-                    .border(Color.gray, width: 1)
-                    .padding()
-                    .disabled(!isEditable)
-                Button {
-                    showingImagePicker = true
-                } label: {
-                    Text("Upload Image")
-                }
-                Button(action: addReview) {
-                    Text("Post Review")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(width: 220, height: 60)
-                        .background(Color.green)
-                        .cornerRadius(15.0)
-                }
+            TextEditor(text: $reviewtext)
+                .border(Color.gray, width: 1)
                 .padding()
-                .sheet(isPresented: $showingImagePicker) {
-                    ImagePicker(image: $inputImage)
-                }
-                .onChange(of: inputImage) { image in
-                    if let image = image {
-                        imageFiles.append(image)
-                        print(image)
-                    }
+                .disabled(!isEditable)
+            Button {
+                showingImagePicker = true
+            } label: {
+                Text("Upload Image")
+            }
+            Button(action: addReview) {
+                Text("Post Review")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(width: 220, height: 60)
+                    .background(Color.green)
+                    .cornerRadius(15.0)
+            }
+            .padding()
+            .sheet(isPresented: $showingImagePicker) {
+                ImagePicker(image: $inputImage)
+            }
+            .onChange(of: inputImage) { image in
+                if let image = image {
+                    imageFiles.append(image)
+                    print(image)
                 }
             }
+        }
         .padding()
         .background(Color.white)
         .cornerRadius(10.0)

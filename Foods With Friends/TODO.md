@@ -10,8 +10,7 @@
 .   - resize profile pic
 .   - UI cleanup
 
-#  Feed <- Ella
-.   - database observation -> [IMPORTANT]
+#  Feed
 .   - reply and read replies [IMPORTANT]
 .   - favorite?
 .   - UI cleanup -> [IMPORTANT]
@@ -24,7 +23,6 @@
 #  Friends
 .   - animate entry?
 .   - you have no friends message
-.   - remove friend button in friendprofileview -> [IMPORTANT] <- Ella
 .   - always show search bar in friendsearchview
 .   - title in friendsearchview?
     
@@ -33,8 +31,9 @@
 .   - restaurant select -> [IMPORTANT]
 .   - UI cleanup -> [IMPORTANT]
 
+#  Groups
+
 #  Misc.
-.   - change logo at top of screen to long one <- Julia
 .   - accessability?
 
 #  Login/Signup
