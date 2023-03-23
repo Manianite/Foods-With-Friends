@@ -58,6 +58,8 @@ struct AppView: View {
                 ProfileView()
             } else if selectedTab == .HomeView {
                 HomeView()
+            } else if selectedTab == .GroupView {
+                GroupsView()
             } else if selectedTab == .SearchView {
                 SearchView()
             } else if selectedTab == .FriendView {
@@ -86,6 +88,22 @@ struct AppView: View {
                 .padding(.leading, 35)
                 .onTapGesture {
                     selectedTab = .HomeView
+                }
+                
+                VStack {
+                    Image(systemName: "person.3")
+                        .foregroundColor(selectedTab == .GroupView ? Color.highlight : Color.black.opacity(0.7))
+                        .font(.system(size: 20))
+                        .font(.system(size: 25))
+
+                    Text("Groups")
+                        .foregroundColor(selectedTab == .HomeView ? Color.highlight.opacity(0.7) : Color.black.opacity(0.7))
+                        .font(Constants.tabFont)
+
+                }
+                .padding(.leading, 35)
+                .onTapGesture {
+                    selectedTab = .GroupView
                 }
                 
                 Spacer()
@@ -145,6 +163,7 @@ enum Tabs {
     case SettingsView
     case ProfileView
     case HomeView
+    case GroupView
     case SearchView
     case FriendView
     case NewPostView

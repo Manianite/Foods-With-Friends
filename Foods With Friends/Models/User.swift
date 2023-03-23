@@ -16,12 +16,13 @@ class User: ObservableObject, Codable, Equatable {
     @Published var bio: String
     @Published var profilePic: String
     @Published var city: String
-    @Published var friends:[String: Bool]
-    @Published var newFriends:[String: Bool]
-    @Published var reviews:[String: Review]
+    @Published var friends: [String: Bool]
+    @Published var newFriends: [String: Bool]
+    @Published var reviews: [String: Review]
+    @Published var groups: [String: String] //name, role
     
     enum CodingKeys: CodingKey {
-        case username, handle, uid, bio, profilePic, city, friends, reviews, new_friends
+        case username, handle, uid, bio, profilePic, city, friends, reviews, new_friends, groups
     }
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
@@ -34,6 +35,7 @@ class User: ObservableObject, Codable, Equatable {
         try container.encode(friends, forKey: .friends)
         try container.encode(newFriends, forKey: .new_friends)
         try container.encode(reviews, forKey: .reviews)
+        try container.encode(groups, forKey: .groups)
     }
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -46,6 +48,7 @@ class User: ObservableObject, Codable, Equatable {
         friends = try container.decode([String: Bool].self, forKey: .friends)
         newFriends = try container.decode([String: Bool].self, forKey: .new_friends)
         reviews = try container.decode([String: Review].self, forKey: .reviews)
+        groups = try container.decode([String: String].self, forKey: .groups)
     }
     internal init(username: String, handle: String, uid: String) {
         self.username = username
@@ -57,6 +60,7 @@ class User: ObservableObject, Codable, Equatable {
         self.friends = ["_": false]
         self.newFriends = ["_": false]
         self.reviews = ["_": Review(true)]
+        self.groups = ["_": ""]
     }
     internal init() {
         self.username = "Julia Zorc"
@@ -68,6 +72,7 @@ class User: ObservableObject, Codable, Equatable {
         self.friends = ["_": false]
         self.newFriends = ["_": false]
         self.reviews = ["_": Review(true)]
+        self.groups = ["_": ""]
     }
     func reinit(_ user: User) {
         self.username = user.username
@@ -79,6 +84,7 @@ class User: ObservableObject, Codable, Equatable {
         self.friends = user.friends
         self.newFriends = user.newFriends
         self.reviews = user.reviews
+        self.groups = user.groups
     }
     func reinit(username: String, handle: String, uid: String) {
         self.username = username
@@ -90,6 +96,7 @@ class User: ObservableObject, Codable, Equatable {
         self.friends = ["_": false]
         self.newFriends = ["_": false]
         self.reviews = ["_": Review(true)]
+        self.groups = ["_": ""]
     }
 }
 class PublicUser: ObservableObject, Codable, Comparable {

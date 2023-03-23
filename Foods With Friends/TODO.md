@@ -1,9 +1,4 @@
-#  Settings <- Busra
-.   - change password
-.   - change handle
-.   - delete account
-.   - change email address
-.   - UI cleanup?
+#  Settings
 
 #  Profile
 .   - list of reviews -> [IMPORTANT]
@@ -25,7 +20,7 @@
 .   - you have no friends message
 .   - always show search bar in friendsearchview
 .   - title in friendsearchview?
-    
+
 #  Post <- Ariana
 .   - firebase functionality -> [IMPORTANT]
 .   - restaurant select -> [IMPORTANT]
@@ -37,4 +32,3 @@
 .   - accessability?
 
 #  Login/Signup
-
