@@ -75,7 +75,7 @@ struct FriendView: View {
                         .resizable()
                         .frame(width: (UIScreen.main.bounds.width)/6, height: (UIScreen.main.bounds.width)/6)
                         .padding(.trailing, 10)
-                        .padding(.bottom, 3)
+                        .padding(.bottom, 10)
                         .foregroundColor(.highlight)
                 }
             }

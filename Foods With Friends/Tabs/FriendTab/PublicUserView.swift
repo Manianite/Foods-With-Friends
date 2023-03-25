@@ -11,7 +11,9 @@ import struct Kingfisher.KFImage
 struct PublicUserView: View {
     @Binding var user: PublicUser
     var body: some View {
-        ZStack {
+        ZStack(alignment: .leading) {
+            Color.white
+                .padding()
             HStack {
                 KFImage(URL(string: user.profilePic))
                     .placeholder {
@@ -32,20 +34,8 @@ struct PublicUserView: View {
                         .font(Constants.textFont)
                         .foregroundColor(.gray)
                 }
-                Spacer()
             }
         }
-//        .onAppear {
-//            user.username = "Loading..."
-//            UserData.getPublicUser(uid) { gotUser in
-//                user.reinit(gotUser)
-//            }
-//        }
-//        .onChange(of: user) { newUser in
-//            UserData.getPublicUser(uid) { gotUser in
-//                newUser.reinit(gotUser)
-//            }
-//        }
     }
 }
 

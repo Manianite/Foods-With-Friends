@@ -8,7 +8,6 @@
 #  Feed
 .   - reply and read replies [IMPORTANT]
 .   - favorite?
-.   - UI cleanup -> [IMPORTANT]
 
 #  Search
 .   - Search Location -> [IMPORTANT]

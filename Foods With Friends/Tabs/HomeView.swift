@@ -23,7 +23,7 @@ struct HomeView: View {
                     .padding(.top, 5)
             }
             .onAppear {
-                UserData.observeFeed(for: appUser.uid) { gotReviews in
+                UserData.observeFeed(for: "feeds/\(appUser.uid)") { gotReviews in
                     reviews = Array(gotReviews.values)
                 }
             }

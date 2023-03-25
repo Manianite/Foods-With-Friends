@@ -85,11 +85,11 @@ struct AppView: View {
                         .font(Constants.tabFont)
 
                 }
-                .padding(.leading, 35)
+                .padding(.leading, 30)
                 .onTapGesture {
                     selectedTab = .HomeView
                 }
-                
+                Spacer()
                 VStack {
                     Image(systemName: "person.3")
                         .foregroundColor(selectedTab == .GroupView ? Color.highlight : Color.black.opacity(0.7))
@@ -97,11 +97,10 @@ struct AppView: View {
                         .font(.system(size: 25))
 
                     Text("Groups")
-                        .foregroundColor(selectedTab == .HomeView ? Color.highlight.opacity(0.7) : Color.black.opacity(0.7))
+                        .foregroundColor(selectedTab == .GroupView ? Color.highlight.opacity(0.7) : Color.black.opacity(0.7))
                         .font(Constants.tabFont)
 
                 }
-                .padding(.leading, 35)
                 .onTapGesture {
                     selectedTab = .GroupView
                 }
@@ -144,7 +143,7 @@ struct AppView: View {
                         .font(Constants.tabFont)
 
                 }
-                .padding(.trailing, 35)
+                .padding(.trailing, 30)
 
                 .onTapGesture {
                     selectedTab = .NewPostView

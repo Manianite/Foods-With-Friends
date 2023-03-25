@@ -23,6 +23,10 @@ class UserData { // colloquially a static var is called a 'singleton'
         }
         ref.child("users/\(appUser.uid)/reviews/\(review.time.replacingOccurrences(of: ".", with: ","))").updateChildValues(review.toDictionnary)
     }
+    static func pushGroup(_ group: FoodGroup) {
+        ref.child("groups/\(group.gid)").updateChildValues(group.toDictionnary)
+        ref.child("groups/group_dict/\(group.gid)").updateChildValues(PublicFoodGroup(group).toDictionnary)
+    }
     static func remove(_ url: String) {
         ref.child(url).removeValue()
     }
@@ -103,9 +107,9 @@ class UserData { // colloquially a static var is called a 'singleton'
     }
     
     static var observedFeed: [String: Review] = [:]
-    static var feedObserver: DatabaseReference = ref.child("users/uid/")
-    static func observeFeed(for uid: String, _ completion: @escaping ((_ feed: [String: Review]) -> ())) {
-        userObserver = ref.child("feeds/\(uid)")
+    static var feedObserver: DatabaseReference = ref.child("_")
+    static func observeFeed(for url: String, _ completion: @escaping ((_ feed: [String: Review]) -> ())) {
+        userObserver = ref.child(url)
         userObserver.queryOrderedByKey().queryLimited(toLast: 10).observe(.value) { snapshot in
             let dict = snapshot.value as? [String: Any] ?? [:]
             do {
