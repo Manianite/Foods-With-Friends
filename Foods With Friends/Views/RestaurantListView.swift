@@ -7,6 +7,7 @@
 
 import SwiftUI
 import struct Kingfisher.KFImage
+import Combine
 
 struct RestaurantListView: View {
     @Binding var restaurant: Restaurant

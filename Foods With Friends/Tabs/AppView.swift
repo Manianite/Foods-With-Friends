@@ -26,10 +26,10 @@ struct AppView: View {
                     selectedTab = .SettingsView
                 }
                 Spacer()
-                Image("logo")
+                Image("bannerlogo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 50, height: 50)
+                    .frame(width: 200, height: 50)
                 Spacer()
                 VStack {
                     Image(systemName: "person")
