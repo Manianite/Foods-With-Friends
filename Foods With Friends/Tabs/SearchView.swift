@@ -46,7 +46,9 @@ struct SearchView: View {
             .onAppear(perform: runSearch)
             .onSubmit(of: .search, runSearch)
         }
+        
     }
+    
     func runSearch() {
         Task{
             await data.getData(query, locationManager)

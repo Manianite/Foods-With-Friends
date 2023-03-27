@@ -13,6 +13,8 @@ struct LoginView: View {
     @State var password = ""
     @Binding var viewState: ViewState
     @EnvironmentObject var appUser: User
+    @State var sentReset: Bool? = false
+    @State var wrongPassword = false
     var body: some View {
         VStack {
             Group{
@@ -47,6 +49,7 @@ struct LoginView: View {
                         .padding()
                         .frame(width: UIScreen.screenWidth-40, height: UIScreen.screenHeight/15)
                         .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
+                        .background(sentReset==nil ? .red.opacity(0.2) : .white)
                     
                     SecureField("Enter Password", text: $password)
                         .disableAutocorrection(true)
@@ -56,6 +59,23 @@ struct LoginView: View {
                         .padding()
                         .frame(width: UIScreen.screenWidth-40, height: UIScreen.screenHeight/15)
                         .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
+                        .background(wrongPassword ? .red.opacity(0.2) : .white)
+                        .submitLabel(.go)
+                        .onSubmit {
+                            Auth.auth().signIn(withEmail: email, password: password) { user, error in
+                                if let _=user {
+                                    guard let uid = Auth.auth().currentUser?.uid else {return}
+                                    UserData.getUser(uid) { user in
+                                        appUser.reinit(user)
+                                        UserDefaults.standard.set(uid, forKey: "userID")
+                                        viewState = .home
+                                    }
+                                } else {
+                                    print(error ?? "")
+                                    wrongPassword = true
+                                }
+                            }
+                        }
                 }
                 .padding(.top, 70)
                 .padding(.bottom, 40)
@@ -72,6 +92,7 @@ struct LoginView: View {
                         }
                     } else {
                         print(error ?? "")
+                        wrongPassword = true
                     }
                 }
             } label: {
@@ -97,13 +118,19 @@ struct LoginView: View {
                 }
             }
             Button {
-                Auth.auth().sendPasswordReset(withEmail: email) { error in
-                    if let _=error {
-                        print(error)
+                if email != "" {
+                    sentReset = true
+                    Auth.auth().sendPasswordReset(withEmail: email) { error in
+                        if let _=error {
+                            print(error)
+                            sentReset = nil
+                        }
                     }
+                } else {
+                    sentReset = nil
                 }
             } label: {
-                Text("Forgot Password")
+                Text(sentReset ?? false ? "Check your Email!" : "Forgot Password")
                     .padding()
                     .frame(width: UIScreen.screenWidth-70, height: UIScreen.screenHeight/15)
                     .background(Color.highlight.opacity(0.1))
@@ -112,6 +139,7 @@ struct LoginView: View {
                     .tint(Color.black)
                     .font(Constants.textFont)
                     .buttonStyle(.borderedProminent)
+                    .disabled(sentReset ?? false)
             }
             Spacer()
             Spacer()

@@ -25,7 +25,6 @@ struct SignupView: View {
                 Image("loginlogo")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-
                     .frame(width: UIScreen.screenWidth/2.5, height: UIScreen.screenWidth/2.5)
                     .padding()
 //                Text("Foods With Friends")
@@ -51,15 +50,16 @@ struct SignupView: View {
                     .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
 
                 TextField("Username", text: $handle)
+                    .textCase(.lowercase)
                     .multilineTextAlignment(.center)
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
                     .foregroundColor(Color.gray)
                     .padding()
                     .frame(width: UIScreen.screenWidth-40, height: UIScreen.screenHeight/15)
-                   
                     .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
                     .background(handleCheck ? .white : .red.opacity(0.2))
+                
                 TextField("Name", text: $username)
                     .autocapitalization(.none)
                     .multilineTextAlignment(.center)
@@ -88,24 +88,37 @@ struct SignupView: View {
                     .frame(width: UIScreen.screenWidth-40, height: UIScreen.screenHeight/15)
                     .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
                     .background(matchCheck ? .white : .red.opacity(0.2))
-
+                    .submitLabel(.go)
+                    .onSubmit {
+                        Auth.auth().createUser(withEmail: email, password: password) { user, error in
+                            if let _=user {
+                                guard let uid = Auth.auth().currentUser?.uid else {return}
+                                appUser.reinit(username: username, handle: handle, uid: uid)
+                                UserData.appendUserDict(uid, PublicUser(username: username, handle: handle, uid: uid))
+                                UserData.pushUser(appUser)
+                                UserData.stopObservingUserDict()
+                                viewState = .home
+                            } else {
+                                print(error ?? "")
+                            }
+                        }
+                    }
             }
             Spacer()
 
             Button {
-                //TODO: loading –––––––––––––––––––––––––––––––
-                if matchCheck && handleCheck {
-                    Auth.auth().createUser(withEmail: email, password: password) { user, error in
-                        if let _=user {
-                            guard let uid = Auth.auth().currentUser?.uid else {return}
-                            appUser.reinit(username: username, handle: handle, uid: uid)
-                            UserData.appendUserDict(uid, PublicUser(username: username, handle: handle, uid: uid))
-                            UserData.pushUser(appUser)
-                            UserData.stopObservingUserDict()
-                            viewState = .home
-                        } else {
-                            print(error ?? "")
-                        }
+                Auth.auth().createUser(withEmail: email, password: password) { user, error in
+                    if let _=user {
+                        guard let uid = Auth.auth().currentUser?.uid else {return}
+                        appUser.reinit(username: username, handle: handle, uid: uid)
+                        UserData.appendUserDict(uid, PublicUser(username: username, handle: handle, uid: uid))
+                        UserData.pushUser(appUser)
+                        UserData.setValue(uid, to: "users/handle_to_uid/\(handle)")
+                        UserData.stopObservingUserDict()
+                        UserDefaults.standard.set(uid, forKey: "userID")
+                        viewState = .home
+                    } else {
+                        print(error ?? "")
                     }
                 }
             } label: {

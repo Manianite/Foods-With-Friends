@@ -6,46 +6,39 @@
 
 import SwiftUI
 struct HomeView: View {
-    let reviews: [Review] = [
-        Review(title: "LOVED IT", stars: 5, images: [""], restaurant: "The Krusty Krab", uid: "Julia'sAccountlessID", body: "I was sort of hesitant in visiting a restaurant underwater, but the food was beyond compare! I have never before in my whole life had a burger as delectable as the Krabby Paddy. Thanks, @Patrick!")
-    ]
-    
-    @State private var expanded: Bool = false
-    @State private var truncated: Bool = false
-    @State private var shrinkText: String
-    private var text: String
-    let font: UIFont
-    let lineLimit: Int
-    private var moreLessText: String {
-        if !truncated {
-            return ""
-        } else {
-            return self.expanded ? " read less" : " ... read more"
-        }
-    }
-    
-    init(_ text: String, lineLimit: Int, font: UIFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)) {
-        self.text = text
-        self.lineLimit = lineLimit
-        _shrinkText =  State(wrappedValue: text)
-        self.font = font
-    }
+    @EnvironmentObject var appUser: User
+    @State var testReview: Review = Review()
+    @State var reviews: [Review] = []
     var body: some View {
-        VStack{
-            NavigationView {
-                List(reviews) { review in
-                    ReviewRow(review: review)
+        ScrollView {
+//            ReviewView(review: $testReview)
+//                .background(.white)
+//                .cornerRadius(15)
+//                .padding()
+            ForEach($reviews) { review in
+                ReviewView(review: review)
+                    .background(.white)
+                    .cornerRadius(15)
+                    .padding(.horizontal, 10)
+                    .padding(.top, 5)
+            }
+            .onAppear {
+                UserData.observeFeed(for: "feeds/\(appUser.uid)") { gotReviews in
+                    reviews = Array(gotReviews.values)
                 }
             }
+            .onDisappear {
+                UserData.stopObservingFeed()
+            }
         }
+        .background(Color.secondarySystemBackground)
     }
 }
 
 
 
-
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView("", lineLimit: 10)
+        HomeView()
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FetchRestaurantData: ObservableObject{
+@MainActor class FetchRestaurantData: ObservableObject{
     @Published var response = RestaurantResponse()
     
     func getData(_ query: String, _ locationManager: LocationManager) async {
