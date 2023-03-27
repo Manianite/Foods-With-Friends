@@ -20,7 +20,7 @@
 .   - always show search bar in friendsearchview
 .   - title in friendsearchview?
 
-#  Post <- Ariana
+#  Post
 .   - firebase functionality -> [IMPORTANT]
 .   - restaurant select -> [IMPORTANT]
 .   - UI cleanup -> [IMPORTANT]

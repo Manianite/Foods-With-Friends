@@ -191,12 +191,11 @@ struct PersonalProfileView: View {
                     Spacer()
                 }
             }
-            
-            
             Divider()
             Spacer()
             
         }
+        .padding(.top, 5)
         .sheet(isPresented: $showingImagePicker) {
             ImagePicker(image: $inputImage)
         }

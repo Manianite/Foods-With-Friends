@@ -15,6 +15,9 @@ struct GroupsView: View {
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottom) {
+                if groupsList.count == 0 {
+                    Text("You have not joined any groups yet!")
+                }
                 ScrollView {
                     ForEach($groupsList, id: \.self.gid) { group in
                         NavigationLink {

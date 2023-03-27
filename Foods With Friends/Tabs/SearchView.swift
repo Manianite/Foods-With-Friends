@@ -13,7 +13,7 @@ struct SearchView: View {
     
     @StateObject var data = FetchRestaurantData()
     @StateObject private var locationManager = LocationManager()
-    @EnvironmentObject var user: User
+    @EnvironmentObject var appUser: User
     @State private var query: String = ""
     
     var body: some View {
