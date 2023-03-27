@@ -12,7 +12,7 @@ import FirebaseAuth
 struct SearchView: View {
     
     @StateObject var data = FetchRestaurantData()
-    @StateObject private var locationManager = LocationManager()
+    @StateObject var locationManager: LocationManager = LocationManager()
     @EnvironmentObject var user: User
     @State private var query: String = ""
     
@@ -34,10 +34,9 @@ struct SearchView: View {
                         
                     }
                     .listStyle(.grouped)
-                    .navigationTitle("Search Restaurants")
                     .font(Constants.titleFont)
                     
-                }.searchable(text: $query, prompt: "Search")
+                }.searchable(text: $query, prompt: "Search Restaurants")
                     .font(Constants.titleFont)
                 
             }
@@ -62,5 +61,6 @@ struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
         SearchView()
             .environmentObject(User())
+            .environmentObject(LocationManager())
     }
 }

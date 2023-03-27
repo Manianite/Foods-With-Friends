@@ -12,7 +12,6 @@ import MapKit
 class LocationManager: NSObject, ObservableObject{
 
     @Published var location: CLLocation?
- //   @Published var region: MKCoordinateRegion = MKCoordinateRegion.defaultRegion()
     static let shared = LocationManager()
     private let locationManager = CLLocationManager()
     
@@ -28,13 +27,6 @@ class LocationManager: NSObject, ObservableObject{
     
 }
 
-
-//extension MKCoordinateRegion {
-//    static func defaultRegion() -> MKCoordinateRegion{
-//        MKCoordinateRegion(center: CLLocationCoordinate2D.init(latitude: 39.9526, longitude: 75.1652), latitudinalMeters: 1000, longitudinalMeters: 1000)
-//    }
-//}
-
 extension LocationManager: CLLocationManagerDelegate {
     
     func locationManager(_manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -44,7 +36,6 @@ extension LocationManager: CLLocationManagerDelegate {
         
         DispatchQueue.main.async { [weak self] in
            self?.location = location
-      //      self?.region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 5000, longitudinalMeters: 5000)
         }
         
     }
