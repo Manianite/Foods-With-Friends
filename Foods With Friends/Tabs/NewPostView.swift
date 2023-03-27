@@ -22,6 +22,8 @@ struct NewPostView: View {
     @State var showRestaurants: Bool = false
     @State var restaurant: Restaurant?
     @State var showingSelectedImages = false
+    @EnvironmentObject var locationManager: LocationManager
+
     func addReview() {
         if let restaurant = restaurant {
             let time = Date().timeIntervalSince1970
@@ -74,7 +76,7 @@ struct NewPostView: View {
                 Button {
                     Task {
                         waiting = true
-                        await data.getData(query)
+                        await data.getData(query, locationManager)
                         waiting = false
                     }
                     showRestaurants = true
