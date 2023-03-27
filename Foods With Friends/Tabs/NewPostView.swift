@@ -79,6 +79,8 @@ struct NewPostView: View {
     @State var waiting: Bool = false
     @State var showRestaurants: Bool = false
     @State var restaurant: Restaurant?
+    @EnvironmentObject var locationManager: LocationManager
+
     func addReview() {
         if let restaurant = restaurant {
             let newReview = Review(title: title, stars: rating, images: images, restaurant: restaurant.name+restaurant.address.street_addr, uid: appUser.uid, body: reviewtext, time: Date().timeIntervalSince1970)
@@ -112,7 +114,7 @@ struct NewPostView: View {
                     Button {
                         Task {
                             waiting = true
-                            await data.getData(query)
+                            await data.getData(query, locationManager)
                             waiting = false
                         }
                         showRestaurants = true
