@@ -10,9 +10,13 @@ import Foundation
 class FetchRestaurantData: ObservableObject{
     @Published var response = RestaurantResponse()
     
-    func getData(_ query: String) async {
-        let URLString = "https://api.spoonacular.com/food/restaurants/search?query=\(query)&lat=39.9526&lng=-75.1652&distance=15&apiKey=edb7848c89934d62ba81c2fb8c7c8b0c"
+    func getData(_ query: String, _ locationManager: LocationManager) async {
+       var URLString = "https://api.spoonacular.com/food/restaurants/search?query=\(query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")&lat=39.9526&lng=-75.1652&distance=15&apiKey=edb7848c89934d62ba81c2fb8c7c8b0c"
         
+        if let location = locationManager.location {
+            URLString = "https://api.spoonacular.com/food/restaurants/search?query=\(query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")&lat=\(location.coordinate.latitude)&lng=\(location.coordinate.longitude)&distance=15&apiKey=edb7848c89934d62ba81c2fb8c7c8b0c"
+        }
+   
         guard let url = URL(string: URLString) else {return}
         
         do {
@@ -42,4 +46,4 @@ struct Address: Codable {
     var city:String = "Aardmør"
     var state:String = "PA"
 }
- 
+

@@ -12,51 +12,48 @@ import FirebaseAuth
 struct SearchView: View {
     
     @StateObject var data = FetchRestaurantData()
+    @StateObject private var locationManager = LocationManager()
     @EnvironmentObject var user: User
-    @State var query: String = ""
-    @State var waiting: Bool = false
+    @State private var query: String = ""
     
     var body: some View {
-               VStack{
-                   NavigationView {
-                       VStack {
-                           HStack {
-                               TextField("Search", text: $query)
-                                   .padding(.leading)
-                               Button {
-                                   Task {
-                                       waiting = true
-                                       await data.getData(query)
-                                       waiting = false
-                                   }
-                               } label: {
-                                   Text("Go")
-                                       .foregroundColor(.blue)
-                                       .padding(.trailing)
-                               }
-                           }
-                           
-                           if waiting {
-                               Divider()
-                               Text("Waiting...")
-                           }
-                           List {
-                               ForEach($data.response.restaurants) {restaurant in
-                                   NavigationLink {
-                                       RestaurantInfoView(restaurant: restaurant)
-                                   } label: {
-                                       RestaurantListView(restaurant: restaurant)
-                                   }
-                               }
-                               
-                           }
-                           .listStyle(.grouped)
-                       }
-                       .navigationViewStyle(.stack)
-                       .navigationBarHidden(true)
-                   }
-           }
+        
+        VStack{
+            
+            NavigationView {
+                VStack{
+                    
+                    List {
+                        ForEach($data.response.restaurants) {restaurant in
+                            NavigationLink {
+                                RestaurantInfoView(restaurant: restaurant)
+                            } label: {
+                                RestaurantListView(restaurant: restaurant)
+                            }
+                        }
+                        
+                    }
+                    .listStyle(.grouped)
+                    .navigationTitle("Search Restaurants")
+                    .font(Constants.titleFont)
+                    
+                }.searchable(text: $query, prompt: "Search")
+                    .font(Constants.titleFont)
+                
+            }
+            .navigationViewStyle(.stack)
+            .navigationBarHidden(true)
+            .onAppear(perform: runSearch)
+            .onSubmit(of: .search, runSearch)
+        }
     }
+    func runSearch() {
+        Task{
+            await data.getData(query, locationManager)
+            let restaurantList: [Restaurant] = data.response.restaurants
+        }
+    }
+    
 }
 
 struct SearchView_Previews: PreviewProvider {

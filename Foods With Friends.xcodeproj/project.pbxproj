@@ -28,6 +28,7 @@
 		0FDDA06E29B7AABA00A866C4 /* APIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDDA06D29B7AAB900A866C4 /* APIData.swift */; };
 		43EB9BC0D6410B1441D5161A /* Pods_Foods_With_Friends_Foods_With_FriendsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 870305D1CDDE70F076450C36 /* Pods_Foods_With_Friends_Foods_With_FriendsUITests.framework */; };
 		5C06D9C55326A1B0364472FE /* Pods_Foods_With_Friends.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEBF9A9813A7EF895010EB59 /* Pods_Foods_With_Friends.framework */; };
+		83290A2729C48F4C007F9ECF /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83290A2629C48F4B007F9ECF /* LocationManager.swift */; };
 		834981D229B0F89C00CF2D98 /* PersonalProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834981D129B0F89C00CF2D98 /* PersonalProfileView.swift */; };
 		83C9AA1E29C0AB49009AE879 /* RestaurantListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C9AA1D29C0AB49009AE879 /* RestaurantListView.swift */; };
 		83C9AA2029C0AB71009AE879 /* RestaurantInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C9AA1F29C0AB71009AE879 /* RestaurantInfoView.swift */; };
@@ -90,6 +91,8 @@
 		17AA202260AEF374CFB9658D /* Pods_Foods_With_FriendsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Foods_With_FriendsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		64DAE250A059C1C12BFD3D40 /* Pods-Foods With Friends-Foods With FriendsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foods With Friends-Foods With FriendsUITests.debug.xcconfig"; path = "Target Support Files/Pods-Foods With Friends-Foods With FriendsUITests/Pods-Foods With Friends-Foods With FriendsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		774E59FDDE60AB104A321A88 /* Pods-Foods With FriendsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foods With FriendsTests.release.xcconfig"; path = "Target Support Files/Pods-Foods With FriendsTests/Pods-Foods With FriendsTests.release.xcconfig"; sourceTree = "<group>"; };
+		83290A2629C48F4B007F9ECF /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		83290A2829C494A0007F9ECF /* Foods-With-Friends-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Foods-With-Friends-Info.plist"; sourceTree = SOURCE_ROOT; };
 		834981D129B0F89C00CF2D98 /* PersonalProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalProfileView.swift; sourceTree = "<group>"; };
 		83C9AA1D29C0AB49009AE879 /* RestaurantListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListView.swift; sourceTree = "<group>"; };
 		83C9AA1F29C0AB71009AE879 /* RestaurantInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInfoView.swift; sourceTree = "<group>"; };
@@ -163,6 +166,7 @@
 		0F2F316029AF965D008B0CC3 /* Foods With Friends */ = {
 			isa = PBXGroup;
 			children = (
+				83290A2829C494A0007F9ECF /* Foods-With-Friends-Info.plist */,
 				0FDDA06629B2816B00A866C4 /* Authentication */,
 				834981D429B0F8B200CF2D98 /* Models */,
 				88F733A229B8C5D0001D8CC6 /* Tabs */,
@@ -244,6 +248,7 @@
 				0FDDA06D29B7AAB900A866C4 /* APIData.swift */,
 				0FC9C36029BA65AA006B9ECD /* User.swift */,
 				F0D8A18629BF4F1D004A916F /* Review.swift */,
+				83290A2629C48F4B007F9ECF /* LocationManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -548,6 +553,7 @@
 				F0D8A18B29BF4F80004A916F /* ExpandableText.swift in Sources */,
 				0FC6C8BC29B0F9CF0040048C /* UserData.swift in Sources */,
 				0F43B64829C133F600E9A43A /* PublicUserSearchView.swift in Sources */,
+				83290A2729C48F4C007F9ECF /* LocationManager.swift in Sources */,
 				88F7339D29B77F21001D8CC6 /* NewPostView.swift in Sources */,
 				0F43B64629C0B4C700E9A43A /* FriendProfileView.swift in Sources */,
 				88F7339F29B77F3D001D8CC6 /* SettingsView.swift in Sources */,
@@ -713,6 +719,9 @@
 				DEVELOPMENT_TEAM = DY8WTD66QN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Foods-With-Friends-Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app requires your location to better search near you.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires your location to better search near you.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -743,6 +752,9 @@
 				DEVELOPMENT_TEAM = DY8WTD66QN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Foods-With-Friends-Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app requires your location to better search near you.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires your location to better search near you.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
