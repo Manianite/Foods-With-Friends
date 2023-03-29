@@ -13,13 +13,12 @@ struct SearchView: View {
     
     @StateObject var data = FetchRestaurantData()
     @StateObject var locationManager: LocationManager = LocationManager()
-    @EnvironmentObject var user: User
+    @EnvironmentObject var appUser: User
     @State private var query: String = ""
     
     var body: some View {
         
         VStack{
-            
             NavigationView {
                 VStack{
                     
@@ -38,7 +37,6 @@ struct SearchView: View {
                     
                 }.searchable(text: $query, prompt: "Search Restaurants")
                     .font(Constants.titleFont)
-                
             }
             .navigationViewStyle(.stack)
             .navigationBarHidden(true)

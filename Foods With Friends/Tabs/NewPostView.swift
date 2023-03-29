@@ -6,135 +6,103 @@
 //
 
 import SwiftUI
-class RatingControl: UIStackView {
-    private var ratingButtons = [UIButton]()
-    var rating = 0
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupButtons()
-    }
-    required init(coder: NSCoder) {
-        super.init(coder: coder)
-        setupButtons()
-    }
-    @objc func ratingButtonTapped(_ sender: UIButton) {
-        guard let index = ratingButtons.firstIndex(of: sender) else {
-            fatalError("The button, \(sender), is not in the ratingButtons array: \(ratingButtons)")
-        }
-        let rating = index + 1
-        for i in 0..<ratingButtons.count {
-            ratingButtons[i].isSelected = i < rating
-        }
-        self.rating = rating
-    }
-    private func setupButtons() {
-        for _ in 0..<5 {
-            let button = UIButton()
-            
-            // Set the button images
-            let filledStarImage = UIImage(systemName: "star.fill")
-            let emptyStarImage = UIImage(systemName: "star")
-            button.setImage(emptyStarImage, for: .normal)
-            button.setImage(filledStarImage, for: .selected)
-            button.setImage(filledStarImage, for: [.highlighted, .selected])
-            button.tintColor = UIColor.orange
-            button.translatesAutoresizingMaskIntoConstraints = false
-            button.heightAnchor.constraint(equalToConstant: 44.0).isActive = true
-            button.widthAnchor.constraint(equalToConstant: 44.0).isActive = true
-            addArrangedSubview(button)
-            ratingButtons.append(button)
-            button.addTarget(self, action: #selector(ratingButtonTapped(_:)), for: .touchUpInside)
-        }
-    }
-}
-struct RatingControlWrapper: UIViewRepresentable {
-    typealias UIViewType = RatingControl
-    @Binding var rating: Int
-    @Binding var ratingCount: Int
-    func makeUIView(context: Context) -> RatingControl {
-        let ratingControl = RatingControl()
-        ratingControl.axis = .horizontal
-        ratingControl.distribution = .fillEqually
-        ratingControl.alignment = .center
-        return ratingControl
-    }
-    func updateUIView(_ uiView: RatingControl, context: Context) {
-        uiView.rating = rating
-        ratingCount = uiView.rating
-    }
-}
+import struct Kingfisher.KFImage
+
 struct NewPostView: View {
     @State var reviewtext: String = ""
-    var images: [String] = []
     @State var title: String = ""
     @State private var rating: Int = 0
-    @State private var isEditable = true
-    @State private var ratingCount: Int = 0
     @State var showingImagePicker = false
     @State var inputImage: UIImage?
-    @State var imageFiles: [UIImage] = []
+    @State var images: [UIImage] = []
     @StateObject var data = FetchRestaurantData()
     @EnvironmentObject var appUser: User
     @State var query: String = ""
     @State var waiting: Bool = false
     @State var showRestaurants: Bool = false
     @State var restaurant: Restaurant?
+    @State var showingSelectedImages = false
     @EnvironmentObject var locationManager: LocationManager
 
     func addReview() {
         if let restaurant = restaurant {
-            let newReview = Review(title: title, stars: rating, images: images, restaurant: restaurant.name+restaurant.address.street_addr, uid: appUser.uid, body: reviewtext, time: Date().timeIntervalSince1970)
-            print(newReview)
+            let time = Date().timeIntervalSince1970
+            let newReview = Review(title: title, stars: rating, images: [], restaurant: restaurant.name+restaurant.address.street_addr, uid: appUser.uid, body: reviewtext, time: time)
+            for img in images.indices {
+                UserStorage.putImage(images[img], url: "reviews/\(appUser.uid)/\(time)/\(img)") { url, error in
+                    if let url = url {
+                        newReview.images.append(url.absoluteString)
+                    } else {
+                        print("ERROR: cannot putImage in addReview")
+                    }
+                }
+            }
+            print(newReview.toDictionnary)
         }
     }
     var body: some View {
         VStack {
-            VStack {
-                HStack {
-                    VStack {
-                        Image("profile")
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                        Text("username")
+            TextField("Title", text: $title)
+                .font(.title)
+                .foregroundColor(.black)
+                .padding(.horizontal)
+                .multilineTextAlignment(.center)
+            HStack {
+                Image(systemName: "star.fill")
+                    .onTapGesture {
+                        rating = 1
                     }
-                    VStack {
-                        TextField("Title", text: $title)
-                            .font(.title)
-                            .foregroundColor(.black)
-                            .padding(.horizontal)
-                            .disabled(!isEditable)
-                        RatingControlWrapper(rating: $rating, ratingCount: $ratingCount)
-                            .padding()
-                            .disabled(!isEditable)
+                Image(systemName: rating>1 ? "star.fill": "star")
+                    .onTapGesture {
+                        rating = 2
                     }
-                }
-                HStack {
-                    TextField("Search", text: $query)
-                        .padding(.leading)
-                    Button {
-                        Task {
-                            waiting = true
-                            await data.getData(query, locationManager)
-                            waiting = false
-                        }
-                        showRestaurants = true
-                    } label: {
-                        Text("Go")
-                            .foregroundColor(.blue)
-                            .padding(.trailing)
+                Image(systemName: rating>2 ? "star.fill": "star")
+                    .onTapGesture {
+                        rating = 3
                     }
+                Image(systemName: rating>3 ? "star.fill": "star")
+                    .onTapGesture {
+                        rating = 4
+                    }
+                Image(systemName: rating>4 ? "star.fill": "star")
+                    .onTapGesture {
+                        rating = 5
+                    }
+            }
+            .foregroundColor(.yellow)
+            HStack {
+                TextField(restaurant?.name ?? "Enter Restaurant", text: $query)
+                    .padding(.leading)
+                Button {
+                    Task {
+                        waiting = true
+                        await data.getData(query, locationManager)
+                        waiting = false
+                    }
+                    showRestaurants = true
+                } label: {
+                    Text("Go")
+                        .foregroundColor(.blue)
+                        .padding(.trailing)
                 }
             }
             .navigationViewStyle(.stack)
             .navigationBarHidden(true)
             TextEditor(text: $reviewtext)
                 .border(Color.gray, width: 1)
-                .padding()
-                .disabled(!isEditable)
-            Button {
-                showingImagePicker = true
-            } label: {
-                Text("Upload Image")
+            HStack {
+                Button {
+                    showingImagePicker = true
+                } label: {
+                    Text("Upload Image")
+                }
+                Button {
+                    showingSelectedImages = true
+                } label: {
+                    Text("\(images.count) images")
+                        .font(Constants.textFont)
+                        .foregroundColor(.highlight)
+                }
             }
             Button(action: addReview) {
                 Text("Post Review")
@@ -142,29 +110,32 @@ struct NewPostView: View {
                     .foregroundColor(.white)
                     .padding()
                     .frame(width: 220, height: 60)
-                    .background(Color.green)
+                    .background(Color.highlight)
                     .cornerRadius(15.0)
             }
-            .padding()
-            .sheet(isPresented: $showingImagePicker) {
-                ImagePicker(image: $inputImage)
-            }
-            .onChange(of: inputImage) { image in
-                if let image = image {
-                    imageFiles.append(image)
-                    print(image)
-                }
+        }
+        .sheet(isPresented: $showingImagePicker) {
+            ImagePicker(image: $inputImage)
+        }
+        .onChange(of: inputImage) { image in
+            if let image = image {
+                images.append(image)
+                print(image)
             }
         }
         .padding()
         .background(Color.white)
         .cornerRadius(10.0)
-        .disabled(!isEditable)
         .sheet(isPresented: $showRestaurants) {
+            if waiting {
+                Text("Fetching restaurant data")
+                    .font(Constants.titleFont)
+            }
             List {
                 ForEach($data.response.restaurants) {restaurant in
                     Button {
                         self.restaurant = restaurant.wrappedValue
+                        showRestaurants = false
                     } label: {
                         RestaurantListView(restaurant: restaurant)
                     }
@@ -172,11 +143,35 @@ struct NewPostView: View {
             }
             .listStyle(.grouped)
         }
+        .sheet(isPresented: $showingSelectedImages) {
+            
+            TabView {
+                ForEach(images, id:\.self) { image in
+                    VStack {
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                        Button {
+                            images.removeAll {$0==image}
+                        } label: {
+                            Text("Remove")
+                                .font(Constants.textFont)
+                                .padding()
+                                .padding(.bottom, 25)
+                                .accentColor(.highlight)
+                                .cornerRadius(10)
+                        }
+                    }
+                }
+            }
+            .tabViewStyle(PageTabViewStyle())
+            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+        }
     }
 }
 
 struct NewPostView_Previews: PreviewProvider {
     static var previews: some View {
-        NewPostView(reviewtext: "", images: [], title: "")
+        NewPostView()
     }
 }

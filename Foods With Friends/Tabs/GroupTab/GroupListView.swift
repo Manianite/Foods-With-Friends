@@ -44,11 +44,17 @@ struct GroupListView: View {
                     .aspectRatio(contentMode: .fill)
                     .clipShape(Circle())
                     .padding(2)
-                VStack {
+                VStack(alignment: .leading) {
                     Text(group.name)
                         .font(Constants.titleFont)
-                    Text("\(group.count) members")
-                        .font(Constants.textFontSmall)
+                    HStack(spacing: 3) {
+                        Text("\(group.count) members")
+                            .font(Constants.textFontSmall)
+                            .padding(.trailing, 10)
+                        Image(systemName: group.isPublic ? "globe" : "lock")
+                        Text(group.isPublic ? "public" : "private")
+                            .font(Constants.textFontSmall)
+                    }
                 }
             }
         }

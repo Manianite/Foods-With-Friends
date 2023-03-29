@@ -11,10 +11,10 @@ import struct Kingfisher.KFImage
 struct NewGroupView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var appUser: User
+    @Binding var groupsList: [FoodGroup]
     @State var name = ""
     @State var isPublic = false
     @State var inputImage: UIImage?
-    @State var imageURL = ""
     @State var showingImagePicker = false
     @State var showingNameInput = true
     var body: some View {
@@ -76,7 +76,13 @@ struct NewGroupView: View {
                             UserData.pushGroup(group)
                             appUser.groups[group.gid] = "creator"
                             UserData.pushUser(appUser)
+                            groupsList.insert(group, at: 0)
                         } else {
+                            let group = FoodGroup(name: name, creatorID: appUser.uid, isPublic: isPublic)
+                            UserData.pushGroup(group)
+                            appUser.groups[group.gid] = "creator"
+                            UserData.pushUser(appUser)
+                            groupsList.insert(group, at: 0)
                             print(error)
                         }
                     }
@@ -85,6 +91,7 @@ struct NewGroupView: View {
                     UserData.pushGroup(group)
                     appUser.groups[group.gid] = "creator"
                     UserData.pushUser(appUser)
+                    groupsList.insert(group, at: 0)
                 }
                 self.presentationMode.wrappedValue.dismiss()
             } label: {
@@ -105,6 +112,6 @@ struct NewGroupView: View {
 
 struct NewGroupView_Previews: PreviewProvider {
     static var previews: some View {
-        NewGroupView()
+        NewGroupView(groupsList: .constant([]))
     }
 }

@@ -12,22 +12,21 @@
 #  Search
 .   - Search Location -> [IMPORTANT]
 .   - list of reviews in restaurantview -> [IMPORTANT]
-.   - UI cleanup
 
 #  Friends
-.   - animate entry?
 .   - you have no friends message
 .   - always show search bar in friendsearchview
 .   - title in friendsearchview?
 
-#  Post <- Ariana
+#  Post
 .   - firebase functionality -> [IMPORTANT]
-.   - restaurant select -> [IMPORTANT]
-.   - UI cleanup -> [IMPORTANT]
+.   - UI cleanup
 
 #  Groups
+.   - Join private approval
 
 #  Misc.
-.   - accessability?
+.   - accessability
+.   - dark mode
 
 #  Login/Signup

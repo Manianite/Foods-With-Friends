@@ -21,7 +21,7 @@ struct AppView: View {
                         .foregroundColor(selectedTab == .SettingsView ? Color.highlight.opacity(0.7) : Color.black.opacity(0.7))
                         .font(Constants.tabFont)
                 }
-                .padding(.leading, 30.0)
+                .padding(.leading, 15.0)
                 .onTapGesture {
                     selectedTab = .SettingsView
                 }
@@ -40,7 +40,7 @@ struct AppView: View {
                         .foregroundColor(selectedTab == .ProfileView ? Color.highlight.opacity(0.7) : Color.black.opacity(0.7))
                         .font(Constants.tabFont)
                 }
-                .padding(.trailing, 30.0)
+                .padding(.trailing, 15.0)
                 .onTapGesture {
                     selectedTab = .ProfileView
                 }
@@ -49,8 +49,6 @@ struct AppView: View {
             .background(Color.white.edgesIgnoringSafeArea(.all))
             Divider()
                 .padding(.top, 7)
-            
-            //Spacer()
             
             if selectedTab == .SettingsView {
                 SettingsView(viewState: $viewState)
@@ -67,8 +65,6 @@ struct AppView: View {
             } else if selectedTab == .NewPostView {
                 NewPostView()
             }
-            
-            //Spacer()
             
             Divider()
                 .padding(.bottom, 7)

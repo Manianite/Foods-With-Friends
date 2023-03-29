@@ -10,7 +10,7 @@ import Foundation
 @MainActor class FetchRestaurantData: ObservableObject{
     @Published var response = RestaurantResponse()
     
-    func getData(_ query: String, _ locationManager: LocationManager) async {
+    func getData(_ query: String, _ locationManager: LocationManager = LocationManager()) async {
        var URLString = "https://api.spoonacular.com/food/restaurants/search?query=\(query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")&lat=39.9526&lng=-75.1652&distance=15&apiKey=edb7848c89934d62ba81c2fb8c7c8b0c"
         
         if let location = locationManager.location {
@@ -39,7 +39,7 @@ struct Restaurant: Codable {
     var is_open:Bool = false
 }
 extension Restaurant: Identifiable {
-    var id: String {name+address.street_addr}
+    var id: String {name+"∆"+address.street_addr}
 }
 struct Address: Codable {
     var street_addr:String = "1004 E Montgomery Rd."

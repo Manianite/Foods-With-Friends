@@ -14,189 +14,197 @@ struct PersonalProfileView: View {
     @State var showingImagePicker = false
     @State var inputImage: UIImage?
     var body: some View {
-        VStack(alignment: viewMode ? .leading : .center){
-            HStack{
-                Spacer()
-                HStack(alignment: .bottom){
+        ScrollView {
+            VStack(alignment: .leading) {
+                HStack{
                     Spacer()
-                    if viewMode {
-                        //profile pic
-                        KFImage(URL(string: appUser.profilePic))
-                            .placeholder {
-                                Image(systemName: "person.crop.circle.fill")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                            }
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: (UIScreen.main.bounds.width)/4, height: (UIScreen.main.bounds.width)/4)
-                            .clipShape(Circle())
-                            .padding(.leading, 8)
-                        
-                        Button {
-                            viewMode = false
-                        } label: {
-                            Image(systemName: "pencil.circle.fill")
-                                .foregroundColor(Color.highlight)
-                                .font(.system(size: 30))
-                        }
-                        .padding(.leading, -20.0)
-                    } else {
-                        Button {
-                            showingImagePicker = true
-                        } label: {
+                    HStack(alignment: .bottom){
+                        Spacer()
+                        if viewMode {
                             //profile pic
-                            ZStack(alignment: .bottom){
-                                KFImage(URL(string: appUser.profilePic))
-                                    .placeholder {
-                                        Image(systemName: "person.crop.circle.fill")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fill)
-                                    }
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: (UIScreen.main.bounds.width)/4, height: (UIScreen.main.bounds.width)/4)
-                                    .clipShape(Circle())
-                                    .padding(.leading, 8)
-                                
-                                Text("Edit")
-                                    .padding(.horizontal, 5)
-                                    .padding(.top, 2)
-                                    .background(Color.highlight.opacity(0.5))
-                                    .cornerRadius(40)
-                                    .frame(width: (UIScreen.main.bounds.width)/5, height: (UIScreen.main.bounds.width)/4)
-                                    .foregroundColor(Color.white)
-                                    .font(Constants.textFontSmall)
+                            KFImage(URL(string: appUser.profilePic))
+                                .placeholder {
+                                    Image(systemName: "person.crop.circle.fill")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                }
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: (UIScreen.main.bounds.width)/4, height: (UIScreen.main.bounds.width)/4)
+                                .clipShape(Circle())
+                                .padding(.leading, 8)
+                            
+                            Button {
+                                viewMode = false
+                            } label: {
+                                Image(systemName: "pencil.circle.fill")
+                                    .foregroundColor(Color.highlight)
                                     .font(.system(size: 30))
-                                    .padding(.leading, 8)
                             }
+                            .padding(.leading, -20.0)
+                        } else {
+                            Button {
+                                showingImagePicker = true
+                            } label: {
+                                //profile pic
+                                ZStack(alignment: .bottom){
+                                    KFImage(URL(string: appUser.profilePic))
+                                        .placeholder {
+                                            Image(systemName: "person.crop.circle.fill")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fill)
+                                        }
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: (UIScreen.main.bounds.width)/4, height: (UIScreen.main.bounds.width)/4)
+                                        .clipShape(Circle())
+                                        .padding(.leading, 8)
+                                    
+                                    Text("Edit")
+                                        .padding(.horizontal, 5)
+                                        .padding(.top, 2)
+                                        .background(Color.highlight.opacity(0.5))
+                                        .cornerRadius(40)
+                                        .frame(width: (UIScreen.main.bounds.width)/5, height: (UIScreen.main.bounds.width)/4)
+                                        .foregroundColor(Color.white)
+                                        .font(Constants.textFontSmall)
+                                        .font(.system(size: 30))
+                                        .padding(.leading, 8)
+                                }
+                            }
+                            .foregroundColor(.black)
+                            
+                            Button {
+                                viewMode = true
+                                UserData.pushUser(appUser)
+                            } label: {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundColor(Color.highlight)
+                                    .font(.system(size: 30))
+                            }
+                            .padding(.leading, -20.0)
                         }
-                        .foregroundColor(.black)
+                        Spacer()
                         
-                        Button {
-                            viewMode = true
-                            UserData.pushUser(appUser)
-                        } label: {
-                            Image(systemName: "checkmark.circle.fill")
-                                .foregroundColor(Color.highlight)
-                                .font(.system(size: 30))
+                        //# of reviews
+                        VStack{
+                            Text(String(appUser.reviews.count-1))
+                                .font(Constants.titleFont)
+                            
+                            Text("Reviews")
+                                .font(Constants.textFont)
+                                .frame(width: UIScreen.screenWidth/5)
+                                .scaledToFill()
+                                .minimumScaleFactor(0.5)
+                                .lineLimit(1)
                         }
-                        .padding(.leading, -20.0)
-                    }
-                    Spacer()
-                    
-                    //# of reviews
-                    VStack{
-                        Text(String(appUser.reviews.count-1))
-                            .font(Constants.titleFont)
                         
-                        Text("Reviews")
-                            .font(Constants.textFont)
-                            .frame(width: UIScreen.screenWidth/5)
-                            .scaledToFill()
-                            .minimumScaleFactor(0.5)
-                            .lineLimit(1)
-                    }
-                    
-                    //# of friends
-                    VStack{
-                        Text(String(appUser.friends.count-1))
+                        //# of friends
+                        VStack{
+                            Text(String(appUser.friends.count-1))
+                                .font(Constants.titleFont)
+                            
+                            Text("Friends")
+                                .font(Constants.textFont)
+                                .frame(width: UIScreen.screenWidth/5)
+                                .scaledToFill()
+                                .minimumScaleFactor(0.5)
+                                .lineLimit(1)
+                        }
+                        Spacer()
+                    }.frame(width: UIScreen.screenWidth)
+                    Spacer()
+                }
+                
+                HStack{
+                    if viewMode {
+                        //Name
+                        Text(appUser.username)
                             .font(Constants.titleFont)
-                        
-                        Text("Friends")
+                            .padding(.leading, 25)
+                        //username
+                        Text("@\(appUser.handle)")
                             .font(Constants.textFont)
-                            .frame(width: UIScreen.screenWidth/5)
-                            .scaledToFill()
-                            .minimumScaleFactor(0.5)
-                            .lineLimit(1)
-                    }
-                    Spacer()
-                }.frame(width: UIScreen.screenWidth)
-                Spacer()
-            }
-            
-            HStack{
-                if viewMode {
-                    //Name
-                    Text(appUser.username)
-                        .font(Constants.titleFont)
-                        .padding(.leading, 25)
-                    //username
-                    Text("@\(appUser.handle)")
-                        .font(Constants.textFont)
-                        .foregroundColor(Color.gray)
-                } else {
-                    Spacer()
-                        .frame(width: 20)
-                    //Name
-                    TextField("Name", text: $appUser.username)
-                        .font(Constants.titleFont)
-                        .disableAutocorrection(true)
-                        .autocapitalization(.none)
-                        .multilineTextAlignment(.leading)
-                        .foregroundColor(Color.gray)
-                        .padding(.leading, 5)
-                        .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
-                    Spacer()
-                    //.frame(width: 20)
-                }
-            }
-            
-            HStack{
-                Image(systemName: "mappin.and.ellipse")
-                    .foregroundColor(Color.highlight)
-                    .font(.system(size: 20))
-                    .padding(.leading, 20)
-                //Location
-                if viewMode {
-                    Text(appUser.city)
-                        .font(Constants.textFont)
-                } else {
-                    TextField("City", text: $appUser.city)
-                        .font(Constants.textFont)
-                        .disableAutocorrection(true)
-                        .autocapitalization(.none)
-                        .multilineTextAlignment(.leading)
-                        .foregroundColor(Color.gray)
-                        .padding(.leading, 5)
-                        .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
-                }
-                Spacer()
-                    .frame(width: 20)
-            }.padding(.leading, 1.0)
-            HStack {
-                //bio
-                if viewMode {
-                    Spacer()
-                    ScrollView {
-                        Text(appUser.bio)
-                            .font(Constants.textFontSmall)
-                            .frame(width: (UIScreen.main.bounds.width)-20, height: (UIScreen.main.bounds.width)/6)
-                            .multilineTextAlignment(.leading)
-                            .lineLimit(nil)
-                    }
-                    Spacer()
-                } else {
-                    Spacer()
-                    ScrollView {
-                        TextEditor(text: $appUser.bio)
-                            .font(Constants.textFontSmall)
-                            .frame(width: (UIScreen.main.bounds.width)-20, height: (UIScreen.main.bounds.width)/6)
+                            .foregroundColor(Color.gray)
+                    } else {
+                        Spacer()
+                            .frame(width: 20)
+                        //Name
+                        TextField("Name", text: $appUser.username)
+                            .font(Constants.titleFont)
+                            .disableAutocorrection(true)
+                            .autocapitalization(.none)
                             .multilineTextAlignment(.leading)
                             .foregroundColor(Color.gray)
-                            .padding([.leading, .top, .bottom, .trailing], 3)
-                        //.padding(.trailing, -10)
+                            .padding(.leading, 5)
+                            .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
+                        Spacer()
+                        //.frame(width: 20)
+                    }
+                }
+                
+                HStack{
+                    Image(systemName: "mappin.and.ellipse")
+                        .foregroundColor(Color.highlight)
+                        .font(.system(size: 20))
+                        .padding(.leading, 20)
+                    //Location
+                    if viewMode {
+                        Text(appUser.city)
+                            .font(Constants.textFont)
+                    } else {
+                        TextField("City", text: $appUser.city)
+                            .font(Constants.textFont)
+                            .disableAutocorrection(true)
+                            .autocapitalization(.none)
+                            .multilineTextAlignment(.leading)
+                            .foregroundColor(Color.gray)
+                            .padding(.leading, 5)
                             .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
                     }
                     Spacer()
+                        .frame(width: 20)
+                }.padding(.leading, 1.0)
+                Spacer()
+                HStack {
+                    //bio
+                    if viewMode {
+                        Text(appUser.bio)
+                            .font(Constants.textFontSmall)
+                            .frame(width: (UIScreen.main.bounds.width)-30)
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(5)
+                            .padding(.leading, 20)
+                    } else {
+                        TextEditor(text: $appUser.bio)
+                            .font(Constants.textFontSmall)
+                            .frame(width: (UIScreen.main.bounds.width)-30)
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(5)
+                            .foregroundColor(Color.gray)
+                            .padding([.leading, .top, .bottom, .trailing], 3)
+                            .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
+                            .padding(.leading, 20)
+                    }
                 }
             }
-            
-            
+            .frame(width: (UIScreen.main.bounds.width)-10)
+            .padding(.vertical, 15)
+            .background(.white)
+            .cornerRadius(15)
+            .padding(.top, 5)
             Divider()
+            ForEach(appUser.reviews.sorted(by: {$0.key>$1.key}).dropFirst(), id: \.key) { key, review in
+                ReviewView(review: .constant(review))
+                    .background(.white)
+                    .cornerRadius(15)
+                    .padding(.horizontal, 10)
+                    .padding(.top, 5)
+            }
             Spacer()
-            
         }
+//        .padding(.top, 5)
+        .background(Color.secondarySystemBackground)
         .sheet(isPresented: $showingImagePicker) {
             ImagePicker(image: $inputImage)
         }

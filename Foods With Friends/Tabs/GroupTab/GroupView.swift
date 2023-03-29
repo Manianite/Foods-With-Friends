@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct GroupView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var appUser: User
     @Binding var group: FoodGroup
+    @Binding var groupsList: [FoodGroup]
+    @Binding var insideNavigator: Bool
     @State var reviews: [Review] = []
     var body: some View {
         VStack {
@@ -17,6 +20,7 @@ struct GroupView: View {
                 .font(Constants.titleFont)
             Text("\(group.members.count) members")
                 .font(Constants.textFontSmall)
+            Divider()
             ScrollView {
                 ForEach($reviews) { review in
                     ReviewView(review: review)
@@ -34,13 +38,14 @@ struct GroupView: View {
                     UserData.stopObservingFeed()
                 }
             }
-            .background(Color.secondarySystemBackground)
         }
+        .background(Color.secondarySystemBackground)
+        .navigationBarItems(trailing: group.gid==appUser.uid ? AnyView(NavigationLink("Edit", isActive: $insideNavigator) {EditGroupView(group, groups: $groupsList, isActive: $insideNavigator)}) : AnyView(EmptyView()))
     }
 }
 
 struct GroupView_Previews: PreviewProvider {
     static var previews: some View {
-        GroupView(group: .constant(FoodGroup()))
+        GroupView(group: .constant(FoodGroup()), groupsList: .constant([]), insideNavigator: .constant(false))
     }
 }
