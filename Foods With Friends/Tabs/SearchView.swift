@@ -19,7 +19,6 @@ struct SearchView: View {
     var body: some View {
         
         VStack{
-            
             NavigationView {
                 VStack{
                     
@@ -38,7 +37,6 @@ struct SearchView: View {
                     
                 }.searchable(text: $query, prompt: "Search Restaurants")
                     .font(Constants.titleFont)
-                
             }
             .navigationViewStyle(.stack)
             .navigationBarHidden(true)

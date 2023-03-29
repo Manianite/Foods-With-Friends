@@ -25,6 +25,7 @@
 		0F5A352629CCB3AB00C38E5B /* FoodGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5A352529CCB3AB00C38E5B /* FoodGroup.swift */; };
 		0F5A352829CCCD6A00C38E5B /* GroupSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5A352729CCCD6A00C38E5B /* GroupSearchView.swift */; };
 		0F5A352A29CEA95B00C38E5B /* NewGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5A352929CEA95B00C38E5B /* NewGroupView.swift */; };
+		0F66A19429D3F18100E8A62F /* EditGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F66A19329D3F18100E8A62F /* EditGroupView.swift */; };
 		0F98D40E29BFBF0B00AEE455 /* PublicUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F98D40D29BFBF0B00AEE455 /* PublicUserView.swift */; };
 		0FC6C8BC29B0F9CF0040048C /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6C8BB29B0F9CF0040048C /* UserData.swift */; };
 		0FC8C53B29D2089D0079098B /* Foods-With-Friends-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0FC8C53A29D2089D0079098B /* Foods-With-Friends-Info.plist */; };
@@ -94,6 +95,7 @@
 		0F5A352529CCB3AB00C38E5B /* FoodGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodGroup.swift; sourceTree = "<group>"; };
 		0F5A352729CCCD6A00C38E5B /* GroupSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSearchView.swift; sourceTree = "<group>"; };
 		0F5A352929CEA95B00C38E5B /* NewGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupView.swift; sourceTree = "<group>"; };
+		0F66A19329D3F18100E8A62F /* EditGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupView.swift; sourceTree = "<group>"; };
 		0F98D40D29BFBF0B00AEE455 /* PublicUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicUserView.swift; sourceTree = "<group>"; };
 		0FC6C8BB29B0F9CF0040048C /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		0FC8C53A29D2089D0079098B /* Foods-With-Friends-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Foods-With-Friends-Info.plist"; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				0F17AEE029CCB085008A881C /* GroupView.swift */,
 				0F5A352729CCCD6A00C38E5B /* GroupSearchView.swift */,
 				0F5A352929CEA95B00C38E5B /* NewGroupView.swift */,
+				0F66A19329D3F18100E8A62F /* EditGroupView.swift */,
 			);
 			path = GroupTab;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 				0F17AEDA29C94C0C008A881C /* ExpandableText.swift in Sources */,
 				88F7339D29B77F21001D8CC6 /* NewPostView.swift in Sources */,
 				0F43B64629C0B4C700E9A43A /* FriendProfileView.swift in Sources */,
+				0F66A19429D3F18100E8A62F /* EditGroupView.swift in Sources */,
 				0F17AEDC29CC903F008A881C /* GroupsView.swift in Sources */,
 				88F7339F29B77F3D001D8CC6 /* SettingsView.swift in Sources */,
 			);

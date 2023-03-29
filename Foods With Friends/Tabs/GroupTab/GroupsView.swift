@@ -12,16 +12,20 @@ struct GroupsView: View {
     @State var query = ""
     @State var groupsList: [FoodGroup] = []
     @State var userHasGroupError = false
+    @State var insideNavigator = false
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottom) {
                 if groupsList.count == 0 {
-                    Text("You have not joined any groups yet!")
+                    VStack {
+                        Text("You have not joined any groups yet!")
+                        Spacer()
+                    }
                 }
                 ScrollView {
                     ForEach($groupsList, id: \.self.gid) { group in
                         NavigationLink {
-                            GroupView(group: group)
+                            GroupView(group: group, groupsList: $groupsList, insideNavigator: $insideNavigator)
                         } label: {
                             ZStack(alignment: .trailing) {
                                 GroupListView(group: group)
@@ -39,8 +43,6 @@ struct GroupsView: View {
                         }
                         .buttonStyle(.plain)
                     }
-                    .navigationTitle("My Groups")
-                    .navigationBarTitleDisplayMode(.inline)
                 }
                 HStack {
                     NavigationLink {
@@ -55,7 +57,7 @@ struct GroupsView: View {
                     }
                     Spacer()
                     NavigationLink {
-                        NewGroupView()
+                        NewGroupView(groupsList: $groupsList)
                     } label: {
                         Image(systemName: "plus.circle.fill")
                             .resizable()
@@ -69,6 +71,7 @@ struct GroupsView: View {
                     })
                 }
             }
+            .navigationBarTitle("My Groups", displayMode: .inline)
         }
         .searchable(text: $query)
         .onAppear {
