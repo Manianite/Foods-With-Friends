@@ -30,227 +30,207 @@ struct SettingsView: View {
                 .accentColor(.highlight)
             
             
-            //button for change password
-            Button {
-                if passwordChangeMode == false{
-                    passwordChangeMode = true
-                }
-                else {
-                    passwordChangeMode = false
-                }
-                handleChangeMode = false
-                emailChangeMode = false
-            } label: {
-                Text("Change Password")
-                    .frame(width: UIScreen.screenWidth/1.3)
-                    .font(Constants.textFont)
-                    .accentColor(.black.opacity(0.8))
-                    .padding(.vertical, 5)
-                    .padding(.horizontal)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                            .stroke(.black, lineWidth: 4)
-                    )
-                    .padding(.vertical, 10)
-            }
-            
-            //shows textfield or securefield for password
-            if passwordChangeMode {
-                VStack {
-                    if isHidden {
-                        HStack {
-                            SecureField("Enter new password", text: $newPassword)
-                                .disableAutocorrection(true)
-                                .autocapitalization(.none)
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 10)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .stroke(.black, lineWidth: 2)
-                                )
-                                .font(Constants.textFont)
-                                .padding(.top, 20)
-                                .padding(.leading, 30)
-                            Button(){
-                                isHidden = false
-                            } label: {
-                                Image(systemName: "eye")
-                                    .padding(.trailing, 20)
-                                    .padding(.top, 20)
-                            }
-                        }
+            Group {
+                //button for change password
+                Button {
+                    if passwordChangeMode == false{
+                        passwordChangeMode = true
                     }
                     else {
-                        HStack{
-                            TextField("Enter new password", text: $newPassword)
-                                .disableAutocorrection(true)
-                                .autocapitalization(.none)
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 10)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .stroke(.black, lineWidth: 2)
-                                )
-                                .font(Constants.textFont)
-                                .padding(.top, 20)
-                                .padding(.leading, 30)
-                            Button{
-                                isHidden = true
-                            } label: {
-                                Image(systemName: "eye.slash")
-                                    .padding(.trailing, 20)
+                        passwordChangeMode = false
+                    }
+                    handleChangeMode = false
+                    emailChangeMode = false
+                } label: {
+                    Text("Change Password")
+                        .frame(width: UIScreen.screenWidth/1.3)
+                        .font(Constants.textFont)
+                        .accentColor(.black.opacity(0.8))
+                        .padding(.vertical, 5)
+                        .padding(.horizontal)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(.black, lineWidth: 4)
+                        )
+                }
+
+                
+                
+                //shows textfield or securefield for password
+                if passwordChangeMode {
+                    VStack {
+                        if isHidden {
+                            HStack {
+                                SecureField("Enter new password", text: $newPassword)
+                                    .disableAutocorrection(true)
+                                    .autocapitalization(.none)
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 10)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .stroke(.black, lineWidth: 2)
+                                    )
+                                    .font(Constants.textFont)
                                     .padding(.top, 20)
+                                    .padding(.leading, 30)
+                                Button(){
+                                    isHidden = false
+                                } label: {
+                                    Image(systemName: "eye")
+                                        .padding(.trailing, 20)
+                                        .padding(.top, 20)
+                                }
                             }
+                        }
+                        else {
+                            HStack{
+                                TextField("Enter new password", text: $newPassword)
+                                    .disableAutocorrection(true)
+                                    .autocapitalization(.none)
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 10)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .stroke(.black, lineWidth: 2)
+                                    )
+                                    .font(Constants.textFont)
+                                    .padding(.top, 20)
+                                    .padding(.leading, 30)
+                                Button{
+                                    isHidden = true
+                                } label: {
+                                    Image(systemName: "eye.slash")
+                                        .padding(.trailing, 20)
+                                        .padding(.top, 20)
+                                }
+                            }
+                        }
+                        
+                        //asks user to confirm password change
+                        Button {
+                            guard let pass = Auth.auth().currentUser?.updatePassword(to: newPassword) else {return}
+                            
+                            passwordChangeMode = false
+                        } label: {
+                            Text("Confirm Password Change")
+                                .font(Constants.textFont)
+                                .accentColor(.highlight)
+                                .padding(.bottom, 10)
+                            
+                        }
+                    }
+                }
+                                
+                //button for changing handle
+                Button{
+                    if handleChangeMode == false{
+                        handleChangeMode = true
+                    }
+                    else {
+                        handleChangeMode = false
+                    }
+                    emailChangeMode = false
+                    passwordChangeMode = false
+                }label: {
+                    Text("Change handle")
+                        .frame(width: UIScreen.screenWidth/1.3)
+                        .font(Constants.textFont)
+                        .accentColor(.black.opacity(0.8))
+                        .padding(.vertical, 5)
+                        .padding(.horizontal)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(.black, lineWidth: 4)
+                        )
+                        //.padding(.vertical, 10)
+                    
+                }
+                
+                //shows textfield for handle change
+                if handleChangeMode == true {
+                    VStack{
+                        TextField("Enter new handle", text: $newHandle)
+                            .disableAutocorrection(true)
+                            .autocapitalization(.none)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .stroke(.black, lineWidth: 2)
+                            )
+                            .font(Constants.textFont)
+                            .padding(.top, 20)
+                            .padding(.horizontal, 30)
+                        Button{
+                            appUser.handle = newHandle
+                            UserData.pushUser(appUser)
+                            handleChangeMode == false
+                        }label: {
+                            Text("Confirm Handle Change")
+                                .font(Constants.textFont)
+                                .accentColor(.highlight)
+                                .padding(.bottom, 10)
                         }
                     }
                     
-                    //asks user to confirm password change
-                    Button {
-                        guard let pass = Auth.auth().currentUser?.updatePassword(to: newPassword) else {return}
-                        
-                        passwordChangeMode = false
-                    } label: {
-                        Text("Confirm Password Change")
-                            .font(Constants.textFont)
-                            .accentColor(.highlight)
-                            .padding(.bottom, 10)
-                        
-                    }
-                }
-            }
-            
-            
-            //            Button {
-            //                //confirmation = true
-            //                presentPopup = true
-            //            } label: {
-            //                Text("Delete Account")
-            //                    .font(Constants.titleFont)
-            //                    .accentColor(.highlight)
-            //                    .popover(isPresented: $presentPopup, content: {
-            //                        Button{
-            //                            //Auth.auth().currentUser?.delete()
-            //                            Auth.auth().currentUser!.uid
-            //                            UserData.remove("users/\(appUser.uid)")
-            //                            UserData.remove("users/user_dict/\(appUser.uid)")
-            //                            viewState = .login
-            //                        }label: {
-            //                            Text("Confirm delete account?")
-            //                        }
-            //                    })
-            //            }
-            
-            
-            //button for changing handle
-            Button{
-                if handleChangeMode == false{
-                    handleChangeMode = true
-                }
-                else {
-                    handleChangeMode = false
-                }
-                emailChangeMode = false
-                passwordChangeMode = false
-            }label: {
-                Text("Change handle")
-                    .frame(width: UIScreen.screenWidth/1.3)
-                    .font(Constants.textFont)
-                    .accentColor(.black.opacity(0.8))
-                    .padding(.vertical, 5)
-                    .padding(.horizontal)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                            .stroke(.black, lineWidth: 4)
-                    )
-                    .padding(.vertical, 10)
-
-            }
-            
-            //shows textfield for handle change
-            if handleChangeMode == true {
-                VStack{
-                    TextField("Enter new handle", text: $newHandle)
-                        .disableAutocorrection(true)
-                        .autocapitalization(.none)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 10)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 16)
-                                .stroke(.black, lineWidth: 2)
-                        )
-                        .font(Constants.textFont)
-                        .padding(.top, 20)
-                        .padding(.horizontal, 30)
-                    Button{
-                        appUser.handle = newHandle
-                        UserData.pushUser(appUser)
-                        handleChangeMode == false
-                    }label: {
-                        Text("Confirm Handle Change")
-                            .font(Constants.textFont)
-                            .accentColor(.highlight)
-                            .padding(.bottom, 10)
-                    }
                 }
                 
-            }
-            
-            
-            //button to change email
-            Button{
-                if emailChangeMode == false{
-                    emailChangeMode = true
-                }
-                else {
-                    emailChangeMode = false
-                }
-                handleChangeMode = false
-                passwordChangeMode = false
-            }label: {
-                Text("Change email")
-                    .frame(width: UIScreen.screenWidth/1.3)
-                    .font(Constants.textFont)
-                    .accentColor(.black.opacity(0.8))
-                    .padding(.vertical, 5)
-                    .padding(.horizontal)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                            .stroke(.black, lineWidth: 4)
-                    )
-                    .padding(.vertical, 10)
-
-            }
-            
-            //shows textfield for email change
-            if emailChangeMode == true {
-                VStack{
-                    TextField("Enter new email", text: $newEmail)
-                        .disableAutocorrection(true)
-                        .autocapitalization(.none)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 10)
+                //button to change email
+                Button{
+                    if emailChangeMode == false{
+                        emailChangeMode = true
+                    }
+                    else {
+                        emailChangeMode = false
+                    }
+                    handleChangeMode = false
+                    passwordChangeMode = false
+                }label: {
+                    Text("Change email")
+                        .frame(width: UIScreen.screenWidth/1.3)
+                        .font(Constants.textFont)
+                        .accentColor(.black.opacity(0.8))
+                        .padding(.vertical, 5)
+                        .padding(.horizontal)
                         .overlay(
                             RoundedRectangle(cornerRadius: 16)
-                                .stroke(.black, lineWidth: 2)
+                                .stroke(.black, lineWidth: 4)
                         )
-                        .font(Constants.textFont)
-                        .padding(.top, 20)
-                        .padding(.horizontal, 30)
-                    Button{
-                        appUser.handle = newHandle
-                        UserData.pushUser(appUser)
-                        emailChangeMode == false
-                    }label: {
-                        Text("Confirm Email Change")
+                        //.padding(.vertical, 10)
+                    
+                }
+                
+                //shows textfield for email change
+                if emailChangeMode == true {
+                    VStack{
+                        TextField("Enter new email", text: $newEmail)
+                            .disableAutocorrection(true)
+                            .autocapitalization(.none)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .stroke(.black, lineWidth: 2)
+                            )
                             .font(Constants.textFont)
-                            .accentColor(.highlight)
-                            .padding(.bottom, 10)
+                            .padding(.top, 20)
+                            .padding(.horizontal, 30)
+                        Button{
+                            appUser.handle = newHandle
+                            UserData.pushUser(appUser)
+                            emailChangeMode == false
+                        }label: {
+                            Text("Confirm Email Change")
+                                .font(Constants.textFont)
+                                .accentColor(.highlight)
+                                .padding(.bottom, 10)
+                        }
                     }
                 }
-            }
+            } //.frame(height: UIScreen.screenWidth/2)
             
             Spacer()
-            
+
             Button {
                 UserDefaults.standard.removeObject(forKey: "userID")
                 viewState = .login
@@ -280,8 +260,8 @@ struct SettingsView: View {
                     .accentColor(.highlight)
                     .disabled(true)
             }
-
-
+            
+            
         }
     }
 }

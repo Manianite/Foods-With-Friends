@@ -17,6 +17,7 @@ struct SearchView: View {
     @State private var query: String = ""
     
     var body: some View {
+
         
         VStack{
             NavigationView {
@@ -43,7 +44,7 @@ struct SearchView: View {
             } .onAppear(perform: runSearch)
                 .onSubmit(of: .search, runSearch)
         }
-        
+       
     }
     
     func runSearch() {
