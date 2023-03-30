@@ -237,8 +237,8 @@
 		0F43B64929C13AAD00E9A43A /* FriendTab */ = {
 			isa = PBXGroup;
 			children = (
-				0F98D40D29BFBF0B00AEE455 /* PublicUserView.swift */,
 				0F43B64729C133F600E9A43A /* PublicUserSearchView.swift */,
+				0F98D40D29BFBF0B00AEE455 /* PublicUserView.swift */,
 				0F43B64529C0B4C700E9A43A /* FriendProfileView.swift */,
 				88F7339A29B77F12001D8CC6 /* FriendView.swift */,
 			);
