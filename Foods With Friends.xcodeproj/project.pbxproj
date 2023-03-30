@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0F17AED829C8EA25008A881C /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17AED729C8EA25008A881C /* ReviewView.swift */; };
 		0F17AEDA29C94C0C008A881C /* ExpandableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17AED929C94C0C008A881C /* ExpandableText.swift */; };
+		0F17AEDC29CC903F008A881C /* GroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17AEDB29CC903E008A881C /* GroupsView.swift */; };
+		0F17AEDF29CCB05E008A881C /* GroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17AEDE29CCB05E008A881C /* GroupListView.swift */; };
+		0F17AEE129CCB085008A881C /* GroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17AEE029CCB085008A881C /* GroupView.swift */; };
 		0F2F316229AF965D008B0CC3 /* Foods_With_FriendsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2F316129AF965D008B0CC3 /* Foods_With_FriendsApp.swift */; };
 		0F2F316429AF965D008B0CC3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2F316329AF965D008B0CC3 /* ContentView.swift */; };
 		0F2F316629AF9661008B0CC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F2F316529AF9661008B0CC3 /* Assets.xcassets */; };
@@ -19,8 +22,13 @@
 		0F43B64629C0B4C700E9A43A /* FriendProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F43B64529C0B4C700E9A43A /* FriendProfileView.swift */; };
 		0F43B64829C133F600E9A43A /* PublicUserSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F43B64729C133F600E9A43A /* PublicUserSearchView.swift */; };
 		0F43B64D29C412C500E9A43A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F43B64C29C412C500E9A43A /* ImagePicker.swift */; };
+		0F5A352629CCB3AB00C38E5B /* FoodGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5A352529CCB3AB00C38E5B /* FoodGroup.swift */; };
+		0F5A352829CCCD6A00C38E5B /* GroupSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5A352729CCCD6A00C38E5B /* GroupSearchView.swift */; };
+		0F5A352A29CEA95B00C38E5B /* NewGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5A352929CEA95B00C38E5B /* NewGroupView.swift */; };
+		0F66A19429D3F18100E8A62F /* EditGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F66A19329D3F18100E8A62F /* EditGroupView.swift */; };
 		0F98D40E29BFBF0B00AEE455 /* PublicUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F98D40D29BFBF0B00AEE455 /* PublicUserView.swift */; };
 		0FC6C8BC29B0F9CF0040048C /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6C8BB29B0F9CF0040048C /* UserData.swift */; };
+		0FC8C53B29D2089D0079098B /* Foods-With-Friends-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0FC8C53A29D2089D0079098B /* Foods-With-Friends-Info.plist */; };
 		0FC9C35F29B8E558006B9ECD /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC9C35E29B8E558006B9ECD /* AppView.swift */; };
 		0FC9C36129BA65AA006B9ECD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC9C36029BA65AA006B9ECD /* User.swift */; };
 		0FC9C36329BBBBB3006B9ECD /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC9C36229BBBBB3006B9ECD /* UserStorage.swift */; };
@@ -30,6 +38,7 @@
 		0FDDA06E29B7AABA00A866C4 /* APIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDDA06D29B7AAB900A866C4 /* APIData.swift */; };
 		43EB9BC0D6410B1441D5161A /* Pods_Foods_With_Friends_Foods_With_FriendsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 870305D1CDDE70F076450C36 /* Pods_Foods_With_Friends_Foods_With_FriendsUITests.framework */; };
 		5C06D9C55326A1B0364472FE /* Pods_Foods_With_Friends.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEBF9A9813A7EF895010EB59 /* Pods_Foods_With_Friends.framework */; };
+		83290A2729C48F4C007F9ECF /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83290A2629C48F4B007F9ECF /* LocationManager.swift */; };
 		834981D229B0F89C00CF2D98 /* PersonalProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834981D129B0F89C00CF2D98 /* PersonalProfileView.swift */; };
 		83C9AA1E29C0AB49009AE879 /* RestaurantListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C9AA1D29C0AB49009AE879 /* RestaurantListView.swift */; };
 		83C9AA2029C0AB71009AE879 /* RestaurantInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C9AA1F29C0AB71009AE879 /* RestaurantInfoView.swift */; };
@@ -67,6 +76,9 @@
 		0F17AED429C6D4BA008A881C /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		0F17AED729C8EA25008A881C /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		0F17AED929C94C0C008A881C /* ExpandableText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableText.swift; sourceTree = "<group>"; };
+		0F17AEDB29CC903E008A881C /* GroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsView.swift; sourceTree = "<group>"; };
+		0F17AEDE29CCB05E008A881C /* GroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListView.swift; sourceTree = "<group>"; };
+		0F17AEE029CCB085008A881C /* GroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupView.swift; sourceTree = "<group>"; };
 		0F2F315E29AF965D008B0CC3 /* Foods With Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Foods With Friends.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F2F316129AF965D008B0CC3 /* Foods_With_FriendsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Foods_With_FriendsApp.swift; sourceTree = "<group>"; };
 		0F2F316329AF965D008B0CC3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -80,8 +92,13 @@
 		0F43B64529C0B4C700E9A43A /* FriendProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendProfileView.swift; sourceTree = "<group>"; };
 		0F43B64729C133F600E9A43A /* PublicUserSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicUserSearchView.swift; sourceTree = "<group>"; };
 		0F43B64C29C412C500E9A43A /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		0F5A352529CCB3AB00C38E5B /* FoodGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodGroup.swift; sourceTree = "<group>"; };
+		0F5A352729CCCD6A00C38E5B /* GroupSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSearchView.swift; sourceTree = "<group>"; };
+		0F5A352929CEA95B00C38E5B /* NewGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupView.swift; sourceTree = "<group>"; };
+		0F66A19329D3F18100E8A62F /* EditGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupView.swift; sourceTree = "<group>"; };
 		0F98D40D29BFBF0B00AEE455 /* PublicUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicUserView.swift; sourceTree = "<group>"; };
 		0FC6C8BB29B0F9CF0040048C /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		0FC8C53A29D2089D0079098B /* Foods-With-Friends-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Foods-With-Friends-Info.plist"; sourceTree = "<group>"; };
 		0FC9C35E29B8E558006B9ECD /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		0FC9C36029BA65AA006B9ECD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0FC9C36229BBBBB3006B9ECD /* UserStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
@@ -93,6 +110,7 @@
 		17AA202260AEF374CFB9658D /* Pods_Foods_With_FriendsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Foods_With_FriendsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		64DAE250A059C1C12BFD3D40 /* Pods-Foods With Friends-Foods With FriendsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foods With Friends-Foods With FriendsUITests.debug.xcconfig"; path = "Target Support Files/Pods-Foods With Friends-Foods With FriendsUITests/Pods-Foods With Friends-Foods With FriendsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		774E59FDDE60AB104A321A88 /* Pods-Foods With FriendsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foods With FriendsTests.release.xcconfig"; path = "Target Support Files/Pods-Foods With FriendsTests/Pods-Foods With FriendsTests.release.xcconfig"; sourceTree = "<group>"; };
+		83290A2629C48F4B007F9ECF /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		834981D129B0F89C00CF2D98 /* PersonalProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalProfileView.swift; sourceTree = "<group>"; };
 		83C9AA1D29C0AB49009AE879 /* RestaurantListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListView.swift; sourceTree = "<group>"; };
 		83C9AA1F29C0AB71009AE879 /* RestaurantInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInfoView.swift; sourceTree = "<group>"; };
@@ -139,9 +157,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F17AEDD29CCB024008A881C /* GroupTab */ = {
+			isa = PBXGroup;
+			children = (
+				0F17AEDB29CC903E008A881C /* GroupsView.swift */,
+				0F17AEDE29CCB05E008A881C /* GroupListView.swift */,
+				0F17AEE029CCB085008A881C /* GroupView.swift */,
+				0F5A352729CCCD6A00C38E5B /* GroupSearchView.swift */,
+				0F5A352929CEA95B00C38E5B /* NewGroupView.swift */,
+				0F66A19329D3F18100E8A62F /* EditGroupView.swift */,
+			);
+			path = GroupTab;
+			sourceTree = "<group>";
+		};
 		0F2F315529AF965D008B0CC3 = {
 			isa = PBXGroup;
 			children = (
+				0FC8C53A29D2089D0079098B /* Foods-With-Friends-Info.plist */,
 				0F2F316029AF965D008B0CC3 /* Foods With Friends */,
 				0F2F317129AF9662008B0CC3 /* Foods With FriendsTests */,
 				0F2F317B29AF9662008B0CC3 /* Foods With FriendsUITests */,
@@ -205,8 +237,8 @@
 		0F43B64929C13AAD00E9A43A /* FriendTab */ = {
 			isa = PBXGroup;
 			children = (
-				0F98D40D29BFBF0B00AEE455 /* PublicUserView.swift */,
 				0F43B64729C133F600E9A43A /* PublicUserSearchView.swift */,
+				0F98D40D29BFBF0B00AEE455 /* PublicUserView.swift */,
 				0F43B64529C0B4C700E9A43A /* FriendProfileView.swift */,
 				88F7339A29B77F12001D8CC6 /* FriendView.swift */,
 			);
@@ -246,6 +278,8 @@
 				0FDDA06D29B7AAB900A866C4 /* APIData.swift */,
 				0FC9C36029BA65AA006B9ECD /* User.swift */,
 				F0D8A18629BF4F1D004A916F /* Review.swift */,
+				83290A2629C48F4B007F9ECF /* LocationManager.swift */,
+				0F5A352529CCB3AB00C38E5B /* FoodGroup.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -256,6 +290,7 @@
 				88F7339E29B77F3D001D8CC6 /* SettingsView.swift */,
 				88F733A029B77FD1001D8CC6 /* ProfileView.swift */,
 				8801352E29B3A06600304A06 /* HomeView.swift */,
+				0F17AEDD29CCB024008A881C /* GroupTab */,
 				88F7339829B77EFA001D8CC6 /* SearchView.swift */,
 				0F43B64929C13AAD00E9A43A /* FriendTab */,
 				88F7339C29B77F21001D8CC6 /* NewPostView.swift */,
@@ -396,6 +431,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FC8C53B29D2089D0079098B /* Foods-With-Friends-Info.plist in Resources */,
 				0F2F316929AF9661008B0CC3 /* Preview Assets.xcassets in Resources */,
 				0F2F316629AF9661008B0CC3 /* Assets.xcassets in Resources */,
 				0FDDA06C29B28EDB00A866C4 /* GoogleService-Info.plist in Resources */,
@@ -527,10 +563,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FDDA06A29B2816B00A866C4 /* SignupView.swift in Sources */,
+				0F5A352629CCB3AB00C38E5B /* FoodGroup.swift in Sources */,
 				F0D8A18929BF4F3F004A916F /* StarsView.swift in Sources */,
+				0F17AEE129CCB085008A881C /* GroupView.swift in Sources */,
 				0FDDA06929B2816B00A866C4 /* LoginView.swift in Sources */,
 				83C9AA1E29C0AB49009AE879 /* RestaurantListView.swift in Sources */,
 				834981D229B0F89C00CF2D98 /* PersonalProfileView.swift in Sources */,
+				0F5A352A29CEA95B00C38E5B /* NewGroupView.swift in Sources */,
 				88F7339B29B77F12001D8CC6 /* FriendView.swift in Sources */,
 				0FC9C36129BA65AA006B9ECD /* User.swift in Sources */,
 				0F2F316429AF965D008B0CC3 /* ContentView.swift in Sources */,
@@ -538,8 +577,10 @@
 				88F733A129B77FD1001D8CC6 /* ProfileView.swift in Sources */,
 				8801352F29B3A06600304A06 /* HomeView.swift in Sources */,
 				0FC9C35F29B8E558006B9ECD /* AppView.swift in Sources */,
+				0F5A352829CCCD6A00C38E5B /* GroupSearchView.swift in Sources */,
 				0FC9C36329BBBBB3006B9ECD /* UserStorage.swift in Sources */,
 				F0D8A18729BF4F1D004A916F /* Review.swift in Sources */,
+				0F17AEDF29CCB05E008A881C /* GroupListView.swift in Sources */,
 				88F7339929B77EFA001D8CC6 /* SearchView.swift in Sources */,
 				0F43B64D29C412C500E9A43A /* ImagePicker.swift in Sources */,
 				8801352729B0F45400304A06 /* Constants.swift in Sources */,
@@ -549,9 +590,12 @@
 				83C9AA2029C0AB71009AE879 /* RestaurantInfoView.swift in Sources */,
 				0FC6C8BC29B0F9CF0040048C /* UserData.swift in Sources */,
 				0F43B64829C133F600E9A43A /* PublicUserSearchView.swift in Sources */,
+				83290A2729C48F4C007F9ECF /* LocationManager.swift in Sources */,
 				0F17AEDA29C94C0C008A881C /* ExpandableText.swift in Sources */,
 				88F7339D29B77F21001D8CC6 /* NewPostView.swift in Sources */,
 				0F43B64629C0B4C700E9A43A /* FriendProfileView.swift in Sources */,
+				0F66A19429D3F18100E8A62F /* EditGroupView.swift in Sources */,
+				0F17AEDC29CC903F008A881C /* GroupsView.swift in Sources */,
 				88F7339F29B77F3D001D8CC6 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -715,6 +759,9 @@
 				DEVELOPMENT_TEAM = DY8WTD66QN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Foods-With-Friends-Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app requires your location to better search near you.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires your location to better search near you.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -745,6 +792,9 @@
 				DEVELOPMENT_TEAM = DY8WTD66QN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Foods-With-Friends-Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app requires your location to better search near you.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires your location to better search near you.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

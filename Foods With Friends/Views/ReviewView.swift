@@ -33,8 +33,8 @@ struct ReviewView: View {
                 .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
                 .frame(height: UIScreen.main.bounds.width-40, alignment: .leading)
             }
-            .padding(.leading, 15)
-            .padding(.trailing, 15)
+            .padding(.horizontal, 15)
+            .padding(.bottom, 15)
         } label: {
             VStack(alignment: .leading, spacing: 0) {
                 Text(review.restaurant)
@@ -80,7 +80,7 @@ struct ReviewView: View {
             }
             .foregroundColor(.black)
             .padding(.leading)
-            .padding(.top, 10)
+            .padding(.vertical, 10)
         }
         .accentColor(.clear)
     }

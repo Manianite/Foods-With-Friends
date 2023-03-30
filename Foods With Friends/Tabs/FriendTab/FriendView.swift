@@ -15,6 +15,12 @@ struct FriendView: View {
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
+                if friendsList.count == 0 {
+                    VStack {
+                        Text("You have not added any friends yet!")
+                        Spacer()
+                    }
+                }
                 ScrollView {
                     ForEach($friendReqsList, id: \.self.uid) { friend in
                         ZStack(alignment: .trailing) {
@@ -65,8 +71,6 @@ struct FriendView: View {
                         .buttonStyle(.plain)
                         
                     }
-                    .navigationTitle("My Friends")
-                    .navigationBarTitleDisplayMode(.inline)
                 }
                 NavigationLink {
                     PublicUserSearchView()
@@ -75,10 +79,11 @@ struct FriendView: View {
                         .resizable()
                         .frame(width: (UIScreen.main.bounds.width)/6, height: (UIScreen.main.bounds.width)/6)
                         .padding(.trailing, 10)
-                        .padding(.bottom, 3)
+                        .padding(.bottom, 10)
                         .foregroundColor(.highlight)
                 }
             }
+            .navigationBarTitle("My Friends", displayMode: .inline)
         }
         .searchable(text: $query)
         .onAppear {

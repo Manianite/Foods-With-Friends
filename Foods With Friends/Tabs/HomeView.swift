@@ -7,14 +7,15 @@
 import SwiftUI
 struct HomeView: View {
     @EnvironmentObject var appUser: User
-    @State var testReview: Review = Review()
     @State var reviews: [Review] = []
     var body: some View {
         ScrollView {
-//            ReviewView(review: $testReview)
-//                .background(.white)
-//                .cornerRadius(15)
-//                .padding()
+            if reviews.count == 0 {
+                VStack {
+                    Text("You do not have a feed yet! Add some friends, join some local groups, and have a good time!")
+                    Spacer()
+                }
+            }
             ForEach($reviews) { review in
                 ReviewView(review: review)
                     .background(.white)
@@ -22,14 +23,14 @@ struct HomeView: View {
                     .padding(.horizontal, 10)
                     .padding(.top, 5)
             }
-            .onAppear {
-                UserData.observeFeed(for: appUser.uid) { gotReviews in
-                    reviews = Array(gotReviews.values)
-                }
+        }
+        .onAppear {
+            UserData.observeFeed(for: "feeds/\(appUser.uid)") { gotReviews in
+                reviews = Array(gotReviews.values)
             }
-            .onDisappear {
-                UserData.stopObservingFeed()
-            }
+        }
+        .onDisappear {
+            UserData.stopObservingFeed()
         }
         .background(Color.secondarySystemBackground)
     }

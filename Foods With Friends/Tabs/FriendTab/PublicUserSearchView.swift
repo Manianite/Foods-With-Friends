@@ -33,6 +33,7 @@ struct PublicUserSearchView: View {
                     .disabled(appUser.newFriends.keys.contains(user.uid.wrappedValue+"-O") )
                 }
             }
+            .navigationTitle("Search Users")
         }
         .searchable(text: $query)
         .onAppear {

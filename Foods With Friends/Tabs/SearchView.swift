@@ -12,65 +12,54 @@ import FirebaseAuth
 struct SearchView: View {
     
     @StateObject var data = FetchRestaurantData()
-    @EnvironmentObject var user: User
-    @State var query: String = ""
-    @State var waiting: Bool = false
+    @EnvironmentObject var locationManager: LocationManager
+    @EnvironmentObject var appUser: User
+    @State private var query: String = ""
     
     var body: some View {
-               VStack{
-                   NavigationView {
-                       VStack {
-                           HStack {
-                               TextField("Search", text: $query)
-                                   .submitLabel(.go)
-                                   .padding(.leading)
-                                   .onSubmit {
-                                       Task {
-                                           waiting = true
-                                           await data.getData(query)
-                                           waiting = false
-                                       }
-                                   }
-                               Button {
-                                   Task {
-                                       waiting = true
-                                       await data.getData(query)
-                                       waiting = false
-                                   }
-                               } label: {
-                                   Text("Go")
-                                       .accentColor(.highlight)
-                                       .padding(.trailing)
-                               }
-                               .disabled(waiting)
-                           }
-                           
-                           if waiting {
-                               Divider()
-                               Text("Loading...")
-                           }
-                           List {
-                               ForEach($data.response.restaurants) {restaurant in
-                                   NavigationLink {
-                                       RestaurantInfoView(restaurant: restaurant)
-                                   } label: {
-                                       RestaurantListView(restaurant: restaurant)
-                                   }
-                               }
-                               
-                           }
-                           .listStyle(.grouped)
-                       }
-                       .navigationViewStyle(.stack)
-                       .navigationBarHidden(true)
-                   }
-           }
+
+        
+        VStack{
+            NavigationView {
+                VStack{
+                    
+                    List {
+                        ForEach($data.response.restaurants) {restaurant in
+                            NavigationLink {
+                                RestaurantInfoView(restaurant: restaurant)
+                            } label: {
+                                RestaurantListView(restaurant: restaurant)
+                            }
+                        }
+                        
+                    }
+                    .listStyle(.grouped)
+                    .font(Constants.titleFont)
+                    
+                }.searchable(text: $query, prompt: "Search")
+                    .font(Constants.titleFont)
+                    .navigationTitle("Search Restaurants")
+                    .navigationBarTitleDisplayMode(.inline)
+        //            .navigationViewStyle(.stack)
+            } .onAppear(perform: runSearch)
+                .onSubmit(of: .search, runSearch)
+        }
+       
     }
+    
+    func runSearch() {
+        Task{
+            await data.getData(query, locationManager)
+            let restaurantList: [Restaurant] = data.response.restaurants
+        }
+    }
+    
 }
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
         SearchView()
             .environmentObject(User())
+            .environmentObject(LocationManager())
     }
 }

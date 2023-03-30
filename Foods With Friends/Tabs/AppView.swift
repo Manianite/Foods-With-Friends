@@ -21,15 +21,15 @@ struct AppView: View {
                         .foregroundColor(selectedTab == .SettingsView ? Color.highlight.opacity(0.7) : Color.black.opacity(0.7))
                         .font(Constants.tabFont)
                 }
-                .padding(.leading, 30.0)
+                .padding(.leading, 15.0)
                 .onTapGesture {
                     selectedTab = .SettingsView
                 }
                 Spacer()
-                Image("logo")
+                Image("bannerlogo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 50, height: 50)
+                    .frame(width: 200, height: 50)
                 Spacer()
                 VStack {
                     Image(systemName: "person")
@@ -40,7 +40,7 @@ struct AppView: View {
                         .foregroundColor(selectedTab == .ProfileView ? Color.highlight.opacity(0.7) : Color.black.opacity(0.7))
                         .font(Constants.tabFont)
                 }
-                .padding(.trailing, 30.0)
+                .padding(.trailing, 15.0)
                 .onTapGesture {
                     selectedTab = .ProfileView
                 }
@@ -50,14 +50,14 @@ struct AppView: View {
             Divider()
                 .padding(.top, 7)
             
-            //Spacer()
-            
             if selectedTab == .SettingsView {
                 SettingsView(viewState: $viewState)
             } else if selectedTab == .ProfileView {
                 ProfileView()
             } else if selectedTab == .HomeView {
                 HomeView()
+            } else if selectedTab == .GroupView {
+                GroupsView()
             } else if selectedTab == .SearchView {
                 SearchView()
             } else if selectedTab == .FriendView {
@@ -65,8 +65,6 @@ struct AppView: View {
             } else if selectedTab == .NewPostView {
                 NewPostView()
             }
-            
-            //Spacer()
             
             Divider()
                 .padding(.bottom, 7)
@@ -83,9 +81,24 @@ struct AppView: View {
                         .font(Constants.tabFont)
 
                 }
-                .padding(.leading, 35)
+                .padding(.leading, 30)
                 .onTapGesture {
                     selectedTab = .HomeView
+                }
+                Spacer()
+                VStack {
+                    Image(systemName: "person.3")
+                        .foregroundColor(selectedTab == .GroupView ? Color.highlight : Color.black.opacity(0.7))
+                        .font(.system(size: 20))
+                        .font(.system(size: 25))
+
+                    Text("Groups")
+                        .foregroundColor(selectedTab == .GroupView ? Color.highlight.opacity(0.7) : Color.black.opacity(0.7))
+                        .font(Constants.tabFont)
+
+                }
+                .onTapGesture {
+                    selectedTab = .GroupView
                 }
                 
                 Spacer()
@@ -126,7 +139,7 @@ struct AppView: View {
                         .font(Constants.tabFont)
 
                 }
-                .padding(.trailing, 35)
+                .padding(.trailing, 30)
 
                 .onTapGesture {
                     selectedTab = .NewPostView
@@ -145,6 +158,7 @@ enum Tabs {
     case SettingsView
     case ProfileView
     case HomeView
+    case GroupView
     case SearchView
     case FriendView
     case NewPostView

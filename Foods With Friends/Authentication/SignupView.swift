@@ -25,7 +25,6 @@ struct SignupView: View {
                 Image("loginlogo")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-
                     .frame(width: UIScreen.screenWidth/2.5, height: UIScreen.screenWidth/2.5)
                     .padding()
 //                Text("Foods With Friends")
@@ -114,6 +113,7 @@ struct SignupView: View {
                         appUser.reinit(username: username, handle: handle, uid: uid)
                         UserData.appendUserDict(uid, PublicUser(username: username, handle: handle, uid: uid))
                         UserData.pushUser(appUser)
+                        UserData.setValue(uid, to: "users/handle_to_uid/\(handle)")
                         UserData.stopObservingUserDict()
                         UserDefaults.standard.set(uid, forKey: "userID")
                         viewState = .home
