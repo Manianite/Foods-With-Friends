@@ -47,7 +47,7 @@ struct SearchView: View {
                            
                            if waiting {
                                Divider()
-                               Text("Waiting...")
+                               Text("Loading...")
                            }
                            List {
                                ForEach($data.response.restaurants) {restaurant in
