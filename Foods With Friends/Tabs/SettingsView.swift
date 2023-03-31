@@ -165,13 +165,14 @@ struct SettingsView: View {
                         Button{
                             appUser.handle = newHandle
                             UserData.pushUser(appUser)
-                            handleChangeMode == false
+                            handleChangeMode = false
                         }label: {
                             Text("Confirm Handle Change")
                                 .font(Constants.textFont)
                                 .accentColor(.highlight)
                                 .padding(.bottom, 10)
                         }
+                        .disabled(handleCheck)
                     }
                     .onAppear {
                         UserData.observeUserDict()
@@ -225,7 +226,7 @@ struct SettingsView: View {
                         Button{
                             appUser.handle = newHandle
                             UserData.pushUser(appUser)
-                            emailChangeMode == false
+                            emailChangeMode = false
                         }label: {
                             Text("Confirm Email Change")
                                 .font(Constants.textFont)
