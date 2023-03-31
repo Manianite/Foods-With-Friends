@@ -13,6 +13,7 @@ struct GroupView: View {
     @Binding var group: FoodGroup
     @Binding var groupsList: [FoodGroup]
     @Binding var insideNavigator: Bool
+    @State var memberReqsList: [PublicUser] = []
     @State var reviews: [Review] = []
     var body: some View {
         VStack {
@@ -22,6 +23,43 @@ struct GroupView: View {
                 .font(Constants.textFontSmall)
             Divider()
             ScrollView {
+                ForEach($memberReqsList, id: \.self.uid) { memberReq in
+                    ZStack(alignment: .trailing) {
+                        PublicUserView(user: memberReq)
+                            .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(.black).background(.white))
+                            .padding([.trailing, .leading], 5)
+                            .transition(.move(edge: .bottom))
+                        HStack {
+                            Button {
+                                UserData.remove("groups/\(group.gid)/members/\(memberReq.uid)")
+                                UserData.remove("users/\(memberReq.uid)/groups/\(group.gid)")
+                                appUser.groups.removeValue(forKey: group.gid)
+                                group.members.removeValue(forKey: memberReq.uid.wrappedValue)
+                                memberReqsList.removeAll {$0.uid == memberReq.uid.wrappedValue}
+                            } label: {
+                                Image(systemName: "xmark")
+                                    .resizable()
+                                    .frame(width: (UIScreen.main.bounds.width)/8, height: (UIScreen.main.bounds.width)/8)
+                                    .accentColor(.red)
+                                    .padding(.trailing, 5)
+                            }
+                            Divider()
+                            Button {
+                                UserData.setValue("member", to: "groups/\(group.gid)/members/\(memberReq.uid.wrappedValue)")
+                                UserData.setValue("member", to: "users/\(memberReq.uid.wrappedValue)/groups/\(group.gid)")
+                                appUser.groups[group.gid] = "member"
+                                group.members.removeValue(forKey: memberReq.uid.wrappedValue)
+                                memberReqsList.removeAll {$0.uid == memberReq.uid.wrappedValue}
+                            } label: {
+                                Image(systemName: "checkmark")
+                                    .resizable()
+                                    .frame(width: (UIScreen.main.bounds.width)/8, height: (UIScreen.main.bounds.width)/8)
+                                    .accentColor(.green)
+                                    .padding(.trailing, 18)
+                            }
+                        }
+                    }
+                }
                 ForEach($reviews) { review in
                     ReviewView(review: review)
                         .background(.white)
@@ -29,14 +67,21 @@ struct GroupView: View {
                         .padding(.horizontal, 10)
                         .padding(.top, 5)
                 }
-                .onAppear {
-                    UserData.observeFeed(for: "groups/\(group.gid)/\(appUser.uid)/feed") { gotReviews in
-                        reviews = Array(gotReviews.values)
+            }
+            .onAppear {
+                UserData.observeFeed(for: "groups/\(group.gid)/\(appUser.uid)/feed") { gotReviews in
+                    reviews = Array(gotReviews.values)
+                }
+                for memberReqUid in Array(group.members.filter {$0.value == "incoming"}.keys) {
+                    //print(memberReqUid)
+                    UserData.getPublicUser(memberReqUid) { memberReq in
+                        //print(memberReq.username)
+                        memberReqsList.append(memberReq)
                     }
                 }
-                .onDisappear {
-                    UserData.stopObservingFeed()
-                }
+            }
+            .onDisappear {
+                UserData.stopObservingFeed()
             }
         }
         .background(Color.secondarySystemBackground)
@@ -46,6 +91,6 @@ struct GroupView: View {
 
 struct GroupView_Previews: PreviewProvider {
     static var previews: some View {
-        GroupView(group: .constant(FoodGroup()), groupsList: .constant([]), insideNavigator: .constant(false))
+        GroupView(group: .constant(FoodGroup()), groupsList: .constant([]), insideNavigator: .constant(false), memberReqsList: [])
     }
 }

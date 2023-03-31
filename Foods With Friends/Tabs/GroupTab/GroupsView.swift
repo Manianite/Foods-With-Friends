@@ -29,7 +29,9 @@ struct GroupsView: View {
                         } label: {
                             ZStack(alignment: .trailing) {
                                 GroupListView(group: group)
-                                    .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(.black))
+                                    .background(.white)
+                                    .cornerRadius(10)
+                                    //.background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(.black))
                                     .padding([.trailing, .leading], 5)
                                 if group.gid.wrappedValue == appUser.uid {
                                     Image(systemName: "crown.fill")
@@ -72,12 +74,13 @@ struct GroupsView: View {
                 }
             }
             .navigationBarTitle("My Groups", displayMode: .inline)
+            .background(Color.secondarySystemBackground)
         }
         .searchable(text: $query)
         .onAppear {
             for groupID in appUser.groups.keys {
                 UserData.getBranch(from: "groups/\(groupID)", as: FoodGroup.self) { group in
-                    if group.gid != "_" {
+                    if group.gid != "_" && appUser.groups[group.gid] != "incoming" {
                         groupsList.append(group)
                     }
                 }

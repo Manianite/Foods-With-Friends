@@ -136,6 +136,9 @@ struct SignupView: View {
             .onAppear {
                 UserData.observeUserDict()
             }
+            .onDisappear {
+                UserData.stopObservingUserDict()
+            }
             Spacer()
             Text("Already have an account?")
                 .font(Constants.textFont)

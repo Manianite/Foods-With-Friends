@@ -23,6 +23,7 @@ struct GroupSearchView: View {
                         Button {
                             UserData.setValue(group.isPublic.wrappedValue ? "member" : "incoming", to: "groups/\(group.gid.wrappedValue)/members/\(appUser.uid)")
                             UserData.setValue(group.isPublic.wrappedValue ? "member" : "incoming", to: "users/\(appUser.uid)/groups/\(group.gid.wrappedValue)")
+                            appUser.groups[group.gid.wrappedValue] = group.isPublic.wrappedValue ? "member" : "incoming"
                             if group.isPublic.wrappedValue {
                                 groups.removeAll {$0==group.wrappedValue}
                             }
@@ -33,9 +34,7 @@ struct GroupSearchView: View {
                                 .accentColor(.highlight)
                                 .padding(.trailing, 15)
                         }
-                        .disabled(appUser.groups.contains { (key, value) in
-                            value == "incoming"
-                        })
+                        .disabled(appUser.groups[group.gid.wrappedValue] == "incoming")
                     }
                 }
                 .navigationTitle("All Groups")
@@ -46,7 +45,7 @@ struct GroupSearchView: View {
         .onAppear {
             UserData.getBranch(from: "groups/group_dict", as: [String: PublicFoodGroup].self) { groupList in
                 groups = Array(groupList.values).filter { group in
-                    !appUser.groups.keys.contains(group.gid)
+                    !(appUser.groups.keys.contains(group.gid) && appUser.groups[group.gid] != "incoming")
                 }
                 filteredGroups = groups
             }

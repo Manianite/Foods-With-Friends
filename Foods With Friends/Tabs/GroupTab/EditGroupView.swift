@@ -19,6 +19,7 @@ struct EditGroupView: View {
     @State var inputImage: UIImage?
     @State var showingImagePicker = false
     @State var showingNameInput = true
+    @State var deleteAssurance = false
     
     init(_ group: FoodGroup, groups: Binding<[FoodGroup]>, isActive insideNavigator: Binding<Bool>) {
         _insideNavigator = Binding(projectedValue: insideNavigator)
@@ -87,15 +88,7 @@ struct EditGroupView: View {
             
             HStack {
                 Button {
-                    for (member, _) in group.members {
-                        UserData.remove("users/\(member)/groups/\(group.gid)")
-                    }
-                    UserStorage.deleteItem("groups/\(group.gid)")
-                    UserData.remove("groups/\(group.gid)")
-                    UserData.remove("groups/group_dict/\(group.gid)")
-                    appUser.groups.removeValue(forKey: group.gid)
-                    groupsList.removeAll {$0.gid==appUser.uid}
-                    insideNavigator = false
+                    deleteAssurance = true
                 } label: {
                     Text("Delete Group")
                         .font(Constants.titleFont)
@@ -137,6 +130,24 @@ struct EditGroupView: View {
         .padding()
         .sheet(isPresented: $showingImagePicker) {
             ImagePicker(image: $inputImage)
+        }
+        .alert(isPresented: $deleteAssurance) {
+            Alert (
+                title: Text("Foods With Friends"),
+                message: Text("Are you sure you want to delete \(group.name)?"),
+                primaryButton: .destructive(Text("Delete")) {
+                    for (member, _) in group.members {
+                        UserData.remove("users/\(member)/groups/\(group.gid)")
+                    }
+                    UserStorage.deleteItem("groups/\(group.gid)/group_pic")
+                    UserData.remove("groups/\(group.gid)")
+                    UserData.remove("groups/group_dict/\(group.gid)")
+                    appUser.groups.removeValue(forKey: group.gid)
+                    groupsList.removeAll {$0.gid==appUser.uid}
+                    insideNavigator = false
+                },
+                secondaryButton: .cancel()
+            )
         }
         .navigationTitle("Edit Group")
     }

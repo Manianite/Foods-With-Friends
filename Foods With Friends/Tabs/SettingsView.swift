@@ -20,6 +20,7 @@ struct SettingsView: View {
     @State var isHidden = true
     @State var confirmation = false
     @State var presentPopup = false
+    var handleCheck: Bool {!UserData.userDict.contains {$0.value.handle == newHandle}}
     
     var body: some View {
         VStack{
@@ -172,6 +173,12 @@ struct SettingsView: View {
                                 .padding(.bottom, 10)
                         }
                     }
+                    .onAppear {
+                        UserData.observeUserDict()
+                    }
+                    .onDisappear {
+                        UserData.stopObservingUserDict()
+                    }
                     
                 }
                 
@@ -258,10 +265,8 @@ struct SettingsView: View {
                 Text("Push Test Review")
                     .font(Constants.textFont)
                     .accentColor(.highlight)
-                    .disabled(true)
             }
-            
-            
+            .disabled(true)
         }
     }
 }

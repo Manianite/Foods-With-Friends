@@ -7,7 +7,11 @@
 
 import SwiftUI
 
-class FoodGroup: ObservableObject, Codable {
+class FoodGroup: ObservableObject, Codable, Equatable {
+    static func == (lhs: FoodGroup, rhs: FoodGroup) -> Bool {
+        lhs.isPublic == rhs.isPublic && lhs.img == rhs.img && lhs.name == rhs.name
+    }
+    
     @Published var members: [String: String]
     @Published var img: String
     @Published var name: String
