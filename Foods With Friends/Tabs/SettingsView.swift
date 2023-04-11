@@ -28,11 +28,6 @@ struct SettingsView: View {
         
         VStack{
             Group{
-                Text("Settings")
-                    .font(Constants.titleFont)
-                    .padding(.top, 20)
-                    .padding(.bottom, 30)
-                    .accentColor(.highlight)
 
             Text("Settings")
                 .font(Constants.titleFont)
@@ -66,7 +61,7 @@ struct SettingsView: View {
                             RoundedRectangle(cornerRadius: 16)
                                 .stroke(.black, lineWidth: 4)
                         )
-                }
+                }.padding(.vertical, 10)
                 
                 //shows textfield or securefield for password
                 if passwordChangeMode {
@@ -179,7 +174,7 @@ struct SettingsView: View {
                             RoundedRectangle(cornerRadius: 16)
                                 .stroke(.black, lineWidth: 4)
                         )
-                        //.padding(.vertical, 10)
+                        .padding(.vertical, 10)
 
                     
                 }

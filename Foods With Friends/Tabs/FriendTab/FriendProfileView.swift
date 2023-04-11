@@ -102,8 +102,9 @@ struct FriendProfileView: View {
                     ScrollView {
                         Text(friend.bio)
                             .font(Constants.textFontSmall)
-                            .frame(width: (UIScreen.main.bounds.width)-20, height: (UIScreen.main.bounds.width)/6)
-                            .multilineTextAlignment(.leading)
+//                            .frame(width: (UIScreen.main.bounds.width)-20, height: (UIScreen.main.bounds.width)/6)
+//                            .multilineTextAlignment(.leading)
+                            .padding(.leading, 20)
                             .lineLimit(nil)
                         Spacer()
                     }

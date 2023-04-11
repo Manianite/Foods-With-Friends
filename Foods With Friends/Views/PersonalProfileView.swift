@@ -19,7 +19,7 @@ struct PersonalProfileView: View {
                 HStack{
                     Spacer()
                     HStack(alignment: .bottom){
-                        Spacer()
+                      //  Spacer()
                         if viewMode {
                             //profile pic
                             KFImage(URL(string: appUser.profilePic))
@@ -32,7 +32,7 @@ struct PersonalProfileView: View {
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: (UIScreen.main.bounds.width)/4, height: (UIScreen.main.bounds.width)/4)
                                 .clipShape(Circle())
-                                .padding(.leading, 8)
+                                .padding(.leading, 20)
                             
                             Button {
                                 viewMode = false
@@ -41,7 +41,7 @@ struct PersonalProfileView: View {
                                     .foregroundColor(Color.highlight)
                                     .font(.system(size: 30))
                             }
-                            .padding(.leading, -20.0)
+                            .padding(.leading, -15.0)
                         } else {
                             Button {
                                 showingImagePicker = true
@@ -58,18 +58,22 @@ struct PersonalProfileView: View {
                                         .aspectRatio(contentMode: .fill)
                                         .frame(width: (UIScreen.main.bounds.width)/4, height: (UIScreen.main.bounds.width)/4)
                                         .clipShape(Circle())
-                                        .padding(.leading, 8)
+                                        .padding(.leading, 20)
+                                   
                                     
+                                    ZStack{
+                                        Circle()
+                                            .frame(width: (UIScreen.main.bounds.width)/4, height: (UIScreen.main.bounds.width)/4)
+                                            .foregroundColor(Color.highlight.opacity(0.3))
+                                            .padding(.leading, 8)
+
                                     Text("Edit")
                                         .padding(.horizontal, 5)
                                         .padding(.top, 2)
-                                        .background(Color.highlight.opacity(0.5))
-                                        .cornerRadius(40)
-                                        .frame(width: (UIScreen.main.bounds.width)/5, height: (UIScreen.main.bounds.width)/4)
                                         .foregroundColor(Color.white)
-                                        .font(Constants.textFontSmall)
-                                        .font(.system(size: 30))
+                                        .font(Constants.textFont)
                                         .padding(.leading, 8)
+                                }
                                 }
                             }
                             .foregroundColor(.black)
@@ -82,7 +86,7 @@ struct PersonalProfileView: View {
                                     .foregroundColor(Color.highlight)
                                     .font(.system(size: 30))
                             }
-                            .padding(.leading, -20.0)
+                            .padding(.leading, -15.0)
                         }
                         Spacer()
                         
@@ -171,10 +175,10 @@ struct PersonalProfileView: View {
                     if viewMode {
                         Text(appUser.bio)
                             .font(Constants.textFontSmall)
-                            .frame(width: (UIScreen.main.bounds.width)-30)
-                            .multilineTextAlignment(.leading)
+//                            .frame(width: (UIScreen.main.bounds.width)-30)
+//                            .multilineTextAlignment(.leading)
                             .lineLimit(5)
-                            .padding(.leading, 20)
+                            .padding(.leading, 25)
                     } else {
                         TextEditor(text: $appUser.bio)
                             .font(Constants.textFontSmall)
