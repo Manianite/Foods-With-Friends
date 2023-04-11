@@ -26,8 +26,6 @@ struct Foods_With_FriendsApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(appUser)
-               // .environmentObject(locationManager)
-
         }
     }
 }

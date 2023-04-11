@@ -22,6 +22,7 @@ struct SettingsView: View {
     @State var isHidden = true
     @State var confirmation = false
     @State var presentPopup = false
+    var handleCheck: Bool {!UserData.userDict.contains {$0.value.handle == newHandle}}
     
     var body: some View {
         
@@ -32,8 +33,16 @@ struct SettingsView: View {
                     .padding(.top, 20)
                     .padding(.bottom, 30)
                     .accentColor(.highlight)
-                
-                
+
+            Text("Settings")
+                .font(Constants.titleFont)
+                .padding(.top, 20)
+                .padding(.bottom, 30)
+                .accentColor(.highlight)
+            
+            
+            Group {
+
                 //button for change password
                 Button {
                     if passwordChangeMode == false{
@@ -45,20 +54,18 @@ struct SettingsView: View {
                     handleChangeMode = false
                     emailChangeMode = false
                     locationChangeMode = false
+
                 } label: {
-                    VStack{
-                        Text("Change Password")
-                            .frame(width: UIScreen.screenWidth/1.3)
-                            .font(Constants.textFont)
-                            .accentColor(.black.opacity(0.8))
-                            .padding(.vertical, 5)
-                            .padding(.horizontal)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 16)
-                                    .stroke(.black, lineWidth: 4)
-                            )
-                            .padding(.vertical, 10)
-                    }
+                    Text("Change Password")
+                        .frame(width: UIScreen.screenWidth/1.3)
+                        .font(Constants.textFont)
+                        .accentColor(.black.opacity(0.8))
+                        .padding(.vertical, 5)
+                        .padding(.horizontal)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(.black, lineWidth: 4)
+                        )
                 }
                 
                 //shows textfield or securefield for password
@@ -160,6 +167,7 @@ struct SettingsView: View {
                     emailChangeMode = false
                     passwordChangeMode = false
                     locationChangeMode = false
+
                 }label: {
                     Text("Change handle")
                         .frame(width: UIScreen.screenWidth/1.3)
@@ -171,7 +179,8 @@ struct SettingsView: View {
                             RoundedRectangle(cornerRadius: 16)
                                 .stroke(.black, lineWidth: 4)
                         )
-                        .padding(.vertical, 10)
+                        //.padding(.vertical, 10)
+
                     
                 }
                 
@@ -193,17 +202,27 @@ struct SettingsView: View {
                         Button{
                             appUser.handle = newHandle
                             UserData.pushUser(appUser)
+
                             handleChangeMode == false
+                            
                         }label: {
                             Text("Confirm Handle Change")
                                 .font(Constants.textFont)
                                 .accentColor(.highlight)
                                 .padding(.bottom, 10)
                         }
+
+                        .disabled(handleCheck)
+                    }
+                    .onAppear {
+                        UserData.observeUserDict()
+                    }
+                    .onDisappear {
+                        UserData.stopObservingUserDict()
+
                     }
                     
                 }
-                
                 
                 //button to change email
                 Button{
@@ -216,6 +235,7 @@ struct SettingsView: View {
                     handleChangeMode = false
                     passwordChangeMode = false
                     locationChangeMode = false
+                    
                 }label: {
                     Text("Change email")
                         .frame(width: UIScreen.screenWidth/1.3)
@@ -276,6 +296,7 @@ struct SettingsView: View {
                         .accentColor(.black.opacity(0.8))
                         .padding(.vertical, 5)
                         .padding(.horizontal)
+
                         .overlay(
                             RoundedRectangle(cornerRadius: 16)
                                 .stroke(.black, lineWidth: 4)
@@ -339,6 +360,9 @@ struct SettingsView: View {
             //            }
             
             
+                        //.padding(.vertical, 10)
+                    
+                }               
         }
     }
 }

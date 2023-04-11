@@ -15,6 +15,7 @@ struct FriendView: View {
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
+                Color.secondarySystemBackground.edgesIgnoringSafeArea(.all)
                 if friendsList.count == 0 {
                     VStack {
                         Text("You have not added any friends yet!")
@@ -25,7 +26,9 @@ struct FriendView: View {
                     ForEach($friendReqsList, id: \.self.uid) { friend in
                         ZStack(alignment: .trailing) {
                             PublicUserView(user: friend)
-                                .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(.black))
+                                .background(.white)
+                                .cornerRadius(10)
+                                //.background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(.black))
                                 .padding([.trailing, .leading], 5)
                                 .transition(.move(edge: .bottom))
                             HStack {
@@ -65,7 +68,9 @@ struct FriendView: View {
                             FriendProfileView(uid: friend.uid, friendsList: $friendsList)
                         } label: {
                             PublicUserView(user: friend)
-                                .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(.black))
+                                .background(.white)
+                                .cornerRadius(10)
+                                //.background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(.black))
                                 .padding([.trailing, .leading], 5)
                         }
                         .buttonStyle(.plain)

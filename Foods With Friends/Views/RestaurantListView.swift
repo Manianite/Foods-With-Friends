@@ -13,29 +13,36 @@ struct RestaurantListView: View {
     @Binding var restaurant: Restaurant
     var body: some View {
         HStack(alignment: .top) {
-            HStack {
+                HStack {
                 KFImage(URL(string: restaurant.logo_photos.first ?? "https://us.123rf.com/450wm/benidict83/benidict832008/benidict83200800014/benidict83200800014.jpg?ver=6"))
                     .resizable()
                     .frame(width: 100, height: 100, alignment: .topLeading)
                     .cornerRadius(20)
-                    .padding(5)
+                    .padding(.leading, 13)
             }
             VStack(alignment: .trailing) {
                 Text(restaurant.name)
-                    .font(.title3)
-                    .padding(5)
+                    .frame(width: UIScreen.screenWidth/1.5, alignment: .leading)
+                    .font(Constants.titleFont)
+                    .padding([.bottom, .top], 10)
+                    .padding(.trailing, 2)
+                    .scaledToFill()
+                    .minimumScaleFactor(0.5)
+                    .lineLimit(1)
+                
                 HStack {
                     Spacer()
-                    Text(restaurant.cuisines.first ?? "Food Place")
-                        .font(.headline)
+                    Text(restaurant.cuisines.first ?? "Restaurant")
+                        .font(Constants.textFont)
                     Spacer()
                     Text(restaurant.is_open ? "Open" : "Closed")
-                        .font(.headline)
-                        .foregroundColor(restaurant.is_open ? .green : .red)
+                        .font(Constants.textFont)
+                        .foregroundColor(restaurant.is_open ? .green : Color.highlight)
                     Spacer()
                 }
             }
         }
+        
     }
 }
 
