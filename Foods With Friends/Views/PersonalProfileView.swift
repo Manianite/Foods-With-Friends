@@ -65,14 +65,14 @@ struct PersonalProfileView: View {
                                         Circle()
                                             .frame(width: (UIScreen.main.bounds.width)/4, height: (UIScreen.main.bounds.width)/4)
                                             .foregroundColor(Color.highlight.opacity(0.3))
-                                            .padding(.leading, 8)
+                                            .padding(.leading, 20)
 
                                     Text("Edit")
                                         .padding(.horizontal, 5)
                                         .padding(.top, 2)
                                         .foregroundColor(Color.white)
                                         .font(Constants.textFont)
-                                        .padding(.leading, 8)
+                                        .padding(.leading, 20)
                                 }
                                 }
                             }
