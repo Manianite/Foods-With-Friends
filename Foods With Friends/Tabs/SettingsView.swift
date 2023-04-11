@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import UIKit
 
 struct SettingsView: View {
     @EnvironmentObject var appUser: User
@@ -22,6 +23,8 @@ struct SettingsView: View {
     @State var isHidden = true
     @State var confirmation = false
     @State var presentPopup = false
+    private let notificationPublisher = NotificationPublisher()
+    
     var handleCheck: Bool {!UserData.userDict.contains {$0.value.handle == newHandle}}
     
     var body: some View {
@@ -340,7 +343,26 @@ struct SettingsView: View {
             }
             Spacer()
             
+
+            //testing for posting reviews
+            Button {
+                let time = Date().timeIntervalSince1970
+                UserData.pushReview(Review(time: time), toFriendsOf: appUser)
+                appUser.reviews[String(time)] = Review(time: time)
+            } label: {
+                Text("Push Test Review")
+                    .font(Constants.textFont)
+                    .accentColor(.highlight)
+            }
+            .disabled(true)
             
+            Button{
+                notificationPublisher.sendNotification(title: "hey", subtitle: "we made a cool", body: "notification", badge: 1, delayInterval: nil)
+                
+            } label: {
+                Text("test notification")
+            }
+ 
             
             //            //testing for posting reviews
             //            Button {

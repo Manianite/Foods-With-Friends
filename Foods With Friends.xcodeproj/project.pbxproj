@@ -44,6 +44,7 @@
 		83C9AA2029C0AB71009AE879 /* RestaurantInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C9AA1F29C0AB71009AE879 /* RestaurantInfoView.swift */; };
 		8801352729B0F45400304A06 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8801352629B0F45400304A06 /* Constants.swift */; };
 		8801352F29B3A06600304A06 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8801352E29B3A06600304A06 /* HomeView.swift */; };
+		88D3A9B629D720E0007EA0F4 /* NotificationsPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D3A9B529D720E0007EA0F4 /* NotificationsPublisher.swift */; };
 		88F7339929B77EFA001D8CC6 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F7339829B77EFA001D8CC6 /* SearchView.swift */; };
 		88F7339B29B77F12001D8CC6 /* FriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F7339A29B77F12001D8CC6 /* FriendView.swift */; };
 		88F7339D29B77F21001D8CC6 /* NewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F7339C29B77F21001D8CC6 /* NewPostView.swift */; };
@@ -117,6 +118,7 @@
 		870305D1CDDE70F076450C36 /* Pods_Foods_With_Friends_Foods_With_FriendsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Foods_With_Friends_Foods_With_FriendsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8801352629B0F45400304A06 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8801352E29B3A06600304A06 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		88D3A9B529D720E0007EA0F4 /* NotificationsPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationsPublisher.swift; path = "Foods With Friends/Models/NotificationsPublisher.swift"; sourceTree = SOURCE_ROOT; };
 		88F7339829B77EFA001D8CC6 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		88F7339A29B77F12001D8CC6 /* FriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendView.swift; sourceTree = "<group>"; };
 		88F7339C29B77F21001D8CC6 /* NewPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostView.swift; sourceTree = "<group>"; };
@@ -278,8 +280,9 @@
 				0FDDA06D29B7AAB900A866C4 /* APIData.swift */,
 				0FC9C36029BA65AA006B9ECD /* User.swift */,
 				F0D8A18629BF4F1D004A916F /* Review.swift */,
-				83290A2629C48F4B007F9ECF /* LocationManager.swift */,
 				0F5A352529CCB3AB00C38E5B /* FoodGroup.swift */,
+				83290A2629C48F4B007F9ECF /* LocationManager.swift */,
+				88D3A9B529D720E0007EA0F4 /* NotificationsPublisher.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -574,6 +577,7 @@
 				0FC9C36129BA65AA006B9ECD /* User.swift in Sources */,
 				0F2F316429AF965D008B0CC3 /* ContentView.swift in Sources */,
 				0F2F316229AF965D008B0CC3 /* Foods_With_FriendsApp.swift in Sources */,
+				88D3A9B629D720E0007EA0F4 /* NotificationsPublisher.swift in Sources */,
 				88F733A129B77FD1001D8CC6 /* ProfileView.swift in Sources */,
 				8801352F29B3A06600304A06 /* HomeView.swift in Sources */,
 				0FC9C35F29B8E558006B9ECD /* AppView.swift in Sources */,
