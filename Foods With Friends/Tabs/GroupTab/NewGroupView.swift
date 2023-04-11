@@ -21,40 +21,41 @@ struct NewGroupView: View {
         VStack {
             Text("New Group")
                 .font(Constants.titleFont)
-            Button {
-                showingImagePicker = true
-            } label: {
-                //group pic
-                ZStack(alignment: .bottom) {
-                    if let image = inputImage {
-                        Image(uiImage: image)
-                            .resizable()
-                            .frame(width: (UIScreen.main.bounds.width)/2, height: (UIScreen.main.bounds.width)/2)
-                            .aspectRatio(contentMode: .fill)
-                            .clipShape(Circle())
-                            .padding(5)
-                    } else {
-                        Image(systemName: "mappin.circle.fill")
-                            .resizable()
-                            .frame(width: (UIScreen.main.bounds.width)/2, height: (UIScreen.main.bounds.width)/2)
-                            .aspectRatio(contentMode: .fill)
-                            .clipShape(Circle())
-                            .padding(5)
-                    }
-                    Text("Edit")
-                        .padding(.horizontal, 5)
-                        .padding(.top, 2)
-                        .background(Color.highlight.opacity(0.5))
-                        .cornerRadius(40)
-                        .frame(width: (UIScreen.main.bounds.width)/5, height: (UIScreen.main.bounds.width)/4)
-                        .foregroundColor(Color.white)
-                        .font(Constants.textFontSmall)
-                        .font(.system(size: 30))
-                        .padding(.leading, 8)
+            
+            //group pic
+            ZStack(alignment: .bottom) {
+                if let image = inputImage {
+                    Image(uiImage: image)
+                        .resizable()
+                        .frame(width: (UIScreen.main.bounds.width)/2, height: (UIScreen.main.bounds.width)/2)
+                        .aspectRatio(contentMode: .fill)
+                        .clipShape(Circle())
+                        .padding(5)
+                } else {
+                    Image(systemName: "mappin.circle.fill")
+                        .resizable()
+                        .frame(width: (UIScreen.main.bounds.width)/2, height: (UIScreen.main.bounds.width)/2)
+                        .aspectRatio(contentMode: .fill)
+                        .clipShape(Circle())
+                        .padding([.top, .leading, .trailing], 5)
                 }
             }
+                Button {
+                    showingImagePicker = true
+                } label: {
+                    Text("Choose Group Photo")
+                        .padding(.horizontal, 5)
+                        .padding(.bottom, 10)
+                    //                        .background(Color.highlight.opacity(0.5))
+                    //                        .cornerRadius(40)
+                        .foregroundColor(Color.gray)
+                        .font(Constants.textFont)
+                        .padding(.leading, 8)
+                    
+                
+            }
             .foregroundColor(.black)
-
+            
             TextField("Group name", text: $name)
                 .font(Constants.titleFont)
                 .multilineTextAlignment(.leading)
@@ -97,9 +98,15 @@ struct NewGroupView: View {
             } label: {
                 Text("Create Group!")
                     .font(Constants.titleFont)
-                    .foregroundColor(.highlight)
-                    .padding(.horizontal, 5)
-                    .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
+                   // .foregroundColor(.highlight)
+                    .padding(10)
+                    .background(Color.highlight.opacity(0.1)).foregroundColor(Color.highlight)
+                    .cornerRadius(25)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 25)
+                            .stroke(Color.highlight, lineWidth: 2)
+                   )
+
             }
             .padding()
         }
