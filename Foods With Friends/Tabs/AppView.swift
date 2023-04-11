@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct AppView: View {
-    @State var selectedTab = Tabs.SettingsView
-    @Binding var viewState: ViewState
+    @State var selectedTab = Tabs.HomeView
+       @Binding var viewState: ViewState
+       @StateObject var locationManager = LocationManager()
     var body: some View {
+        //ViewController()
         VStack(spacing: 0) {
             HStack{
                 VStack {

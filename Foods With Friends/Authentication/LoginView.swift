@@ -89,6 +89,7 @@ struct LoginView: View {
                             appUser.reinit(user)
                             UserDefaults.standard.set(uid, forKey: "userID")
                             viewState = .home
+                            //selectedTab = .HomeView
                         }
                     } else {
                         print(error ?? "")
