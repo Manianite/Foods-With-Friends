@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct AppView: View {
-    @State var selectedTab = Tabs.SettingsView
+    @State var selectedTab = Tabs.HomeView
     @Binding var viewState: ViewState
+    @StateObject var locationManager = LocationManager()
+    
+    
     var body: some View {
         VStack(spacing: 0) {
             HStack{
@@ -151,8 +154,11 @@ struct AppView: View {
             .padding(.top, 20.0)
             .padding(.bottom, 16)
         }
+    
+        .environmentObject(locationManager)
     }
 }
+
 
 enum Tabs {
     case SettingsView
@@ -167,5 +173,6 @@ enum Tabs {
 struct AppView_Previews: PreviewProvider {
     static var previews: some View {
         AppView(viewState: Binding.constant(.home))
+           
     }
 }

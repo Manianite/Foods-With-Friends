@@ -8,6 +8,7 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject var appUser: User
     @State var reviews: [Review] = []
+
     var body: some View {
         ScrollView {
             if reviews.count == 0 {
@@ -41,5 +42,6 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+
     }
 }

@@ -10,10 +10,12 @@ import FirebaseAuth
 
 struct SettingsView: View {
     @EnvironmentObject var appUser: User
+    @EnvironmentObject var locationManager: LocationManager
     @Binding var viewState: ViewState
     @State var passwordChangeMode = false
     @State var emailChangeMode = false
     @State var handleChangeMode = false
+    @State var locationChangeMode = false
     @State var newPassword = ""
     @State var newHandle = ""
     @State var newEmail = ""
@@ -23,7 +25,15 @@ struct SettingsView: View {
     var handleCheck: Bool {!UserData.userDict.contains {$0.value.handle == newHandle}}
     
     var body: some View {
+        
         VStack{
+            Group{
+                Text("Settings")
+                    .font(Constants.titleFont)
+                    .padding(.top, 20)
+                    .padding(.bottom, 30)
+                    .accentColor(.highlight)
+
             Text("Settings")
                 .font(Constants.titleFont)
                 .padding(.top, 20)
@@ -32,6 +42,7 @@ struct SettingsView: View {
             
             
             Group {
+
                 //button for change password
                 Button {
                     if passwordChangeMode == false{
@@ -42,6 +53,8 @@ struct SettingsView: View {
                     }
                     handleChangeMode = false
                     emailChangeMode = false
+                    locationChangeMode = false
+
                 } label: {
                     Text("Change Password")
                         .frame(width: UIScreen.screenWidth/1.3)
@@ -54,8 +67,6 @@ struct SettingsView: View {
                                 .stroke(.black, lineWidth: 4)
                         )
                 }
-
-                
                 
                 //shows textfield or securefield for password
                 if passwordChangeMode {
@@ -121,7 +132,30 @@ struct SettingsView: View {
                         }
                     }
                 }
-                                
+            }
+            
+            //            Button {
+            //                //confirmation = true
+            //                presentPopup = true
+            //            } label: {
+            //                Text("Delete Account")
+            //                    .font(Constants.titleFont)
+            //                    .accentColor(.highlight)
+            //                    .popover(isPresented: $presentPopup, content: {
+            //                        Button{
+            //                            //Auth.auth().currentUser?.delete()
+            //                            Auth.auth().currentUser!.uid
+            //                            UserData.remove("users/\(appUser.uid)")
+            //                            UserData.remove("users/user_dict/\(appUser.uid)")
+            //                            viewState = .login
+            //                        }label: {
+            //                            Text("Confirm delete account?")
+            //                        }
+            //                    })
+            //            }
+            
+            
+            Group{
                 //button for changing handle
                 Button{
                     if handleChangeMode == false{
@@ -132,6 +166,8 @@ struct SettingsView: View {
                     }
                     emailChangeMode = false
                     passwordChangeMode = false
+                    locationChangeMode = false
+
                 }label: {
                     Text("Change handle")
                         .frame(width: UIScreen.screenWidth/1.3)
@@ -144,6 +180,7 @@ struct SettingsView: View {
                                 .stroke(.black, lineWidth: 4)
                         )
                         //.padding(.vertical, 10)
+
                     
                 }
                 
@@ -165,13 +202,16 @@ struct SettingsView: View {
                         Button{
                             appUser.handle = newHandle
                             UserData.pushUser(appUser)
-                            handleChangeMode = false
+
+                            handleChangeMode == false
+                            
                         }label: {
                             Text("Confirm Handle Change")
                                 .font(Constants.textFont)
                                 .accentColor(.highlight)
                                 .padding(.bottom, 10)
                         }
+
                         .disabled(handleCheck)
                     }
                     .onAppear {
@@ -179,6 +219,7 @@ struct SettingsView: View {
                     }
                     .onDisappear {
                         UserData.stopObservingUserDict()
+
                     }
                     
                 }
@@ -193,6 +234,8 @@ struct SettingsView: View {
                     }
                     handleChangeMode = false
                     passwordChangeMode = false
+                    locationChangeMode = false
+                    
                 }label: {
                     Text("Change email")
                         .frame(width: UIScreen.screenWidth/1.3)
@@ -204,7 +247,7 @@ struct SettingsView: View {
                             RoundedRectangle(cornerRadius: 16)
                                 .stroke(.black, lineWidth: 4)
                         )
-                        //.padding(.vertical, 10)
+                        .padding(.vertical, 10)
                     
                 }
                 
@@ -226,7 +269,7 @@ struct SettingsView: View {
                         Button{
                             appUser.handle = newHandle
                             UserData.pushUser(appUser)
-                            emailChangeMode = false
+                            emailChangeMode == false
                         }label: {
                             Text("Confirm Email Change")
                                 .font(Constants.textFont)
@@ -235,39 +278,91 @@ struct SettingsView: View {
                         }
                     }
                 }
-            } //.frame(height: UIScreen.screenWidth/2)
-            
-            Spacer()
+                
+                //button to change location settings
+                Button{
+                    if locationChangeMode == false{
+                        locationChangeMode = true
+                    }
+                    else{
+                        locationChangeMode = false
+                    }
+                    handleChangeMode = false
+                    passwordChangeMode = false
+                }label: {
+                    Text("Location Services")
+                        .frame(width: UIScreen.screenWidth/1.3)
+                        .font(Constants.textFont)
+                        .accentColor(.black.opacity(0.8))
+                        .padding(.vertical, 5)
+                        .padding(.horizontal)
 
-            Button {
-                UserDefaults.standard.removeObject(forKey: "userID")
-                viewState = .login
-            } label: {
-                Text("Log Out")
-                    .frame(width: UIScreen.screenWidth/1.3)
-                    .font(Constants.textFont)
-                    .accentColor(.black.opacity(0.8))
-                    .padding(.vertical, 5)
-                    .padding(.horizontal)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                            .stroke(.black, lineWidth: 4)
-                    )
-                    .background(Color.highlight.opacity(0.5).cornerRadius(16))
-                    .padding(.vertical, 20)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(.black, lineWidth: 4)
+                        )
+                        .padding(.vertical, 10)
+                    
+                }
+                
+                //shows options for location settings
+                if locationChangeMode == true {
+                    VStack{
+                        Button{
+                            UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!)
+                            locationChangeMode == false
+                        }label: {
+                            Text("Update Location Preferences")
+                                .font(Constants.textFont)
+                                .accentColor(.highlight)
+                                .padding(.bottom, 10)
+                        }
+                    }
+                }
+                
+                
+                Spacer()
+                
+                Button {
+                    UserDefaults.standard.removeObject(forKey: "userID")
+                    viewState = .login
+                } label: {
+                    VStack{
+                        Text("Log Out")
+                            .frame(width: UIScreen.screenWidth/1.3)
+                            .font(Constants.textFont)
+                            .accentColor(.black.opacity(0.8))
+                            .padding(.vertical, 5)
+                            .padding(.horizontal)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .stroke(.black, lineWidth: 4)
+                            )
+                            .background(Color.highlight.opacity(0.5).cornerRadius(16))
+                            .padding(.vertical, 20)
+                    }
+                }
             }
+            Spacer()
             
-            //testing for posting reviews
-            Button {
-                let time = Date().timeIntervalSince1970
-                UserData.pushReview(Review(time: time), toFriendsOf: appUser)
-                appUser.reviews[String(time)] = Review(time: time)
-            } label: {
-                Text("Push Test Review")
-                    .font(Constants.textFont)
-                    .accentColor(.highlight)
-            }
-            .disabled(true)
+            
+            
+            //            //testing for posting reviews
+            //            Button {
+            //                let time = Date().timeIntervalSince1970
+            //                UserData.pushReview(Review(time: time), toFriendsOf: appUser)
+            //                appUser.reviews[String(time)] = Review(time: time)
+            //            } label: {
+            //                Text("Push Test Review")
+            //                    .font(Constants.textFont)
+            //                    .accentColor(.highlight)
+            //                    .disabled(true)
+            //            }
+            
+            
+                        //.padding(.vertical, 10)
+                    
+                }               
         }
     }
 }
@@ -275,5 +370,6 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView(viewState: Binding.constant(.home))
+            .environmentObject(LocationManager())
     }
 }

@@ -21,12 +21,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct Foods_With_FriendsApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var appUser: User = User()
-    @StateObject var locationManager = LocationManager.shared
+   // @StateObject var locationManager: LocationManager = LocationManager()
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(appUser)
-                .environmentObject(locationManager)
         }
     }
 }
