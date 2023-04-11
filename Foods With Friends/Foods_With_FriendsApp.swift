@@ -34,12 +34,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct Foods_With_FriendsApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var appUser: User = User()
-    @StateObject var locationManager = LocationManager.shared
+
+    // this is what was there for me, keeping it here for reference just in case (Busra): @StateObject var locationManager = LocationManager.shared
     @Environment(\.scenePhase) var scenePhase
+   // @StateObject var locationManager: LocationManager = LocationManager()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(appUser)
+
                 .environmentObject(locationManager)
                 .onChange(of: scenePhase) { newPhase in
                     if newPhase == .active {
