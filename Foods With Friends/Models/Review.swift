@@ -40,14 +40,14 @@ class Review: Codable, Identifiable, ObservableObject {
         body = try container.decode(String.self, forKey: .body)
         time = try container.decode(String.self, forKey: .time).replacingOccurrences(of: ",", with: ".")
     }
-    internal init(title: String = "", stars: Int = 0, images: [String] = [""], restaurant: String = "", uid: String = "", body: String = "", time: TimeInterval) {
+    internal init(title: String = "", stars: Int = 0, images: [String], restaurant: String = "", uid: String = "", body: String = "", time: TimeInterval) {
         self.title = title
         self.stars = stars
         self.images = images
         self.restaurant = restaurant
         self.uid = uid
         self.body = body
-        self.time = String(time)
+        self.time = String(time).replacingOccurrences(of: ".", with: ",")
     }
     internal init(_ empty: Bool) {
         title = ""

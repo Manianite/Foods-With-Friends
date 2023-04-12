@@ -18,45 +18,43 @@ struct GroupListView: View {
         self.group = publicGroup.wrappedValue
     }
     var body: some View {
-        ZStack(alignment: .leading) {
-            Color.white
-                .padding()
-            HStack {
-                KFImage(URL(string: group.img))
-                    .placeholder {
-                        ZStack {
-                            Color.black
-                                .clipShape(Circle())
-                            Color.white
-                                .clipShape(Circle())
-                                .frame(width: 49, height: 49)
-                            Image(systemName: "person.3.fill")
-                                .resizable()
-                                .frame(width: 55, height: 25)
-                                .aspectRatio(contentMode: .fit)
-                                .padding(.top, 8)
-                        }
-                        .frame(width: 60, height: 60)
-                        .clipShape(Circle())
+        HStack {
+            KFImage(URL(string: group.img))
+                .placeholder {
+                    ZStack {
+                        Color.black
+                            .clipShape(Circle())
+                        Color.white
+                            .clipShape(Circle())
+                            .frame(width: 49, height: 49)
+                        Image(systemName: "person.3.fill")
+                            .resizable()
+                            .frame(width: 55, height: 25)
+                            .aspectRatio(contentMode: .fit)
+                            .padding(.top, 8)
                     }
-                    .resizable()
-                    .frame(width: (UIScreen.main.bounds.width)/6, height: (UIScreen.main.bounds.width)/6)
-                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 60, height: 60)
                     .clipShape(Circle())
-                    .padding(2)
-                VStack(alignment: .leading) {
-                    Text(group.name)
-                        .font(Constants.titleFont)
-                    HStack(spacing: 3) {
-                        Text("\(group.count) members")
-                            .font(Constants.textFontSmall)
-                            .padding(.trailing, 10)
-                        Image(systemName: group.isPublic ? "globe" : "lock")
-                        Text(group.isPublic ? "public" : "private")
-                            .font(Constants.textFontSmall)
-                    }
+                    .padding(5)
+                }
+                .resizable()
+                .frame(width: (UIScreen.main.bounds.width)/6, height: (UIScreen.main.bounds.width)/6)
+                .aspectRatio(contentMode: .fill)
+                .clipShape(Circle())
+                .padding(5)
+            VStack(alignment: .leading) {
+                Text(group.name)
+                    .font(Constants.titleFont)
+                HStack(spacing: 3) {
+                    Text("\(group.count) members")
+                        .font(Constants.textFontSmall)
+                        .padding(.trailing, 10)
+                    Image(systemName: group.isPublic ? "globe" : "lock")
+                    Text(group.isPublic ? "public" : "private")
+                        .font(Constants.textFontSmall)
                 }
             }
+            Spacer()
         }
     }
 }

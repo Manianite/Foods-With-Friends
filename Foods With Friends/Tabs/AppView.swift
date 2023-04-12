@@ -69,7 +69,7 @@ struct AppView: View {
             } else if selectedTab == .FriendView {
                 FriendView()
             } else if selectedTab == .NewPostView {
-                NewPostView()
+                NewPostView(selectedTab: $selectedTab)
             }
             
             Divider()

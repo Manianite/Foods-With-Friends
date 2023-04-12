@@ -22,22 +22,37 @@ struct NewPostView: View {
     @State var showRestaurants: Bool = false
     @State var restaurant: Restaurant?
     @State var showingSelectedImages = false
+    @State var showingIncompleteAlert = false
+    @State var showingBodylessAlert = false
+    @Binding var selectedTab: Tabs
     @EnvironmentObject var locationManager: LocationManager
 
     func addReview() {
-        if let restaurant = restaurant {
+        if title=="" || rating==0 || restaurant==nil {
+            showingIncompleteAlert = true
+        } else if reviewtext=="" {
+            showingBodylessAlert = true
+        } else if let restaurant = restaurant {
             let time = Date().timeIntervalSince1970
-            let newReview = Review(title: title, stars: rating, images: [], restaurant: restaurant.name+restaurant.address.street_addr, uid: appUser.uid, body: reviewtext, time: time)
+            let newReview = Review(title: title, stars: rating, images: ["_"], restaurant: restaurant.name, uid: appUser.uid, body: reviewtext, time: time)
             for img in images.indices {
                 UserStorage.putImage(images[img], url: "reviews/\(appUser.uid)/\(time)/\(img)") { url, error in
                     if let url = url {
                         newReview.images.append(url.absoluteString)
+                        if img == images.count-1 {
+                            UserData.pushReview(newReview, toFriendsOf: appUser)
+                            appUser.reviews[newReview.time] = newReview
+                        }
                     } else {
                         print("ERROR: cannot putImage in addReview")
                     }
                 }
             }
-            print(newReview.toDictionnary)
+            if images.count == 0 {
+                UserData.pushReview(newReview, toFriendsOf: appUser)
+                appUser.reviews[newReview.time] = newReview
+            }
+            selectedTab = .ProfileView
         }
     }
     var body: some View {
@@ -48,7 +63,7 @@ struct NewPostView: View {
                 .padding(.horizontal)
                 .multilineTextAlignment(.center)
             HStack {
-                Image(systemName: "star.fill")
+                Image(systemName: rating>0 ? "star.fill": "star")
                     .onTapGesture {
                         rating = 1
                     }
@@ -112,6 +127,24 @@ struct NewPostView: View {
                     .frame(width: 220, height: 60)
                     .background(Color.highlight)
                     .cornerRadius(15.0)
+            }
+            .alert("Foods With Friends", isPresented: $showingIncompleteAlert) {
+                Button("OK") {
+                    showingIncompleteAlert = false
+                }
+            } message: {
+                Text("You have not completed your review!")
+            }
+            .alert(isPresented: $showingBodylessAlert) {
+                Alert (
+                    title: Text("Foods With Friends"),
+                    message: Text("Your post has no body. Are you sure you want to post with no body?"),
+                    primaryButton: .default(Text("Post")) {
+                        reviewtext = " "
+                        addReview()
+                    },
+                    secondaryButton: .cancel()
+                )
             }
         }
         .sheet(isPresented: $showingImagePicker) {

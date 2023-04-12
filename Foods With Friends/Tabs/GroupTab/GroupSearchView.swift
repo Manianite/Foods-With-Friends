@@ -10,6 +10,7 @@ import SwiftUI
 struct GroupSearchView: View {
     @State var query = ""
     @EnvironmentObject var appUser: User
+    @Binding var groupsList: [FoodGroup]
     @State var groups: [PublicFoodGroup] =  []
     @State var filteredGroups: [PublicFoodGroup] = []
     var body: some View {
@@ -18,17 +19,27 @@ struct GroupSearchView: View {
                 ForEach($filteredGroups, id: \.self.name) { group in
                     ZStack(alignment: .trailing) {
                         GroupListView(publicGroup: group)
-                            .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(.black))
+                            .background(.white)
+                            .cornerRadius(10)
+                            .overlay(RoundedRectangle(cornerRadius: 10)
+                                .stroke(.tertiary, lineWidth: 1))
                             .padding([.trailing, .leading], 5)
                         Button {
                             UserData.setValue(group.isPublic.wrappedValue ? "member" : "incoming", to: "groups/\(group.gid.wrappedValue)/members/\(appUser.uid)")
                             UserData.setValue(group.isPublic.wrappedValue ? "member" : "incoming", to: "users/\(appUser.uid)/groups/\(group.gid.wrappedValue)")
                             appUser.groups[group.gid.wrappedValue] = group.isPublic.wrappedValue ? "member" : "incoming"
+                            UserData.getBranch(from: "groups/\(group.gid.wrappedValue)", as: FoodGroup.self) { fullGroup in
+                                groupsList.append(fullGroup)
+                            }
+                            
                             if group.isPublic.wrappedValue {
                                 groups.removeAll {$0==group.wrappedValue}
+                                withAnimation {
+                                    filteredGroups.removeAll {$0==group.wrappedValue}
+                                }
                             }
                         } label: {
-                            Image(systemName: group.isPublic.wrappedValue ? "plus.fill" : "paperplane.fill")
+                            Image(systemName: group.isPublic.wrappedValue ? "plus.app.fill" : "paperplane.fill")
                                 .resizable()
                                 .frame(width: (UIScreen.main.bounds.width)/7, height: (UIScreen.main.bounds.width)/7)
                                 .accentColor(.highlight)
@@ -42,6 +53,7 @@ struct GroupSearchView: View {
             }
             .searchable(text: $query)
         }
+        .background(Color.secondarySystemBackground)
         .onAppear {
             UserData.getBranch(from: "groups/group_dict", as: [String: PublicFoodGroup].self) { groupList in
                 groups = Array(groupList.values).filter { group in
@@ -61,6 +73,6 @@ struct GroupSearchView: View {
 
 struct GroupSearchView_Previews: PreviewProvider {
     static var previews: some View {
-        GroupSearchView()
+        GroupSearchView(groupsList: .constant([FoodGroup()]))
     }
 }

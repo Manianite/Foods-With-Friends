@@ -21,6 +21,8 @@ struct HomeView: View {
                 ReviewView(review: review)
                     .background(.white)
                     .cornerRadius(15)
+                    .overlay(RoundedRectangle(cornerRadius: 15)
+                        .stroke(.tertiary, lineWidth: 1))
                     .padding(.horizontal, 10)
                     .padding(.top, 5)
             }

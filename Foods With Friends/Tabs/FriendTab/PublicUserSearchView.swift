@@ -17,7 +17,10 @@ struct PublicUserSearchView: View {
             ForEach($filteredUsers, id: \.self.uid) { user in
                 ZStack(alignment: .trailing) {
                     PublicUserView(user: user)
-                        .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(.black))
+                        .background(.white)
+                        .cornerRadius(10)
+                        .overlay(RoundedRectangle(cornerRadius: 10)
+                            .stroke(.tertiary, lineWidth: 1))
                         .padding([.trailing, .leading], 5)
                     Button {
                         UserData.setValue(true, to: "users/\(user.uid.wrappedValue)/new_friends/\(appUser.uid)-I")
@@ -35,6 +38,7 @@ struct PublicUserSearchView: View {
             }
             .navigationTitle("Search Users")
         }
+        .background(Color.secondarySystemBackground)
         .searchable(text: $query)
         .onAppear {
             UserData.getBranch(from: "users/user_dict", as: [String: PublicUser].self) { userList in

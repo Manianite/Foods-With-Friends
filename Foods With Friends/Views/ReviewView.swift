@@ -19,19 +19,21 @@ struct ReviewView: View {
                     .font(Constants.textFont)
                     .frame(width: UIScreen.main.bounds.width-62, alignment: .leading)
                     .fixedSize()
-                TabView {
-                    ForEach(review.images, id:\.self) { image in
-                        KFImage(URL(string: image))
-                            .placeholder {
-                                Image(systemName: "ellipsis")
-                            }
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
+                if review.images.count>1 {
+                    TabView {
+                        ForEach(review.images.filter {$0 != "_"}, id:\.self) { image in
+                            KFImage(URL(string: image))
+                                .placeholder {
+                                    Image(systemName: "ellipsis")
+                                }
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                        }
                     }
+                    .tabViewStyle(PageTabViewStyle())
+                    .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+                    .frame(height: UIScreen.main.bounds.width-40, alignment: .leading)
                 }
-                .tabViewStyle(PageTabViewStyle())
-                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-                .frame(height: UIScreen.main.bounds.width-40, alignment: .leading)
             }
             .padding(.horizontal, 15)
             .padding(.bottom, 15)
@@ -50,6 +52,7 @@ struct ReviewView: View {
                         }
                         .resizable()
                         .frame(width: 50, height: 50)
+                        .clipShape(Circle())
                     VStack(alignment: .trailing, spacing: 0) {
                         Text(review.title)
                             .font(Constants.titleFont)
@@ -83,6 +86,11 @@ struct ReviewView: View {
             .padding(.vertical, 10)
         }
         .accentColor(.clear)
+        .onAppear {
+            UserData.getPublicUser(review.uid) { user in
+                poster.reinit(user)
+            }
+        }
     }
 }
 

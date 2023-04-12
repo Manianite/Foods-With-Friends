@@ -19,9 +19,14 @@ class UserData { // colloquially a static var is called a 'singleton'
     }
     static func pushReview(_ review: Review, toFriendsOf appUser: User) {
         for recipient in appUser.friends.keys.filter({$0 != "_"}) {
-            ref.child("feeds/\(recipient)/\(review.time.replacingOccurrences(of: ".", with: ","))").updateChildValues(review.toDictionnary)
+            ref.child("feeds/\(recipient)/\(review.time)").updateChildValues(review.toDictionnary)
         }
-        ref.child("users/\(appUser.uid)/reviews/\(review.time.replacingOccurrences(of: ".", with: ","))").updateChildValues(review.toDictionnary)
+        ref.child("users/\(appUser.uid)/reviews/\(review.time)").updateChildValues(review.toDictionnary)
+    }
+    static func pushReview(_ review: Review, toGroups groups: [String]) {
+        for recipient in groups {
+            ref.child("groups/\(recipient)/feed/\(review.time)").updateChildValues(review.toDictionnary)
+        }
     }
     static func pushGroup(_ group: FoodGroup) {
         ref.child("groups/\(group.gid)").updateChildValues(group.toDictionnary)

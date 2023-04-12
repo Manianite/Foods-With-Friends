@@ -31,7 +31,8 @@ struct GroupsView: View {
                                 GroupListView(group: group)
                                     .background(.white)
                                     .cornerRadius(10)
-                                    //.background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(.black))
+                                    .overlay(RoundedRectangle(cornerRadius: 10)
+                                        .stroke(.tertiary, lineWidth: 1))
                                     .padding([.trailing, .leading], 5)
                                 if group.gid.wrappedValue == appUser.uid {
                                     Image(systemName: "crown.fill")
@@ -44,11 +45,12 @@ struct GroupsView: View {
                             }
                         }
                         .buttonStyle(.plain)
+//                        .padding(.bottom, -5)
                     }
                 }
                 HStack {
                     NavigationLink {
-                        GroupSearchView()
+                        GroupSearchView(groupsList: $groupsList)
                     } label: {
                         Image(systemName: "magnifyingglass.circle.fill")
                             .resizable()

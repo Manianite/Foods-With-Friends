@@ -44,7 +44,7 @@ struct Foods_With_FriendsApp: App {
             ContentView()
                 .environmentObject(appUser)
 
-                .environmentObject(locationManager)
+//                .environmentObject(locationManager)
                 .onChange(of: scenePhase) { newPhase in
                     if newPhase == .active {
                         UIApplication.shared.applicationIconBadgeNumber = 0

@@ -28,9 +28,9 @@ struct FriendView: View {
                             PublicUserView(user: friend)
                                 .background(.white)
                                 .cornerRadius(10)
-                                //.background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(.black))
+                                .overlay(RoundedRectangle(cornerRadius: 10)
+                                    .stroke(.tertiary, lineWidth: 1))
                                 .padding([.trailing, .leading], 5)
-                                .transition(.move(edge: .bottom))
                             HStack {
                                 Button {
                                     UserData.remove("users/\(friend.uid.wrappedValue)/new_friends/\(appUser.uid)-O")
@@ -62,6 +62,7 @@ struct FriendView: View {
                                 }
                             }
                         }
+                        .padding(.bottom, -4)
                     }
                     ForEach($friendsList, id: \.self.uid) { friend in
                         NavigationLink {
@@ -70,11 +71,12 @@ struct FriendView: View {
                             PublicUserView(user: friend)
                                 .background(.white)
                                 .cornerRadius(10)
-                                //.background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(.black))
+                                .overlay(RoundedRectangle(cornerRadius: 10)
+                                    .stroke(.tertiary, lineWidth: 1))
                                 .padding([.trailing, .leading], 5)
                         }
                         .buttonStyle(.plain)
-                        
+                        .padding(.bottom, -5)
                     }
                 }
                 NavigationLink {

@@ -15,6 +15,7 @@ struct GroupView: View {
     @Binding var insideNavigator: Bool
     @State var memberReqsList: [PublicUser] = []
     @State var reviews: [Review] = []
+    @State var showingLeaveGroupWarning = false
     var body: some View {
         VStack {
             Text(group.name)
@@ -85,7 +86,21 @@ struct GroupView: View {
             }
         }
         .background(Color.secondarySystemBackground)
-        .navigationBarItems(trailing: group.gid==appUser.uid ? AnyView(NavigationLink("Edit", isActive: $insideNavigator) {EditGroupView(group, groups: $groupsList, isActive: $insideNavigator)}) : AnyView(EmptyView()))
+        .navigationBarItems(trailing: group.gid==appUser.uid ? AnyView(NavigationLink("Edit", isActive: $insideNavigator) {EditGroupView(group, groups: $groupsList, isActive: $insideNavigator)}) : AnyView(Button("Leave") {showingLeaveGroupWarning = true}))
+        .alert(isPresented: $showingLeaveGroupWarning) {
+            Alert (
+                title: Text("Foods With Friends"),
+                message: Text("Are you sure you want to leave \(group.name)?"),
+                primaryButton: .destructive(Text("Leave")) {
+                    UserData.remove("users/\(appUser.uid)/groups/\(group.gid)")
+                    UserData.remove("groups/group_dict/\(group.gid)/members/\(appUser.uid)")
+                    appUser.groups.removeValue(forKey: group.gid)
+                    groupsList.removeAll {$0.gid==group.gid}
+                    insideNavigator = false
+                },
+                secondaryButton: .cancel()
+            )
+        }
     }
 }
 
