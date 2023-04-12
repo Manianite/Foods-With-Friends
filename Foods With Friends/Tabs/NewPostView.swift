@@ -205,6 +205,6 @@ struct NewPostView: View {
 
 struct NewPostView_Previews: PreviewProvider {
     static var previews: some View {
-        NewPostView()
+        NewPostView(selectedTab: .constant(.NewPostView))
     }
 }
