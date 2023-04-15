@@ -1,7 +1,6 @@
 #  Settings
 
 #  Profile
-.   - list of reviews -> [IMPORTANT]
 .   - resize profile pic
 .   - UI cleanup
 

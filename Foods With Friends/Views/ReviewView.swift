@@ -40,7 +40,7 @@ struct ReviewView: View {
         } label: {
             VStack(alignment: .leading, spacing: 0) {
                 Text(review.restaurant)
-                    .font(Constants.titleFont)
+                    .font(Constants.titleFont.bold())
                 Divider()
                     .padding(.bottom, 5)
                 HStack {
@@ -56,15 +56,21 @@ struct ReviewView: View {
                     VStack(alignment: .trailing, spacing: 0) {
                         Text(review.title)
                             .font(Constants.titleFont)
+                            .padding([.top, .bottom], 5)
+
                         Divider()
                         HStack {
                             Text(poster.username)
                                 .font(Constants.textFont)
+                                .padding([.top, .bottom], 5)
                             
                             Text("@"+poster.handle)
                             .font(Constants.textFontSmall)
                             .accentColor(.highlight)
                         }
+//                        Text(NSDate(timeIntervalSince1970: review.time))
+//                            .font(Constants.textFont)
+//                            .foregroundColor(Color.gray)
                     }
                 }
                 .padding(.bottom, 5)

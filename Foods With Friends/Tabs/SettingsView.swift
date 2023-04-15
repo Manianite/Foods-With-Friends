@@ -31,12 +31,14 @@ struct SettingsView: View {
         
         VStack{
             Group{
-
-            Text("Settings")
-                .font(Constants.titleFont)
-                .padding(.top, 20)
-                .padding(.bottom, 30)
-                .accentColor(.highlight)
+                Text("Settings")
+                    .font(.headline)
+                    .padding(10)
+//            Text("Settings")
+//                .font(Constants.titleFont)
+//                .padding(.top, 20)
+//                .padding(.bottom, 30)
+//                .accentColor(.highlight)
             
             
             Group {
@@ -287,6 +289,7 @@ struct SettingsView: View {
                     }
                     handleChangeMode = false
                     passwordChangeMode = false
+                    emailChangeMode = false
                 }label: {
                     Text("Location Services")
                         .frame(width: UIScreen.screenWidth/1.3)

@@ -6,15 +6,24 @@
 //
 
 import Foundation
+import CoreLocation
 
 @MainActor class FetchRestaurantData: ObservableObject{
     @Published var response = RestaurantResponse()
     
-    func getData(_ query: String, _ locationManager: LocationManager = LocationManager()) async {
-       var URLString = "https://api.spoonacular.com/food/restaurants/search?query=\(query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")&lat=39.9526&lng=-75.1652&distance=15&apiKey=edb7848c89934d62ba81c2fb8c7c8b0c"
+    func getData(_ query: String, _ locationManager: LocationManager) async {
+        
+        let URLString: String
         
         if let location = locationManager.location {
-            URLString = "https://api.spoonacular.com/food/restaurants/search?query=\(query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")&lat=\(location.coordinate.latitude)&lng=\(location.coordinate.longitude)&distance=15&apiKey=edb7848c89934d62ba81c2fb8c7c8b0c"
+            
+            print("Latitude: \(location.latitude)")
+            print("Longitude: \(location.longitude)")
+            
+            URLString = "https://api.spoonacular.com/food/restaurants/search?query=\(query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")&lat=\(location.latitude)&lng=\(location.longitude)&distance=15&apiKey=edb7848c89934d62ba81c2fb8c7c8b0c"
+        }
+        else{
+            URLString = "https://api.spoonacular.com/food/restaurants/search?query=\(query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")&lat=39.9526&lng=-75.1652&distance=15&apiKey=edb7848c89934d62ba81c2fb8c7c8b0c"
         }
    
         guard let url = URL(string: URLString) else {return}

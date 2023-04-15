@@ -35,7 +35,7 @@ struct EditGroupView: View {
                 showingImagePicker = true
             } label: {
                 //group pic
-                ZStack(alignment: .bottom) {
+                ZStack() {
                     if let image = inputImage {
                         Image(uiImage: image)
                             .resizable()
@@ -59,16 +59,20 @@ struct EditGroupView: View {
                             .clipShape(Circle())
                             .padding(5)
                     }
-                    Text("Edit")
-                        .padding(.horizontal, 5)
-                        .padding(.top, 2)
-                        .background(Color.highlight.opacity(0.5))
-                        .cornerRadius(40)
-                        .frame(width: (UIScreen.main.bounds.width)/5, height: (UIScreen.main.bounds.width)/4)
-                        .foregroundColor(Color.white)
-                        .font(Constants.textFontSmall)
+                    ZStack(){
+                        Circle()
+                            .frame(width: (UIScreen.main.bounds.width)/2, height: (UIScreen.main.bounds.width)/2)
+                            .foregroundColor(Color.highlight.opacity(0.3))
+                          //  .padding(.leading, 8)
+                        Text("Choose Picture")
+                            .font(Constants.textFont.bold())
+                            .foregroundColor(Color.white)
                         .font(.system(size: 30))
-                        .padding(.leading, 8)
+                        .padding(5)
+                        .padding(.top, -10)
+//                        .background(Color.highlight.opacity(0.5))
+//                        .cornerRadius(40)
+                    }
                 }
             }
             .foregroundColor(.black)
@@ -80,7 +84,7 @@ struct EditGroupView: View {
                 .padding(.leading, 5)
                 .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
             Toggle(isOn: $isPublic) {
-                Text("Public?")
+                Text("Public")
                     .font(Constants.titleFont)
             }
             
@@ -92,9 +96,11 @@ struct EditGroupView: View {
                 } label: {
                     Text("Delete Group")
                         .font(Constants.titleFont)
-                        .foregroundColor(.highlight)
-                        .padding(.horizontal, 5)
-                        .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
+                        .foregroundColor(.black)
+                        .padding(.horizontal, 10)
+                        .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.highlight))
+                        .background(Color.highlight.opacity(0.1))
+                        .padding(20)
                 }
                 Button {
                     if let image = inputImage {
@@ -120,9 +126,11 @@ struct EditGroupView: View {
                 } label: {
                     Text("Save")
                         .font(Constants.titleFont)
-                        .foregroundColor(.highlight)
-                        .padding(.horizontal, 5)
-                        .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.black))
+                        .foregroundColor(Color.black)
+                        .padding(.horizontal, 10)
+                        .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundColor(Color.highlight))
+                        .background(Color.highlight.opacity(0.1))
+
                 }
                 .padding()
             }
