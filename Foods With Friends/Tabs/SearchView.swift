@@ -18,7 +18,6 @@ struct SearchView: View {
     
     var body: some View {
 
-        
         VStack{
             NavigationView {
                 VStack{
@@ -41,8 +40,8 @@ struct SearchView: View {
                     .navigationTitle("Search Restaurants")
                     .navigationBarTitleDisplayMode(.inline)
         //            .navigationViewStyle(.stack)
-            } .onAppear(perform: runSearch)
-                .onSubmit(of: .search, runSearch)
+            }.onSubmit(of: .search, runSearch)
+
         }
        
     }

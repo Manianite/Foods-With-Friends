@@ -58,8 +58,9 @@ struct NewPostView: View {
     var body: some View {
         VStack {
             TextField("Title", text: $title)
-                .font(.title)
+                .font(Constants.titleFont)
                 .foregroundColor(.black)
+                .padding(.top, 20)
                 .padding(.horizontal)
                 .multilineTextAlignment(.center)
             HStack {
@@ -85,6 +86,7 @@ struct NewPostView: View {
                     }
             }
             .foregroundColor(.yellow)
+            .padding([.top, .bottom], 10)
             HStack {
                 TextField(restaurant?.name ?? "Enter Restaurant", text: $query)
                     .padding(.leading)
@@ -96,23 +98,28 @@ struct NewPostView: View {
                     }
                     showRestaurants = true
                 } label: {
-                    Text("Go")
+                    Text("Select")
                         .foregroundColor(.blue)
                         .padding(.trailing)
                 }
             }
             .navigationViewStyle(.stack)
             .navigationBarHidden(true)
+            .padding(.bottom, 10)
             TextEditor(text: $reviewtext)
+                .cornerRadius(10)
                 .border(Color.gray, width: 1)
             HStack {
                 Button {
                     showingImagePicker = true
                 } label: {
                     Text("Upload Image")
+                        .font(Constants.textFont)
                 }
                 Button {
+                    if(images.count > 0){
                     showingSelectedImages = true
+                    }
                 } label: {
                     Text("\(images.count) images")
                         .font(Constants.textFont)

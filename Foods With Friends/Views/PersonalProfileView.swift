@@ -71,7 +71,7 @@ struct PersonalProfileView: View {
                                         .padding(.horizontal, 5)
                                         .padding(.top, 2)
                                         .foregroundColor(Color.white)
-                                        .font(Constants.textFont)
+                                        .font(Constants.textFont.bold())
                                         .padding(.leading, 20)
                                 }
                                 }
