@@ -29,7 +29,7 @@ struct HomeView: View {
         }
         .onAppear {
             UserData.observeFeed(for: "feeds/\(appUser.uid)") { gotReviews in
-                reviews = Array(gotReviews.values)
+                reviews = Array(gotReviews.values).sorted { $0.time>$1.time }
             }
         }
         .onDisappear {

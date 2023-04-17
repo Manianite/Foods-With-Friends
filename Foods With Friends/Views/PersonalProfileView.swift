@@ -199,7 +199,7 @@ struct PersonalProfileView: View {
             .padding(.top, 5)
             Divider()
             ForEach(appUser.reviews.sorted(by: {$0.key>$1.key}).dropFirst(), id: \.key) { key, review in
-                ReviewView(review: .constant(review))
+                UserReviewView(review: .constant(review), poster: appUser.getPublic)
                     .background(.white)
                     .cornerRadius(15)
                     .overlay(RoundedRectangle(cornerRadius: 15)

@@ -98,6 +98,9 @@ class User: ObservableObject, Codable, Equatable {
         self.reviews = ["_": Review(true)]
         self.groups = ["_": ""]
     }
+    var getPublic: PublicUser {
+        PublicUser(self)
+    }
 }
 class PublicUser: ObservableObject, Codable, Comparable {
     static func < (lhs: PublicUser, rhs: PublicUser) -> Bool {lhs.uid<rhs.uid}

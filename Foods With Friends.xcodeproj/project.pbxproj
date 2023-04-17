@@ -27,6 +27,7 @@
 		0F5A352A29CEA95B00C38E5B /* NewGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5A352929CEA95B00C38E5B /* NewGroupView.swift */; };
 		0F66A19429D3F18100E8A62F /* EditGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F66A19329D3F18100E8A62F /* EditGroupView.swift */; };
 		0F98D40E29BFBF0B00AEE455 /* PublicUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F98D40D29BFBF0B00AEE455 /* PublicUserView.swift */; };
+		0FB844F229E6E7670026C110 /* UserReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB844F129E6E7670026C110 /* UserReviewView.swift */; };
 		0FC6C8BC29B0F9CF0040048C /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6C8BB29B0F9CF0040048C /* UserData.swift */; };
 		0FC8C53B29D2089D0079098B /* Foods-With-Friends-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0FC8C53A29D2089D0079098B /* Foods-With-Friends-Info.plist */; };
 		0FC9C35F29B8E558006B9ECD /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC9C35E29B8E558006B9ECD /* AppView.swift */; };
@@ -98,6 +99,7 @@
 		0F5A352929CEA95B00C38E5B /* NewGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupView.swift; sourceTree = "<group>"; };
 		0F66A19329D3F18100E8A62F /* EditGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupView.swift; sourceTree = "<group>"; };
 		0F98D40D29BFBF0B00AEE455 /* PublicUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicUserView.swift; sourceTree = "<group>"; };
+		0FB844F129E6E7670026C110 /* UserReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReviewView.swift; sourceTree = "<group>"; };
 		0FC6C8BB29B0F9CF0040048C /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		0FC8C53A29D2089D0079098B /* Foods-With-Friends-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Foods-With-Friends-Info.plist"; sourceTree = "<group>"; };
 		0FC9C35E29B8E558006B9ECD /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				83C9AA1D29C0AB49009AE879 /* RestaurantListView.swift */,
 				83C9AA1F29C0AB71009AE879 /* RestaurantInfoView.swift */,
 				0F17AED729C8EA25008A881C /* ReviewView.swift */,
+				0FB844F129E6E7670026C110 /* UserReviewView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -578,6 +581,7 @@
 				0F2F316429AF965D008B0CC3 /* ContentView.swift in Sources */,
 				0F2F316229AF965D008B0CC3 /* Foods_With_FriendsApp.swift in Sources */,
 				88D3A9B629D720E0007EA0F4 /* NotificationsPublisher.swift in Sources */,
+				0FB844F229E6E7670026C110 /* UserReviewView.swift in Sources */,
 				88F733A129B77FD1001D8CC6 /* ProfileView.swift in Sources */,
 				8801352F29B3A06600304A06 /* HomeView.swift in Sources */,
 				0FC9C35F29B8E558006B9ECD /* AppView.swift in Sources */,

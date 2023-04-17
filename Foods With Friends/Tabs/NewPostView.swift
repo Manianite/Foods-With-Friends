@@ -24,6 +24,9 @@ struct NewPostView: View {
     @State var showingSelectedImages = false
     @State var showingIncompleteAlert = false
     @State var showingBodylessAlert = false
+    @State var groupRecipiants: [String] = []
+    @State var groups: [PublicFoodGroup] = []
+    @State var showingGroups = false
     @Binding var selectedTab: Tabs
     @EnvironmentObject var locationManager: LocationManager
 
@@ -41,6 +44,7 @@ struct NewPostView: View {
                         newReview.images.append(url.absoluteString)
                         if img == images.count-1 {
                             UserData.pushReview(newReview, toFriendsOf: appUser)
+                            UserData.pushReview(newReview, toGroups: groupRecipiants)
                             appUser.reviews[newReview.time] = newReview
                         }
                     } else {
@@ -50,6 +54,7 @@ struct NewPostView: View {
             }
             if images.count == 0 {
                 UserData.pushReview(newReview, toFriendsOf: appUser)
+                UserData.pushReview(newReview, toGroups: groupRecipiants)
                 appUser.reviews[newReview.time] = newReview
             }
             selectedTab = .ProfileView
@@ -109,6 +114,36 @@ struct NewPostView: View {
             TextEditor(text: $reviewtext)
                 .cornerRadius(10)
                 .border(Color.gray, width: 1)
+            
+            Text("Posting to...")
+                .font(Constants.textFont)
+            ScrollView{
+            ForEach(groups) { group in
+                HStack {
+                    Text(group.name)
+                        .font(Constants.titleFont)
+                    Spacer()
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundColor(groupRecipiants.contains(group.gid) ? Color.highlight : Color.secondary)
+                }
+                .onTapGesture {
+                    if groupRecipiants.contains(group.gid) {
+                        groupRecipiants.removeAll { $0==group.gid }
+                    } else {
+                        groupRecipiants.append(group.gid)
+                    }
+                }
+            }}
+            .cornerRadius(10)
+            .padding()
+            .onAppear {
+                UserData.getBranch(from: "groups/group_dict/", as: [String: PublicFoodGroup].self) { groupsData in
+                    let isIn = appUser.groups.compactMap {$0.value == "incoming" ? nil : $0.key}
+                    groups = groupsData.compactMap {isIn.contains($0.value.gid) && $0.value.gid != "_" ? $0.value : nil}
+                }
+            }
+            
+            
             HStack {
                 Button {
                     showingImagePicker = true
@@ -209,7 +244,6 @@ struct NewPostView: View {
         }
     }
 }
-
 struct NewPostView_Previews: PreviewProvider {
     static var previews: some View {
         NewPostView(selectedTab: .constant(.NewPostView))

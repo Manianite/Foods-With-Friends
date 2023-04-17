@@ -65,7 +65,7 @@ class FoodGroup: ObservableObject, Codable, Equatable {
         self.gid = creatorID
     }
 }
-class PublicFoodGroup: ObservableObject, Codable, Comparable {
+class PublicFoodGroup: ObservableObject, Codable, Comparable, Identifiable, Hashable {
     static func < (lhs: PublicFoodGroup, rhs: PublicFoodGroup) -> Bool {
         lhs.gid < rhs.gid
     }
@@ -74,11 +74,16 @@ class PublicFoodGroup: ObservableObject, Codable, Comparable {
         lhs.gid == rhs.gid
     }
     
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(gid)
+    }
+    
     @Published var img: String
     @Published var name: String
     @Published var isPublic: Bool
     @Published var count: Int
     @Published var gid: String
+    var id: String {gid}
     
     enum CodingKeys: CodingKey {
         case img, name, isPublic, count, gid

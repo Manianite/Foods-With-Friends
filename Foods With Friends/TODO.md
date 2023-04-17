@@ -9,7 +9,6 @@
 .   - favorite?
 
 #  Search
-.   - Search Location -> [IMPORTANT]
 .   - list of reviews in restaurantview -> [IMPORTANT]
 
 #  Friends
@@ -18,11 +17,9 @@
 .   - title in friendsearchview?
 
 #  Post
-.   - firebase functionality -> [IMPORTANT]
 .   - UI cleanup
 
 #  Groups
-.   - Join private approval
 
 #  Misc.
 .   - accessability

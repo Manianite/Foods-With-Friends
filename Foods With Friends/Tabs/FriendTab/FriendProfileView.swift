@@ -116,7 +116,7 @@ struct FriendProfileView: View {
             .cornerRadius(15)
             Divider()
             ForEach(friend.reviews.sorted(by: {$0.key>$1.key}).dropFirst(), id: \.key) { key, review in
-                ReviewView(review: .constant(review))
+                UserReviewView(review: .constant(review), poster: friend.getPublic)
                     .background(.white)
                     .cornerRadius(15)
                     .overlay(RoundedRectangle(cornerRadius: 15)
