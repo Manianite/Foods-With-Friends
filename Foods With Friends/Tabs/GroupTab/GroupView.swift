@@ -16,12 +16,34 @@ struct GroupView: View {
     @State var memberReqsList: [PublicUser] = []
     @State var reviews: [Review] = []
     @State var showingLeaveGroupWarning = false
+    @State  var showingSheet = false
+    
     var body: some View {
         VStack {
             Text(group.name)
                 .font(Constants.titleFont)
-            Text("\(group.members.count) members")
-                .font(Constants.textFontSmall)
+            Button {
+                showingSheet.toggle()
+            }label: {
+                Text("\(group.members.count) members")
+                    .font(Constants.textFontSmall)
+            } .sheet(isPresented: $showingSheet) {
+//                ForEach(Array(group.members.keys), id: \.self) { friend in
+//                    NavigationLink {
+//                        FriendProfileView(uid: friend.uid, friendsList: $group.members)
+//                    } label: {
+//                        PublicUserView(user: friend)
+//                            .background(.white)
+//                            .cornerRadius(10)
+//                            .overlay(RoundedRectangle(cornerRadius: 10)
+//                                .stroke(.tertiary, lineWidth: 1))
+//                            .padding([.trailing, .leading], 5)
+//                    }
+//                    .buttonStyle(.plain)
+//                    .padding(.bottom, -5)
+//                }
+            }
+            
             Divider()
             ScrollView {
                 ForEach($memberReqsList, id: \.self.uid) { memberReq in
