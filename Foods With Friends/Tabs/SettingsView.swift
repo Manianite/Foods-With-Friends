@@ -60,11 +60,11 @@ struct SettingsView: View {
                         .frame(width: UIScreen.screenWidth/1.3)
                         .font(Constants.textFont)
                         .accentColor(.black.opacity(0.8))
-                        .padding(.vertical, 5)
+                        .padding(.vertical, 10)
                         .padding(.horizontal)
                         .overlay(
                             RoundedRectangle(cornerRadius: 16)
-                                .stroke(.black, lineWidth: 4)
+                                .stroke(.black, lineWidth: 1)
                         )
                 }.padding(.vertical, 10)
                 
@@ -80,7 +80,8 @@ struct SettingsView: View {
                                     .padding(.vertical, 10)
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 16)
-                                            .stroke(.black, lineWidth: 2)
+                                            .stroke(.black.opacity(0.5), lineWidth: 1)
+                                         
                                     )
                                     .font(Constants.textFont)
                                     .padding(.top, 20)
@@ -91,6 +92,7 @@ struct SettingsView: View {
                                     Image(systemName: "eye")
                                         .padding(.trailing, 20)
                                         .padding(.top, 20)
+                                        .accentColor(Color.highlight)
                                 }
                             }
                         }
@@ -103,7 +105,7 @@ struct SettingsView: View {
                                     .padding(.vertical, 10)
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 16)
-                                            .stroke(.black, lineWidth: 2)
+                                            .stroke(.black.opacity(0.5), lineWidth: 1)
                                     )
                                     .font(Constants.textFont)
                                     .padding(.top, 20)
@@ -173,11 +175,11 @@ struct SettingsView: View {
                         .frame(width: UIScreen.screenWidth/1.3)
                         .font(Constants.textFont)
                         .accentColor(.black.opacity(0.8))
-                        .padding(.vertical, 5)
+                        .padding(.vertical, 10)
                         .padding(.horizontal)
                         .overlay(
                             RoundedRectangle(cornerRadius: 16)
-                                .stroke(.black, lineWidth: 4)
+                                .stroke(.black, lineWidth: 1)
                         )
                         .padding(.vertical, 10)
 
@@ -194,7 +196,7 @@ struct SettingsView: View {
                             .padding(.vertical, 10)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 16)
-                                    .stroke(.black, lineWidth: 2)
+                                    .stroke(.black.opacity(0.5), lineWidth: 1)
                             )
                             .font(Constants.textFont)
                             .padding(.top, 20)
@@ -203,12 +205,12 @@ struct SettingsView: View {
                             appUser.handle = newHandle
                             UserData.pushUser(appUser)
 
-                            handleChangeMode == false
+                            handleChangeMode = false
                             
                         }label: {
                             Text("Confirm Handle Change")
                                 .font(Constants.textFont)
-                                .accentColor(.highlight)
+                                .foregroundColor(Color.highlight)
                                 .padding(.bottom, 10)
                         }
 
@@ -241,11 +243,11 @@ struct SettingsView: View {
                         .frame(width: UIScreen.screenWidth/1.3)
                         .font(Constants.textFont)
                         .accentColor(.black.opacity(0.8))
-                        .padding(.vertical, 5)
+                        .padding(.vertical, 10)
                         .padding(.horizontal)
                         .overlay(
                             RoundedRectangle(cornerRadius: 16)
-                                .stroke(.black, lineWidth: 4)
+                                .stroke(.black, lineWidth: 1)
                         )
                         .padding(.vertical, 10)
                     
@@ -261,7 +263,7 @@ struct SettingsView: View {
                             .padding(.vertical, 10)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 16)
-                                    .stroke(.black, lineWidth: 2)
+                                    .stroke(.black.opacity(0.5), lineWidth: 1)
                             )
                             .font(Constants.textFont)
                             .padding(.top, 20)
@@ -269,7 +271,7 @@ struct SettingsView: View {
                         Button{
                             appUser.handle = newHandle
                             UserData.pushUser(appUser)
-                            emailChangeMode == false
+                            emailChangeMode = false
                         }label: {
                             Text("Confirm Email Change")
                                 .font(Constants.textFont)
@@ -295,12 +297,12 @@ struct SettingsView: View {
                         .frame(width: UIScreen.screenWidth/1.3)
                         .font(Constants.textFont)
                         .accentColor(.black.opacity(0.8))
-                        .padding(.vertical, 5)
+                        .padding(.vertical, 10)
                         .padding(.horizontal)
 
                         .overlay(
                             RoundedRectangle(cornerRadius: 16)
-                                .stroke(.black, lineWidth: 4)
+                                .stroke(.black, lineWidth: 1)
                         )
                         .padding(.vertical, 10)
                     
@@ -311,7 +313,7 @@ struct SettingsView: View {
                     VStack{
                         Button{
                             UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!)
-                            locationChangeMode == false
+                            locationChangeMode = false
                         }label: {
                             Text("Update Location Preferences")
                                 .font(Constants.textFont)
@@ -333,38 +335,38 @@ struct SettingsView: View {
                             .frame(width: UIScreen.screenWidth/1.3)
                             .font(Constants.textFont)
                             .accentColor(.black.opacity(0.8))
-                            .padding(.vertical, 5)
+                            .padding(.vertical, 10)
                             .padding(.horizontal)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 16)
-                                    .stroke(.black, lineWidth: 4)
+                                    .stroke(.black, lineWidth: 1)
                             )
                             .background(Color.highlight.opacity(0.5).cornerRadius(16))
                             .padding(.vertical, 20)
                     }
                 }
             }
-            Spacer()
-            
-
-            //testing for posting reviews
-            Button {
-                let time = Date().timeIntervalSince1970
-                UserData.pushReview(Review(time: time), toFriendsOf: appUser)
-                appUser.reviews[String(time)] = Review(time: time)
-            } label: {
-                Text("Push Test Review")
-                    .font(Constants.textFont)
-                    .accentColor(.highlight)
-            }
-            .disabled(true)
-            
-            Button{
-                notificationPublisher.sendNotification(title: "hey", subtitle: "we made a cool", body: "notification", badge: 1, delayInterval: nil)
-                
-            } label: {
-                Text("test notification")
-            }
+//            Spacer()
+//
+//
+//            //testing for posting reviews
+//            Button {
+//                let time = Date().timeIntervalSince1970
+//                UserData.pushReview(Review(time: time), toFriendsOf: appUser)
+//                appUser.reviews[String(time)] = Review(time: time)
+//            } label: {
+//                Text("Push Test Review")
+//                    .font(Constants.textFont)
+//                    .accentColor(.highlight)
+//            }
+//            .disabled(true)
+//
+//            Button{
+//                notificationPublisher.sendNotification(title: "hey", subtitle: "we made a cool", body: "notification", badge: 1, delayInterval: nil)
+//
+//            } label: {
+//                Text("test notification")
+//            }
  
             
             //            //testing for posting reviews

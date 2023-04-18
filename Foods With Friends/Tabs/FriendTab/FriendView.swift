@@ -92,7 +92,7 @@ struct FriendView: View {
             }
             .navigationBarTitle("My Friends", displayMode: .inline)
         }
-        .searchable(text: $query)
+        .searchable(text: $query, prompt: "Search Friends")
         .onAppear {
             UserData.getUser(appUser.uid) { user in
                 let friendReqUids = Array(user.newFriends.keys).filter { $0.hasSuffix("-I") }.map { String($0.dropLast(2)) }

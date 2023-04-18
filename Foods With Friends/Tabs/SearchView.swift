@@ -35,9 +35,10 @@ struct SearchView: View {
                     .listStyle(.grouped)
                     .font(Constants.titleFont)
                     
-                }.searchable(text: $query, prompt: "Search")
+                }.searchable(text: $query, prompt: "Search Restaurants")
                     .font(Constants.titleFont)
                     .navigationTitle("Search Restaurants")
+                    .font(Constants.textFont)
                     .navigationBarTitleDisplayMode(.inline)
         //            .navigationViewStyle(.stack)
             }.onSubmit(of: .search, runSearch)
