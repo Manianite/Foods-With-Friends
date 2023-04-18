@@ -29,7 +29,10 @@ struct NewPostView: View {
     @State var showingGroups = false
     @Binding var selectedTab: Tabs
     @EnvironmentObject var locationManager: LocationManager
-
+    @Binding var chosen: Restaurant?
+    @State var showSearch: Bool = true
+    @State var showCheck: Bool = true
+    
     func addReview() {
         if title=="" || rating==0 || restaurant==nil {
             showingIncompleteAlert = true
@@ -60,6 +63,7 @@ struct NewPostView: View {
             selectedTab = .ProfileView
         }
     }
+    
     var body: some View {
         VStack {
             TextField("Title", text: $title)
@@ -92,25 +96,148 @@ struct NewPostView: View {
             }
             .foregroundColor(.yellow)
             .padding([.top, .bottom], 10)
-            HStack {
-                TextField(restaurant?.name ?? "Enter Restaurant", text: $query)
-                    .padding(.leading)
-                Button {
-                    Task {
-                        waiting = true
-                        await data.getData(query, locationManager)
-                        waiting = false
+            if showSearch{
+                HStack {
+                    TextField("Enter Restaurant", text: $query)
+                        .padding(5)
+                        .foregroundColor(Color.gray)
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(9)
+                        .padding(.leading)
+                    Button {
+                        Task {
+                            waiting = true
+                            await data.getData(query, locationManager)
+                            waiting = false
+                        }
+                        showRestaurants = true
+                    } label: {
+                        Text("Search")
+                            .foregroundColor(.blue)
+                            .padding(.trailing)
                     }
-                    showRestaurants = true
-                } label: {
-                    Text("Select")
-                        .foregroundColor(.blue)
-                        .padding(.trailing)
+                }
+                .navigationViewStyle(.stack)
+                .navigationBarHidden(true)
+                .padding(.bottom, 5)
+            }
+            
+            if let chosenRestaurant = chosen{
+                //print(chosenRestaurant.name)
+                HStack{
+                    ZStack{
+                        HStack{
+                            Spacer()
+                            VStack{
+                                Button{
+                                    restaurant = nil
+                                    showSearch = true
+                                    query = ""
+                                } label: {
+                                    Image(systemName: "xmark")
+                                        .resizable()
+                                        .accentColor(Color.gray)
+                                        .frame(width: 20, height: 20, alignment: .trailing)
+                                        .padding(5)
+                                }.padding([.top, .trailing], 10)
+                            }
+                        }
+                        HStack{
+                            VStack{
+                                Text(chosenRestaurant.name)
+                                    .font(Constants.textFont)
+                                    .foregroundColor(Color.black)
+                                    .frame(width: UIScreen.screenWidth/1.5, alignment: .leading)
+                                    .padding(.leading, 10)
+                                    .scaledToFill()
+                                    .minimumScaleFactor(0.5)
+                                    .lineLimit(1)
+                                Text("\(chosenRestaurant.address.city), \(chosenRestaurant.address.state)")
+                                    .foregroundColor(Color.gray)
+                                    .frame(width: UIScreen.screenWidth/1.5, alignment: .leading)
+                                    .font(Constants.textFont)
+                                    .padding([.leading,.bottom], 10)
+                                    .scaledToFill()
+                                    .minimumScaleFactor(0.5)
+                                    .lineLimit(1)
+                            }
+                            Spacer()
+                        }
+                    }
+                }
+                .frame(width: UIScreen.main.bounds.width-10, height: UIScreen.main.bounds.height/10, alignment: .center)
+                .background(Color.gray.opacity(0.1))
+                .padding(.bottom, 10)
+                .padding([.leading, .trailing], 20)
+                
+            }
+            else{
+                if let chosenRestaurant = restaurant{
+                    HStack{
+                        ZStack{
+                            HStack{
+                                Spacer()
+                                VStack{
+                                    Button{
+                                        restaurant = nil
+                                        showSearch = true
+                                        showCheck = true
+                                        query = ""
+                                    } label: {
+                                        Image(systemName: "xmark")
+                                            .resizable()
+                                            .accentColor(Color.gray)
+                                            .frame(width: 20, height: 20, alignment: .trailing)
+                                            .padding(5)
+                                    }.padding([.top, .trailing], 10)
+                                    if showCheck{
+                                    Button{
+                                        showSearch = false
+                                        showCheck = false
+                                    } label: {
+                                        Image(systemName: "checkmark")
+                                            .resizable()
+                                            .accentColor(Color.gray)
+                                            .frame(width: 20, height: 20, alignment: .trailing)
+                                            .padding(5)
+                                    }.padding([.bottom, .trailing], 10)
+                                    }
+                                    else{
+                                        Spacer()
+                                    }
+                                }
+                            }
+                            HStack{
+                                VStack{
+                                    Text(chosenRestaurant.name)
+                                        .font(Constants.textFont)
+                                        .foregroundColor(Color.black)
+                                        .frame(width: UIScreen.screenWidth/1.5, alignment: .leading)
+                                        .padding(.leading, 10)
+                                        .scaledToFill()
+                                        .minimumScaleFactor(0.5)
+                                        .lineLimit(1)
+                                    Text("\(chosenRestaurant.address.city), \(chosenRestaurant.address.state)")
+                                        .foregroundColor(Color.gray)
+                                        .frame(width: UIScreen.screenWidth/1.5, alignment: .leading)
+                                        .font(Constants.textFont)
+                                        .padding([.leading,.bottom], 10)
+                                        .scaledToFill()
+                                        .minimumScaleFactor(0.5)
+                                        .lineLimit(1)
+                                }
+                                Spacer()
+                            }
+                        }
+                    }
+                    .frame(width: UIScreen.main.bounds.width-10, height: UIScreen.main.bounds.height/10, alignment: .center)
+                    .background(Color.gray.opacity(0.1))
+                    .padding(.bottom, 10)
+                    .padding([.leading, .trailing], 20)
                 }
             }
-            .navigationViewStyle(.stack)
-            .navigationBarHidden(true)
-            .padding(.bottom, 10)
+            
+            
             TextEditor(text: $reviewtext)
                 .cornerRadius(10)
                 .border(Color.gray, width: 1)
@@ -153,7 +280,7 @@ struct NewPostView: View {
                 }
                 Button {
                     if(images.count > 0){
-                    showingSelectedImages = true
+                        showingSelectedImages = true
                     }
                 } label: {
                     Text("\(images.count) images")
@@ -203,13 +330,15 @@ struct NewPostView: View {
         .cornerRadius(10.0)
         .sheet(isPresented: $showRestaurants) {
             if waiting {
-                Text("Fetching restaurant data")
+                Text("Fetching restaurant data...")
                     .font(Constants.titleFont)
+                    .padding(.top, 20)
             }
             List {
                 ForEach($data.response.restaurants) {restaurant in
                     Button {
                         self.restaurant = restaurant.wrappedValue
+                        query = restaurant.wrappedValue.name
                         showRestaurants = false
                     } label: {
                         RestaurantListView(restaurant: restaurant)
@@ -246,6 +375,6 @@ struct NewPostView: View {
 }
 struct NewPostView_Previews: PreviewProvider {
     static var previews: some View {
-        NewPostView(selectedTab: .constant(.NewPostView))
+        NewPostView(selectedTab: .constant(.NewPostView), chosen: Binding.constant(nil))
     }
 }

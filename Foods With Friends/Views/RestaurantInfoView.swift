@@ -10,12 +10,14 @@ import struct Kingfisher.KFImage
 
 struct RestaurantInfoView: View {
     @Binding var restaurant: Restaurant
-   // @State var showNewPostView: Bool = false
-   // @Binding var selectedTab: Tabs
+    @State var chosen: Restaurant?
+    @State var reviews: [Review] = []
+    @Binding var selectedTab: Tabs
+    @EnvironmentObject var appUser: User
+    
     var body: some View {
         
         ScrollView {
-            //ScrollView{
             Group{
                 VStack{
                     HStack{
@@ -91,7 +93,9 @@ struct RestaurantInfoView: View {
         }
         HStack{
             Button{
-              //  showNewPostView = true
+                selectedTab = .NewPostView
+                print(restaurant.name)
+                chosen = restaurant
             }label: {
                 Text("Review Restaurant")
                     .font(.headline)
@@ -102,7 +106,35 @@ struct RestaurantInfoView: View {
                     .cornerRadius(15.0)
             }.padding([.bottom, .leading], 10)
             NavigationLink{
-                
+                ForEach($reviews) { review in
+                    ReviewView(review: review)
+                        .background(.white)
+                        .cornerRadius(15)
+                        .overlay(RoundedRectangle(cornerRadius: 15)
+                            .stroke(.tertiary, lineWidth: 1))
+                        .padding(.horizontal, 10)
+                        .padding(.top, 5)
+                }
+                .onAppear {
+    //                UserData.observeFeed(for: "feeds/\(appUser.uid)") { gotReviews in
+    //                    reviews = Array(gotReviews.values).filter {$0.restaurant = restaurant.name}
+    //                }
+                    UserData.getBranch(from: "feeds/\(appUser.uid)", as: [String: Review].self) { gotReviews in
+                        reviews = Array(gotReviews.values).filter {$0.restaurant == restaurant.name}
+                    }
+                    UserData.getBranch(from: "users/\(appUser.uid)/groups", as: [String: String].self) { gotGroups in
+                        for group in gotGroups {
+                            UserData.getBranch(from: "groups/\(group.key)/feed", as: [String: Review].self) { gotReviews in
+                                reviews += Array(gotReviews.values).filter {$0.restaurant == restaurant.name}
+                            }
+                        }
+                    }
+                    
+                }
+                .onDisappear {
+                    UserData.stopObservingFeed()
+                }
+                .background(Color.secondarySystemBackground)
             }label: {
                 Text("See Reviews")
                     .font(.headline)
@@ -124,8 +156,7 @@ struct RestaurantInfoView: View {
 
 struct RestaurantInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        RestaurantInfoView(restaurant: Binding.constant(Restaurant())
-                           //, selectedTab: .constant(.NewPostView)
-        )
+        RestaurantInfoView(restaurant: Binding.constant(Restaurant()), selectedTab: .constant(.SearchView))
+            .environmentObject(User())
     }
 }

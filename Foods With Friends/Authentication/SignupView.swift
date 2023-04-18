@@ -26,6 +26,7 @@ struct SignupView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: UIScreen.screenWidth/2.5, height: UIScreen.screenWidth/2.5)
+                    .padding(.top, 20)
                     .padding()
 //                Text("Foods With Friends")
 //                    .font(.system(size: 45))

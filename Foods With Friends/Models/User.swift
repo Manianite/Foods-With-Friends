@@ -19,7 +19,7 @@ class User: ObservableObject, Codable, Equatable {
     @Published var friends: [String: Bool]
     @Published var newFriends: [String: Bool]
     @Published var reviews: [String: Review]
-    @Published var groups: [String: String] //name, role
+    @Published var groups: [String: String] //uid, role
     
     enum CodingKeys: CodingKey {
         case username, handle, uid, bio, profilePic, city, friends, reviews, new_friends, groups
