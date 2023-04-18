@@ -210,7 +210,7 @@ struct SettingsView: View {
                         }label: {
                             Text("Confirm Handle Change")
                                 .font(Constants.textFont)
-                                .foregroundColor(Color.highlight)
+                                .accentColor(Color.highlight)
                                 .padding(.bottom, 10)
                         }
 
