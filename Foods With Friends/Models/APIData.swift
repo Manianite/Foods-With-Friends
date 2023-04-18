@@ -23,7 +23,7 @@ import CoreLocation
             URLString = "https://api.spoonacular.com/food/restaurants/search?query=\(query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")&lat=\(location.latitude)&lng=\(location.longitude)&distance=15&apiKey=edb7848c89934d62ba81c2fb8c7c8b0c"
         }
         else{
-            URLString = "https://api.spoonacular.com/food/restaurants/search?query=\(query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")&lat=39.9526&lng=-75.1652&distance=15&apiKey=edb7848c89934d62ba81c2fb8c7c8b0c"
+            URLString = "https://api.spoonacular.com/food/restaurants/search?query=\(query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")&lat=40.0086&lng=-75.2804&distance=15&apiKey=edb7848c89934d62ba81c2fb8c7c8b0c"
         }
    
         guard let url = URL(string: URLString) else {return}

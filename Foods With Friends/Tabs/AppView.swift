@@ -65,11 +65,11 @@ struct AppView: View {
             } else if selectedTab == .GroupView {
                 GroupsView()
             } else if selectedTab == .SearchView {
-                SearchView()
+                SearchView(selectedTab: $selectedTab)
             } else if selectedTab == .FriendView {
                 FriendView()
             } else if selectedTab == .NewPostView {
-                NewPostView(selectedTab: $selectedTab)
+                NewPostView(selectedTab: $selectedTab, chosen: Binding.constant(nil))
             }
             
             Divider()

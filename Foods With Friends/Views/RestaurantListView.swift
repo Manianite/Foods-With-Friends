@@ -24,6 +24,7 @@ struct RestaurantListView: View {
             VStack(alignment: .trailing) {
                 Text(restaurant.name)
                     .frame(width: UIScreen.screenWidth/1.5, alignment: .leading)
+                    .foregroundColor(Color.black)
                     .font(Constants.titleFont)
                     .padding(.top, 10)
                     .padding(.trailing, 2)
@@ -43,6 +44,7 @@ struct RestaurantListView: View {
                     Spacer()
                     Text(restaurant.cuisines.first ?? "Restaurant")
                         .font(Constants.textFont)
+                        .foregroundColor(Color.black)
                     Spacer()
                     Text(restaurant.is_open ? "Open" : "Closed")
                         .font(Constants.textFont)

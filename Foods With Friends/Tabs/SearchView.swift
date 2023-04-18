@@ -15,6 +15,7 @@ struct SearchView: View {
     @EnvironmentObject var locationManager: LocationManager
     @EnvironmentObject var appUser: User
     @State private var query: String = ""
+    @Binding var selectedTab: Tabs
     
     var body: some View {
 
@@ -25,7 +26,7 @@ struct SearchView: View {
                     List {
                         ForEach($data.response.restaurants) {restaurant in
                             NavigationLink {
-                                RestaurantInfoView(restaurant: restaurant)
+                                RestaurantInfoView(restaurant: restaurant, selectedTab: $selectedTab)
                             } label: {
                                 RestaurantListView(restaurant: restaurant)
                             }
@@ -57,7 +58,7 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView()
+        SearchView(selectedTab: Binding.constant(.SearchView))
             .environmentObject(User())
             .environmentObject(LocationManager())
     }
