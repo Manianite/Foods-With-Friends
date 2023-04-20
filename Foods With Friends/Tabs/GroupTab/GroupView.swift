@@ -92,8 +92,8 @@ struct GroupView: View {
                 }
             }
             .onAppear {
-                UserData.observeFeed(for: "groups/\(group.gid)/\(appUser.uid)/feed") { gotReviews in
-                    reviews = Array(gotReviews.values)
+                UserData.observeFeed(for: "groups/\(group.gid)/feed") { gotReviews in
+                    reviews = Array(gotReviews.values).filter {$0.uid != ""}
                 }
                 for memberReqUid in Array(group.members.filter {$0.value == "incoming"}.keys) {
                     //print(memberReqUid)

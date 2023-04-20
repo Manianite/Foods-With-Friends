@@ -106,7 +106,7 @@ struct RestaurantInfoView: View {
                     .cornerRadius(15.0)
             }.padding([.bottom, .leading], 10)
             NavigationLink{
-                if(reviews.count <= 0){
+                if(reviews.count == 0){
                     VStack{
                         Text("None of your friends have reviewed this restaurant yet. Leave a post and be the first!")
                             .font(Constants.textFont)
@@ -116,8 +116,8 @@ struct RestaurantInfoView: View {
                     }
                 }
                 
-                ForEach($reviews) { review in
-                    ReviewView(review: review)
+                ForEach(Array(Set(reviews))) { review in
+                    ReviewView(review: .constant(review))
                         .background(.white)
                         .cornerRadius(15)
                         .overlay(RoundedRectangle(cornerRadius: 15)
@@ -125,25 +125,8 @@ struct RestaurantInfoView: View {
                         .padding(.horizontal, 10)
                         .padding(.top, 5)
                 }
-                .onAppear {
-    //                UserData.observeFeed(for: "feeds/\(appUser.uid)") { gotReviews in
-    //                    reviews = Array(gotReviews.values).filter {$0.restaurant = restaurant.name}
-    //                }
-                    UserData.getBranch(from: "feeds/\(appUser.uid)", as: [String: Review].self) { gotReviews in
-                        reviews = Array(gotReviews.values).filter {$0.restaurant == restaurant.name}
-                    }
-                    UserData.getBranch(from: "users/\(appUser.uid)/groups", as: [String: String].self) { gotGroups in
-                        for group in gotGroups {
-                            UserData.getBranch(from: "groups/\(group.key)/feed", as: [String: Review].self) { gotReviews in
-                                reviews += Array(gotReviews.values).filter {$0.restaurant == restaurant.name}
-                            }
-                        }
-                    }
-                }
-                .onDisappear {
-                    UserData.stopObservingFeed()
-                }
                 .background(Color.secondarySystemBackground)
+                Spacer()
             }label: {
                 Text("See Reviews")
                     .font(.headline)
@@ -152,15 +135,22 @@ struct RestaurantInfoView: View {
                     .frame(width: 180, height: 50)
                     .background(Color.highlight)
                     .cornerRadius(15.0)
-            }.padding([.bottom, .trailing], 10)
+            }
+            .padding([.bottom, .trailing], 10)
+            .onAppear {
+                UserData.getBranch(from: "feeds/\(appUser.uid)", as: [String: Review].self) { gotReviews in
+                    reviews = Array(gotReviews.values).filter {$0.restaurant == restaurant.name}
+                }
+                UserData.getBranch(from: "users/\(appUser.uid)/groups", as: [String: String].self) { gotGroups in
+                    for group in gotGroups {
+                        UserData.getBranch(from: "groups/\(group.key)/feed", as: [String: Review].self) { gotReviews in
+                            reviews += Array(gotReviews.values).filter {$0.restaurant == restaurant.name}
+                        }
+                    }
+                }
+            }
         }
-        //}
-//        .sheet(isPresented: $showNewPostView) {
-//            NewPostView(selectedTab: $selectedTab)
-//        }
-    //}
-    //Spacer()
-}
+    }
 }
 
 struct RestaurantInfoView_Previews: PreviewProvider {

@@ -7,7 +7,13 @@
 
 import Foundation
 
-class Review: Codable, Identifiable, ObservableObject {
+class Review: Codable, Identifiable, ObservableObject, Hashable {
+    static func == (lhs: Review, rhs: Review) -> Bool {lhs.time==rhs.time}
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(time)
+    }
+    
     @Published var title: String
     @Published var stars: Int
     @Published var images: [String]
