@@ -106,27 +106,7 @@ struct RestaurantInfoView: View {
                     .cornerRadius(15.0)
             }.padding([.bottom, .leading], 10)
             NavigationLink{
-                if(reviews.count == 0){
-                    VStack{
-                        Text("None of your friends have reviewed this restaurant yet. Leave a post and be the first!")
-                            .font(Constants.textFont)
-                            .foregroundColor(Color.black)
-                            .padding(10)
-                        Spacer()
-                    }
-                }
-                
-                ForEach(Array(Set(reviews))) { review in
-                    ReviewView(review: .constant(review))
-                        .background(.white)
-                        .cornerRadius(15)
-                        .overlay(RoundedRectangle(cornerRadius: 15)
-                            .stroke(.tertiary, lineWidth: 1))
-                        .padding(.horizontal, 10)
-                        .padding(.top, 5)
-                }
-                .background(Color.secondarySystemBackground)
-                Spacer()
+                RestaurantReviewsView(reviews: $reviews)
             }label: {
                 Text("See Reviews")
                     .font(.headline)

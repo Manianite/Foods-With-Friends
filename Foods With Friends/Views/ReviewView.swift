@@ -97,6 +97,13 @@ struct ReviewView: View {
                 poster.reinit(user)
             }
         }
+        .onChange(of: poster) { newValue in
+            UserData.getPublicUser(review.uid) { user in
+                newValue.reinit(user)
+            }
+        }
+        .onDisappear {
+        }
     }
 }
 

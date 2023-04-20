@@ -33,6 +33,7 @@
 		0FC9C35F29B8E558006B9ECD /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC9C35E29B8E558006B9ECD /* AppView.swift */; };
 		0FC9C36129BA65AA006B9ECD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC9C36029BA65AA006B9ECD /* User.swift */; };
 		0FC9C36329BBBBB3006B9ECD /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC9C36229BBBBB3006B9ECD /* UserStorage.swift */; };
+		0FD7D37929F1993500F90D85 /* RestaurantReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD7D37829F1993400F90D85 /* RestaurantReviewsView.swift */; };
 		0FDDA06929B2816B00A866C4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDDA06729B2816B00A866C4 /* LoginView.swift */; };
 		0FDDA06A29B2816B00A866C4 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDDA06829B2816B00A866C4 /* SignupView.swift */; };
 		0FDDA06C29B28EDB00A866C4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0FDDA06B29B28EDB00A866C4 /* GoogleService-Info.plist */; };
@@ -105,6 +106,7 @@
 		0FC9C35E29B8E558006B9ECD /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		0FC9C36029BA65AA006B9ECD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0FC9C36229BBBBB3006B9ECD /* UserStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
+		0FD7D37829F1993400F90D85 /* RestaurantReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantReviewsView.swift; sourceTree = "<group>"; };
 		0FDDA06729B2816B00A866C4 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		0FDDA06829B2816B00A866C4 /* SignupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		0FDDA06B29B28EDB00A866C4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				F0D8A18829BF4F3F004A916F /* StarsView.swift */,
 				83C9AA1D29C0AB49009AE879 /* RestaurantListView.swift */,
 				83C9AA1F29C0AB71009AE879 /* RestaurantInfoView.swift */,
+				0FD7D37829F1993400F90D85 /* RestaurantReviewsView.swift */,
 				0F17AED729C8EA25008A881C /* ReviewView.swift */,
 				0FB844F129E6E7670026C110 /* UserReviewView.swift */,
 			);
@@ -603,6 +606,7 @@
 				83290A2729C48F4C007F9ECF /* LocationManager.swift in Sources */,
 				0F17AEDA29C94C0C008A881C /* ExpandableText.swift in Sources */,
 				88F7339D29B77F21001D8CC6 /* NewPostView.swift in Sources */,
+				0FD7D37929F1993500F90D85 /* RestaurantReviewsView.swift in Sources */,
 				0F43B64629C0B4C700E9A43A /* FriendProfileView.swift in Sources */,
 				0F66A19429D3F18100E8A62F /* EditGroupView.swift in Sources */,
 				0F17AEDC29CC903F008A881C /* GroupsView.swift in Sources */,
