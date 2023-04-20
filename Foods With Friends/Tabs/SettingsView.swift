@@ -29,6 +29,10 @@ struct SettingsView: View {
     
     var body: some View {
         
+        ZStack{
+            Rectangle()
+                .foregroundColor(Color.secondarySystemBackground)
+                .ignoresSafeArea()
         VStack{
             Group{
                 Text("Settings")
@@ -66,6 +70,8 @@ struct SettingsView: View {
                             RoundedRectangle(cornerRadius: 16)
                                 .stroke(.black, lineWidth: 1)
                         )
+                        .background(Color.white.cornerRadius(16))
+
                 }.padding(.vertical, 10)
                 
                 //shows textfield or securefield for password
@@ -83,6 +89,7 @@ struct SettingsView: View {
                                             .stroke(.black.opacity(0.5), lineWidth: 1)
                                          
                                     )
+                                    .background(Color.white.cornerRadius(16))
                                     .font(Constants.textFont)
                                     .padding(.top, 20)
                                     .padding(.leading, 30)
@@ -107,6 +114,7 @@ struct SettingsView: View {
                                         RoundedRectangle(cornerRadius: 16)
                                             .stroke(.black.opacity(0.5), lineWidth: 1)
                                     )
+                                    .background(Color.white.cornerRadius(16))
                                     .font(Constants.textFont)
                                     .padding(.top, 20)
                                     .padding(.leading, 30)
@@ -170,7 +178,7 @@ struct SettingsView: View {
                     passwordChangeMode = false
                     locationChangeMode = false
 
-                }label: {
+                } label: {
                     Text("Change handle")
                         .frame(width: UIScreen.screenWidth/1.3)
                         .font(Constants.textFont)
@@ -181,6 +189,7 @@ struct SettingsView: View {
                             RoundedRectangle(cornerRadius: 16)
                                 .stroke(.black, lineWidth: 1)
                         )
+                        .background(Color.white.cornerRadius(16))
                         .padding(.vertical, 10)
 
                     
@@ -198,6 +207,7 @@ struct SettingsView: View {
                                 RoundedRectangle(cornerRadius: 16)
                                     .stroke(.black.opacity(0.5), lineWidth: 1)
                             )
+                            .background(Color.white.cornerRadius(16))
                             .font(Constants.textFont)
                             .padding(.top, 20)
                             .padding(.horizontal, 30)
@@ -214,7 +224,7 @@ struct SettingsView: View {
                                 .padding(.bottom, 10)
                         }
 
-                        .disabled(handleCheck)
+                       // .disabled(handleCheck)
                     }
                     .onAppear {
                         UserData.observeUserDict()
@@ -249,6 +259,7 @@ struct SettingsView: View {
                             RoundedRectangle(cornerRadius: 16)
                                 .stroke(.black, lineWidth: 1)
                         )
+                        .background(Color.white.cornerRadius(16))
                         .padding(.vertical, 10)
                     
                 }
@@ -265,6 +276,7 @@ struct SettingsView: View {
                                 RoundedRectangle(cornerRadius: 16)
                                     .stroke(.black.opacity(0.5), lineWidth: 1)
                             )
+                            .background(Color.white.cornerRadius(16))
                             .font(Constants.textFont)
                             .padding(.top, 20)
                             .padding(.horizontal, 30)
@@ -304,6 +316,7 @@ struct SettingsView: View {
                             RoundedRectangle(cornerRadius: 16)
                                 .stroke(.black, lineWidth: 1)
                         )
+                        .background(Color.white.cornerRadius(16))
                         .padding(.vertical, 10)
                     
                 }
@@ -333,15 +346,16 @@ struct SettingsView: View {
                     VStack{
                         Text("Log Out")
                             .frame(width: UIScreen.screenWidth/1.3)
-                            .font(Constants.textFont)
-                            .accentColor(.black.opacity(0.8))
+                            .font(Constants.textFont.bold())
+                            .foregroundColor(Color.white)
                             .padding(.vertical, 10)
                             .padding(.horizontal)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 16)
-                                    .stroke(.black, lineWidth: 1)
+                                    .stroke(Color.highlight, lineWidth: 1)
+
                             )
-                            .background(Color.highlight.opacity(0.5).cornerRadius(16))
+                            .background(Color.highlight.cornerRadius(16))
                             .padding(.vertical, 20)
                     }
                 }
@@ -384,8 +398,10 @@ struct SettingsView: View {
             
                         //.padding(.vertical, 10)
                     
-                }               
+                }
         }
+        }
+
     }
 }
 

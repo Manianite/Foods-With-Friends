@@ -64,7 +64,16 @@ struct NewPostView: View {
         }
     }
     
+    func ifFromSearch(){
+           if let r : Restaurant = chosen{
+               print(r.name)
+              self.restaurant = chosen
+          }
+           else{ }
+    }
+    
     var body: some View {
+        
         VStack {
             TextField("Title", text: $title)
                 .font(Constants.titleFont)
@@ -96,6 +105,9 @@ struct NewPostView: View {
             }
             .foregroundColor(.yellow)
             .padding([.top, .bottom], 10)
+            .onAppear(){
+                ifFromSearch()
+            }
             if showSearch{
                 HStack {
                     TextField("Enter Restaurant", text: $query)
@@ -122,56 +134,59 @@ struct NewPostView: View {
                 .padding(.bottom, 5)
             }
             
-            if let chosenRestaurant = chosen{
-                //print(chosenRestaurant.name)
-                HStack{
-                    ZStack{
-                        HStack{
-                            Spacer()
-                            VStack{
-                                Button{
-                                    restaurant = nil
-                                    showSearch = true
-                                    query = ""
-                                } label: {
-                                    Image(systemName: "xmark")
-                                        .resizable()
-                                        .accentColor(Color.gray)
-                                        .frame(width: 20, height: 20, alignment: .trailing)
-                                        .padding(5)
-                                }.padding([.top, .trailing], 10)
-                            }
-                        }
-                        HStack{
-                            VStack{
-                                Text(chosenRestaurant.name)
-                                    .font(Constants.textFont)
-                                    .foregroundColor(Color.black)
-                                    .frame(width: UIScreen.screenWidth/1.5, alignment: .leading)
-                                    .padding(.leading, 10)
-                                    .scaledToFill()
-                                    .minimumScaleFactor(0.5)
-                                    .lineLimit(1)
-                                Text("\(chosenRestaurant.address.city), \(chosenRestaurant.address.state)")
-                                    .foregroundColor(Color.gray)
-                                    .frame(width: UIScreen.screenWidth/1.5, alignment: .leading)
-                                    .font(Constants.textFont)
-                                    .padding([.leading,.bottom], 10)
-                                    .scaledToFill()
-                                    .minimumScaleFactor(0.5)
-                                    .lineLimit(1)
-                            }
-                            Spacer()
-                        }
-                    }
-                }
-                .frame(width: UIScreen.main.bounds.width-10, height: UIScreen.main.bounds.height/10, alignment: .center)
-                .background(Color.gray.opacity(0.1))
-                .padding(.bottom, 10)
-                .padding([.leading, .trailing], 20)
-                
-            }
-            else{
+            //print(chosenRestaurant.name)
+//            if let chosenRestaurant = chosen{
+//                HStack{
+//                    ZStack{
+//                        HStack{
+//                            Spacer()
+//                            VStack{
+//                                Button{
+//                                    restaurant = nil
+//                                    chosen = nil
+//                                    showSearch = true
+//                                    query = ""
+//                                } label: {
+//                                    Image(systemName: "xmark")
+//                                        .resizable()
+//                                        .accentColor(Color.gray)
+//                                        .frame(width: 20, height: 20, alignment: .trailing)
+//                                        .padding(5)
+//                                }.padding([.top, .trailing], 10)
+//                                Spacer()
+//                            }
+//                        }
+//                        HStack{
+//                            VStack{
+//                                Text(chosenRestaurant.name)
+//                                    .font(Constants.textFont)
+//                                    .foregroundColor(Color.black)
+//                                    .frame(width: UIScreen.screenWidth/1.5, alignment: .leading)
+//                                    .padding(.leading, 10)
+//                                    .scaledToFill()
+//                                    .minimumScaleFactor(0.5)
+//                                    .lineLimit(1)
+//                                Text("\(chosenRestaurant.address.city), \(chosenRestaurant.address.state)")
+//                                    .foregroundColor(Color.gray)
+//                                    .frame(width: UIScreen.screenWidth/1.5, alignment: .leading)
+//                                    .font(Constants.textFont)
+//                                    .padding([.leading,.bottom], 10)
+//                                    .scaledToFill()
+//                                    .minimumScaleFactor(0.5)
+//                                    .lineLimit(1)
+//                            }
+//                            Spacer()
+//                        }
+//                    }
+//                }
+//                .frame(width: UIScreen.main.bounds.width-10, height: UIScreen.main.bounds.height/10, alignment: .center)
+//                .background(Color.gray.opacity(0.1))
+//                .padding(.bottom, 10)
+//                .padding([.leading, .trailing], 20)
+//
+//            }
+//            else{
+         
                 if let chosenRestaurant = restaurant{
                     HStack{
                         ZStack{
@@ -191,16 +206,16 @@ struct NewPostView: View {
                                             .padding(5)
                                     }.padding([.top, .trailing], 10)
                                     if showCheck{
-                                    Button{
-                                        showSearch = false
-                                        showCheck = false
-                                    } label: {
-                                        Image(systemName: "checkmark")
-                                            .resizable()
-                                            .accentColor(Color.gray)
-                                            .frame(width: 20, height: 20, alignment: .trailing)
-                                            .padding(5)
-                                    }.padding([.bottom, .trailing], 10)
+                                        Button{
+                                            showSearch = false
+                                            showCheck = false
+                                        } label: {
+                                            Image(systemName: "checkmark")
+                                                .resizable()
+                                                .accentColor(Color.gray)
+                                                .frame(width: 20, height: 20, alignment: .trailing)
+                                                .padding(5)
+                                        }.padding([.bottom, .trailing], 10)
                                     }
                                     else{
                                         Spacer()
@@ -235,7 +250,7 @@ struct NewPostView: View {
                     .padding(.bottom, 10)
                     .padding([.leading, .trailing], 20)
                 }
-            }
+        //    }
             
             
             TextEditor(text: $reviewtext)
@@ -245,22 +260,22 @@ struct NewPostView: View {
             Text("Posting to...")
                 .font(Constants.textFont)
             ScrollView{
-            ForEach(groups) { group in
-                HStack {
-                    Text(group.name)
-                        .font(Constants.titleFont)
-                    Spacer()
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(groupRecipiants.contains(group.gid) ? Color.highlight : Color.secondary)
-                }
-                .onTapGesture {
-                    if groupRecipiants.contains(group.gid) {
-                        groupRecipiants.removeAll { $0==group.gid }
-                    } else {
-                        groupRecipiants.append(group.gid)
+                ForEach(groups) { group in
+                    HStack {
+                        Text(group.name)
+                            .font(Constants.titleFont)
+                        Spacer()
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundColor(groupRecipiants.contains(group.gid) ? Color.highlight : Color.secondary)
                     }
-                }
-            }}
+                    .onTapGesture {
+                        if groupRecipiants.contains(group.gid) {
+                            groupRecipiants.removeAll { $0==group.gid }
+                        } else {
+                            groupRecipiants.append(group.gid)
+                        }
+                    }
+                }}
             .cornerRadius(10)
             .padding()
             .onAppear {
@@ -372,9 +387,12 @@ struct NewPostView: View {
             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
         }
     }
+    
 }
 struct NewPostView_Previews: PreviewProvider {
     static var previews: some View {
-        NewPostView(selectedTab: .constant(.NewPostView), chosen: Binding.constant(nil))
+        NewPostView(selectedTab: .constant(.NewPostView), chosen: Binding.constant(Restaurant()))
     }
 }
+
+

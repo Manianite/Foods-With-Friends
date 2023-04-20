@@ -93,9 +93,9 @@ struct RestaurantInfoView: View {
         }
         HStack{
             Button{
-                selectedTab = .NewPostView
-                print(restaurant.name)
                 chosen = restaurant
+                print(chosen!.name)
+                selectedTab = .NewPostView
             }label: {
                 Text("Review Restaurant")
                     .font(.headline)
@@ -106,6 +106,16 @@ struct RestaurantInfoView: View {
                     .cornerRadius(15.0)
             }.padding([.bottom, .leading], 10)
             NavigationLink{
+                if(reviews.count <= 0){
+                    VStack{
+                        Text("None of your friends have reviewed this restaurant yet. Leave a post and be the first!")
+                            .font(Constants.textFont)
+                            .foregroundColor(Color.black)
+                            .padding(10)
+                        Spacer()
+                    }
+                }
+                
                 ForEach($reviews) { review in
                     ReviewView(review: review)
                         .background(.white)
@@ -129,7 +139,6 @@ struct RestaurantInfoView: View {
                             }
                         }
                     }
-                    
                 }
                 .onDisappear {
                     UserData.stopObservingFeed()

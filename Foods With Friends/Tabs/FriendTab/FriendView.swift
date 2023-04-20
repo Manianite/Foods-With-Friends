@@ -19,6 +19,9 @@ struct FriendView: View {
                 if friendsList.count == 0 {
                     VStack {
                         Text("You have not added any friends yet!")
+                            .font(Constants.textFont)
+                            .foregroundColor(Color.black)
+                            .padding(10)
                         Spacer()
                     }
                 }
