@@ -22,12 +22,14 @@ struct GroupView: View {
         VStack {
             Text(group.name)
                 .font(Constants.titleFont)
-            Button {
-                showingSheet.toggle()
-            }label: {
-                Text("\(group.members.count) members")
-                    .font(Constants.textFontSmall)
-            } .sheet(isPresented: $showingSheet) {
+            Text("\(group.members.count) members")
+                .font(Constants.textFontSmall)
+//            Button {
+//                showingSheet.toggle()
+//            }label: {
+//                Text("\(group.members.count) members")
+//                    .font(Constants.textFontSmall)
+//            } .sheet(isPresented: $showingSheet) {
 //                ForEach(Array(group.members.keys), id: \.self) { friend in
 //                    NavigationLink {
 //                        FriendProfileView(uid: friend.uid, friendsList: $group.members)
@@ -42,7 +44,7 @@ struct GroupView: View {
 //                    .buttonStyle(.plain)
 //                    .padding(.bottom, -5)
 //                }
-            }
+//            }
             
             Divider()
             ScrollView {
