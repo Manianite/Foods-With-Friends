@@ -40,7 +40,7 @@ struct ReviewView: View {
         } label: {
             VStack(alignment: .leading, spacing: 0) {
                 Text(review.restaurant)
-                    .font(Constants.titleFont.bold())
+                    .font(Constants.titleFont)
                 Divider()
                     .padding(.bottom, 5)
                 HStack {
