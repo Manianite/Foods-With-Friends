@@ -224,7 +224,7 @@ struct SettingsView: View {
                                 .padding(.bottom, 10)
                         }
 
-                       // .disabled(handleCheck)
+                        .disabled(handleCheck)
                     }
                     .onAppear {
                         UserData.observeUserDict()

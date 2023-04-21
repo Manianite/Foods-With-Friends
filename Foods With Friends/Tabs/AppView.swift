@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AppView: View {
     @State var selectedTab = Tabs.HomeView
-
+    @State var chosen : Restaurant?
     @Binding var viewState: ViewState
     @StateObject var locationManager = LocationManager()
     
@@ -65,11 +65,11 @@ struct AppView: View {
             } else if selectedTab == .GroupView {
                 GroupsView()
             } else if selectedTab == .SearchView {
-                SearchView(selectedTab: $selectedTab)
+                SearchView(selectedTab: $selectedTab, chosen: $chosen)
             } else if selectedTab == .FriendView {
                 FriendView()
             } else if selectedTab == .NewPostView {
-                NewPostView(selectedTab: $selectedTab, chosen: Binding.constant(nil))
+                NewPostView(selectedTab: $selectedTab, chosen: $chosen)
             }
             
             Divider()
@@ -179,3 +179,5 @@ struct AppView_Previews: PreviewProvider {
            
     }
 }
+
+

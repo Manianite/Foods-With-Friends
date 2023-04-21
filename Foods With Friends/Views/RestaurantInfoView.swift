@@ -10,10 +10,11 @@ import struct Kingfisher.KFImage
 
 struct RestaurantInfoView: View {
     @Binding var restaurant: Restaurant
-    @State var chosen: Restaurant?
+   // @EnvironmentObject var chosen: Restaurant?
     @State var reviews: [Review] = []
     @Binding var selectedTab: Tabs
     @EnvironmentObject var appUser: User
+    @Binding var chosen: Restaurant?
     
     var body: some View {
         
@@ -94,7 +95,6 @@ struct RestaurantInfoView: View {
         HStack{
             Button{
                 chosen = restaurant
-                print(chosen!.name)
                 selectedTab = .NewPostView
             }label: {
                 Text("Review Restaurant")
@@ -135,7 +135,7 @@ struct RestaurantInfoView: View {
 
 struct RestaurantInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        RestaurantInfoView(restaurant: Binding.constant(Restaurant()), selectedTab: .constant(.SearchView))
+        RestaurantInfoView(restaurant: Binding.constant(Restaurant()), selectedTab: .constant(.SearchView), chosen: Binding.constant(Restaurant()))
             .environmentObject(User())
     }
 }

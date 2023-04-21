@@ -68,7 +68,7 @@ struct GroupsView: View {
                             .frame(width: (UIScreen.main.bounds.width)/6, height: (UIScreen.main.bounds.width)/6)
                             .padding(.trailing, 10)
                             .padding(.bottom, 10)
-                            .accentColor(.highlight)
+                            .foregroundColor(.highlight)
                     }
                     .disabled(appUser.groups.contains { (key, value) in
                         key == appUser.uid
@@ -96,3 +96,42 @@ struct GroupsView_Previews: PreviewProvider {
         GroupsView()
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
