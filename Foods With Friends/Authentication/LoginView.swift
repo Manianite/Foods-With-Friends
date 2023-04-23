@@ -27,17 +27,6 @@ struct LoginView: View {
                     .padding(.top, 20)
                     .padding()
                     
-                
-                    //.aspectRatio(contentMode: .fit)
-//                Text("Foods With Friends")
-//                    .font(.system(size: 45))
-//                    .font(.largeTitle)
-//                    .font(Constants.titleFont)
-//                    .foregroundColor(Color.highlight)
-//                    .frame(width: UIScreen.screenWidth-20, height: UIScreen.screenHeight/15)
-//                    .scaledToFill()
-//                    .minimumScaleFactor(0.5)
-//                    .lineLimit(1)
                 }
             }
             Group{
